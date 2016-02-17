@@ -1,0 +1,68 @@
+@(apartments: java.util.List[Apartment])(userId: Integer)
+@main{
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cbx-heading text-center">
+                        <h2 class="uppercase wow fadeInUp">Vasi trenutni apartmani</h2>
+                    </div>
+                </div>
+            </div>
+           <!-- //ROW Our Team Header -->
+            <div class="clearfix" style="margin-bottom: 5px"> </div>
+            <div class="cbx-latest-area">
+            @if(apartments.size() > 0) {
+
+                @for(apartment <- apartments) {
+                    <div class="item active cbx-single-all">
+                        <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
+                                    <div class="price-picture">
+                                        <i class="fa fa-euro"> @apartment.price</i>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <a href="@routes.Apartments.apartment(apartment.id)" target="">
+                                            <div class=" col-md-12 text-center">
+                                                <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
+                                                <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.neighborhood</h5>
+                                                <h5 class="price-text-color">@apartment.address</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
+                                        <p class="btn-details"><i class="fa fa-home"></i>@apartment.rooms Sobe</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--//Item-->
+                }
+            }else{
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cbx-heading text-center">
+                            <h3 class="uppercase wow fadeInUp">Trenutno nemate kreiranih apartmana</h3>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div><!-- cbx-latest-area -->
+        </div><!-- container end -->
+    </section>
+
+    <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Apartments.renderApartment(userId)" >
+
+        <div class="col-sm-4 col-md-offset-4 xs-text-center cbx-submit-area" id="">
+            <button type="submit"  class="btn btn-block lz-git-submit-btn cbx-submit" id="addApartment">DODAJ APARTMAN</button>
+        </div>
+    </form>
+
+}

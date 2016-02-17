@@ -1,0 +1,252 @@
+@(apartments: java.util.List[Apartment])
+@main {
+    <section>
+        <div class="container">
+            <div class=" picturemain">
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cbx-heading text-center">
+                        <h2 class="uppercase wow fadeInUp">Povoljni apartmani Bosna i Hercegovina</h2>
+                    </div>
+                </div>
+            </div><!-- //ROW Our Team Header -->
+            <div class="clearfix" style="margin-bottom: 5px"> </div>
+            <div class="cbx-latest-area">
+            @if(apartments.size() > 0) {
+                @for(apartment <- apartments) {
+                    <div class="item active cbx-single-all">
+                        <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
+                                    <div class="price-picture">
+                                       <i class="fa fa-euro"> @apartment.price</i>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <a href="@routes.Apartments.apartment(apartment.id)" target="">
+                                            <div class=" col-md-12 text-center">
+                                                <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
+                                                <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.location</h5>
+                                                <h5 class="price-text-color">@apartment.address</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
+                                        <p class="btn-details"><i class="fa fa-home"></i>@apartment.rooms Sobe</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--//Item-->
+                }
+            }
+            </div><!-- cbx-latest-area -->
+        </div><!-- container end -->
+    </section>
+
+
+    <!-- TEAM SECTION START -->
+    <section>
+        <div id="cbx-team" class="cbx-section cbx-team">
+            <div class="cbx-team-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="cbx-heading text-center">
+                                <h2 class="uppercase wow fadeInUp">APARTMANI Bosna i Hercegovina</h2>
+                                <hr noshade size="" width="" color="">
+                                <p class=" wow flipInY">Postovani Gosti, gore pomenuti apartmani su samo dio nase ponude. Za siru ponudu pogledajte stranicu.</p>
+                            </div>
+                        </div>
+                    </div><!-- //ROW Our Team Header -->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="cbx-single-team text-center">
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                            <div class="flipper">
+                                                    <!-- font content -->
+                                                <div class="front cbx-font-side">
+                                                    <div class="font-single-img text-center">
+                                                        <img class="img-circle" src='@routes.Assets.versioned("images/sa1.jpg")'alt="Team Image">
+                                                    </div>
+                                                    <div class="font-single-text text-center">
+                                                        <h3>Apartmani</h3>
+                                                        <h4>Sarajevo</h4>
+                                                        <p>Ukoliko Vam je potreban apartman u Beogradu na dan, dva ili vise na pravom ste mestu!!! </p>
+                                                    </div>
+                                                </div> <!-- //font content -->
+                                                <!-- back content -->
+                                                <div class="back cbx-back-side">
+                                                    <div class="text-center">
+                                                        <div class="text-center back-single-text">
+                                                            <p>
+                                                                Znatno visi kvalitet usluge nego u hostelima, drasticno nize cene nego u hotelima, sve ukupno nasi apartmani su najbolja opcija za smestaj u Sarajevu.
+                                                                Svi apartmani su klimatizovani, opremljeni posteljinom i peskirima, bezicnim internetom, kablovskom televizijom kao i nekim oblikom grijanja (centralno ili na struju).
+                                                                Kroz nasu jednostavnu pretragu mozete pronaci apartman kakav bas Vama odgovara.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- //back content -->
+                                            </div>
+                                        </div>
+                                    </div> <!--//single team -->
+                                </div> <!--//single team main col 3-->
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="cbx-single-team text-center">
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                            <div class="flipper">
+                                                    <!-- font content -->
+                                                <div class="front cbx-font-side">
+                                                    <div class="font-single-img text-center">
+                                                        <img class="img-circle" src='@routes.Assets.versioned("images/sa2.jpg")' alt="Team Image">
+                                                    </div>
+                                                    <div class="font-single-text text-center">
+                                                        <h3>Stan na dan</h3>
+                                                        <h4>Sarajevo</h4>
+                                                        <p>Pored iznajmljivanja na vise dana najveci broj apartmana se moze iznajmiti i na samo dan tj. noc.</p>
+                                                    </div>
+                                                </div> <!-- //font content -->
+                                                <!-- back content -->
+                                                <div class="back cbx-back-side">
+                                                    <div class="text-center">
+                                                        <div class="text-center back-single-text">
+                                                            <p> Stan na jedan dan odnosno stanovi na dan su upravo nasa uza specijalnost kao sto i samo ime nase agencije govori.
+                                                                Nas cilj je da Vam obezbedimo idealan smestaj u Sarajevu po sistemu "stan na dan" na najboljim lokacijama u Sarajevu.
+                                                                Obzirom da mi nismo hotel vec njegova alternativa rezervacije na samo jedan dan moguce je izvrsiti na sam dan dolaska ili dan pred planirani dolazak.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- //back content -->
+                                            </div>
+                                        </div>
+                                    </div> <!--//single team -->
+                                </div> <!--//single team main col 3-->
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="cbx-single-team text-center">
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                            <div class="flipper">
+                                                    <!-- font content -->
+                                                <div class="front cbx-font-side">
+                                                    <div class="font-single-img text-center">
+                                                        <img class="img-circle" src='@routes.Assets.versioned("images/sa3.jpg")' alt="Team Image">
+                                                    </div>
+                                                    <div class="font-single-text text-center">
+                                                        <h3>Smjestaj</h3>
+                                                        <h4>Sarajevo</h4>
+                                                        <p>Apartmanski smestaj u Sarajevu se u poslednjih nekoliko godina popularizovao</p>
+                                                    </div>
+                                                </div> <!-- //font content -->
+                                                <!-- back content -->
+                                                <div class="back cbx-back-side">
+                                                    <div class="text-center">
+
+                                                        <div class="text-center back-single-text">
+                                                            <p>
+                                                                Smestaj u Sarajevu je odlican izbor za sve: turiste, poslovne ljude, omladinu. kao i Vase romanticne i porodicne trenutke.
+                                                                Iznajmite smesaj u Sarajevu po Vasoj meri i pristojnim cenama koristeci nasu naprednu pretragu.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- //back content -->
+                                            </div>
+                                        </div>
+                                    </div> <!--//single team -->
+                                </div> <!--//single team main col 3-->
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="cbx-single-team text-center">
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                            <div class="flipper">
+                                                    <!-- font content -->
+                                                <div class="front cbx-font-side">
+                                                    <div class="font-single-img text-center">
+                                                        <img class="img-circle" src='@routes.Assets.versioned("images/sa4.jpg")' alt="Team Image">
+                                                    </div>
+                                                    <div class="font-single-text text-center">
+                                                        <h3>Prenociste</h3>
+                                                        <h4>Sarajevo</h4>
+                                                        <p>Stan Na Dan Sarajevo raspolaze sa vecim brojem apartmana na atraktivnim lokacijama u Sarajevu </p>
+                                                    </div>
+                                                </div> <!-- //font content -->
+                                                <!-- back content -->
+                                                <div class="back cbx-back-side">
+                                                    <div class="text-center">
+                                                        <div class="text-center back-single-text">
+                                                            <p>
+                                                                Dovoljno je da nas samo kontaktirate na sam dan dolaska i obezbedite idealno prenociste u Sarajevu po povoljnim a u nekim slucajevima i "last minute" cijenama.
+                                                                Provod i nocni zivot u Sarajevu su samo jedan od razloga.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- //back content -->
+                                            </div>
+                                        </div>
+                                    </div> <!--//single team -->
+                                </div> <!--//single team main col 3-->
+                            </div> <!--//single team main row-->
+                        </div> <!--//CONTAINER-->
+                    </div> <!--//INNER-->
+                </div> <!--//SECTION-->
+            </section> <!-- //New Team Section 24.12.2014  -->
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" id="collapse">
+                    <div id="cssmenu">
+                        <ul>
+                            <li class='has-sub'><a href='#'><span>Ne mozete da se odlucite koji apartman izabrati?</span></a>
+                                <ul>
+                                    <li>
+                                        Posaljite nam zahtjev na officestannadan.com sa svim kljucnim detaljima koji bi nam bili od koristi (dio grada, broj osoba, vrijeme dolaska/odlaska, do koje cijene .... ), a mi cemo se potruditi da Vam u najkracem roku (maksimum 1 sat u vremenskoj zoni GMT+1, za vrijeme radnog vremena) pronadjemo odgovarajuci smestaj u Sarajevu.
+                                        Radno vreme je od 9-20h svakog radnog dana i subotom a nedeljom od 12-20h.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class='has-sub'><a href='#'><span>Tajna naseg uspjeha - Apartmani Sarajevo</span></a>
+                                <ul>
+                                    <li>
+                                        Tajna naseg usjpeha u rentiranju apartmana u Sarajevu po sistemu Stan Na Dan nisu samo niske cijene vec kvalitet nade usluge, obracanje paznje na detalje, profesinonalni i predan pristup svakom gostu i naravno osmijeh na licu.
+                                        Ponosimo se na nas rad i dajemo sve od sebe kako bi se osigurali da nasi gosti imaju najbolji moguci boravak.
+                                        Uvjeravamo Vas da se nasi gosti uvijek vracaju nama, a na Vama je da se u to i uvjerite.
+                                        Uvjerite se i Vi!!! Rezervisite jedan ili vise apartmana u Sarajevu i uvjerite se da smo mi najbolje rjesenje za Vas smjestaj u Sarajevu.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class='has-sub'><a href='#'><span>Cijene apartmana Sarajevo</span></a>
+                                <ul>
+                                    <li>
+                                        Cijene Sarajevo Apartmana koje su predstavljene na naslovnoj strani predstavljaju dnevnu cijenu baziranu na boravku od 2 dana.
+                                        Informacije o konkretnim cijenama Apartmana Sarajevo za period Vaseg boravka mozete dobiti klikom na fotografiju izabranog apartmana u Sarajevu.
+                                        Cijene nasih Sarajevo apartmana razlikuju se u odnosu na duzinu boravka, lokaciju, velicinu, njegove opremljenosti, starosti objekta u kome se nalazi, kao i samog apartmana.
+                                        Potrebno je da unesete datum ulaska - datum napu�tanja apartmana kao i broj osoba koje ?e u navedenom periodu apartman koristiti.
+                                        Sistem ce po unijetim podacima automatski izracunati ukupnu cijenu boravka u zeljenom apartmanu.
+                                        Prikazani popusti apartmana u Sarajevu vaze samo za boravak u kontinuitetu.
+                                        Pronadjite idealan apartmanski smestaj u Sarajevu sa najnizom cijenom.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src='@routes.Assets.versioned("javascripts/informations.js")'></script>
+
+
+
+}

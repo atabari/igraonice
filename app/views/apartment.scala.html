@@ -1,0 +1,432 @@
+@(apartment: Apartment)(currentUser: AppUser)(apartments: java.util.List [Apartment])(reservations: java.util.List[String])
+@main {
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="cbx-heading2 text-left">
+                            <h2 class="uppercase">@apartment.name <p>@apartment.location, @apartment.address</p></h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3 favourite-div">
+                        <form method="GET" role="form" action="@routes.Apartments.favouriteApartments()">
+                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
+                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="favbutton" onclick="getCookies()"><i class="fa fa-heart" style="font-size: 30px"></i> MOJA LISTA</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div><!-- //ROW Our Team Header -->
+        </div>
+    </section>
+
+    <section class="margin-bottom-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="apdescription">
+                        <p>@apartment.title</p>
+                    </div>
+
+                    <div class="duplicate-email">
+                    @if(flash.containsKey("success")) {
+                        <div class="alert alert-success" role="alert">
+                            <i class="fa fa-check-square-o" style="font-size:30px"></i>
+                            <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
+
+                        </div>
+                    }
+                    </div>
+
+
+
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src='@routes.Assets.versioned("images/stan_na_dan.jpg")' alt="">
+                            </div>
+                            @if(Apartment.getListOfApartmentImages(apartment).size() > 0) {
+                                @for(image <- Apartment.getListOfApartmentImages(apartment)) {
+                                    <div class="item">
+                                        <img src="@image" alt="@image">
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                            <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 col-md-offset-1">
+                    <form method="POST" role="form" action="#">
+                        <div class="blue-box">
+                            <div class=" persons-nights">
+                                <p><b id="total" name="totalNights"> 1 </b> Noc</p>
+                                <p><b id="nopersons"> 1 </b> Osoba</p>
+                            </div>
+
+                            <div class="price" id="blue-box-price" >
+                                <p class="" >Po noci: <i class="fa fa-euro" id="cijena" name="price"> @apartment.price</i>  </p>
+                                <p>Ukupno:  <i class="fa fa-euro" id="totalmoney" name="totalPrice"> 0 </i></p>
+                            </div>
+                        </div>
+
+                        <div class="" id="check-in">
+                            <div class="col-md-12 check-in-date">
+                                <h4>Datum dolaska: </h4>
+                            </div>
+                            <div class="col-md-12 padding-left-0">
+                                <input type="date"  class="date-check" name="checkIndate" id="checkIn"  required/>
+                            </div>
+
+                            <div class="col-md-12 check-in-date">
+                                <h4>Datum odlaska: </h4>
+                            </div>
+                            <div class="col-md-12 padding-left-0">
+                                <input type="date" class="date-check" name="checkOutdate" id="checkOut"  required onchange="totalNights(@apartment.price)"/>
+                            </div>
+
+                            <div class="col-md-12 check-in-date">
+                                <h4>Broj osoba: </h4>
+                            </div>
+                            <div class="col-md-6 padding-left-0">
+                                <input type="number" max="@apartment.capacity" min="1"  class="date-check" id="person" onclick="capacity()">
+                            </div>
+                            <div class="col-md-12 check-in-date" id="red-letters">
+                                <p>* Napuštanje apartmana je do 12h</p>
+                                <p>* Za duži boravak cijena po dogovoru</p>
+                            </div>
+
+                            <input id="valchin" hidden>
+                            <input id="valchout" hidden>
+                        </div>
+                        <div class=" xs-text-center cbx-submit-area" id="reservation-button">
+                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" onclick="totalNights(@apartment.price)" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="modal fade modal-reservation" id="basicModal" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content ">
+                    <form method="POST" action="@routes.Emails.sendMail(apartment.id)">
+                        <div class="modal-header">
+                            <button type="button" style="font-size: 30px;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h2 class="modal-title" id="myModalLabel" style="text-align: center;">POTVRDITE REZERVACIJU</h2>
+                        </div>
+                        <div class="row">
+
+                            <div class="modal-body" id="">
+                                <div class="col-md-8">
+                                    <div class="col-md-6" id="">
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Datum dolaska: </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="date"  class="date-check" name="checkIndate" id="checkInpop"  readonly    required/>
+                                            <label id="checkIndate_error" class="error" for="checkIndate"></label>
+
+                                        </div>
+
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Datum odlaska: </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="date" class="date-check" name="checkOutdate" id="checkOutpop" readonly  required />
+                                            <label id="checkOutDate_error" class="error" for="checkOutdate"></label>
+
+                                        </div>
+
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Broj osoba: </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="number" name="numOfPersons" class="date-check" id="personpop" readonly >
+                                            <label id="numOfPersons_error" class="error" for="numOfPersons"></label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Ime i Prezime:  </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="text" name="name"  class="date-check" id="name"  onchange="return checkName()" required>
+                                            <label id="name_error" class="error" for="name"></label>
+
+                                        </div>
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Email:  </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="text" name="mail" class="date-check" id="email" style="font-size: 15px" onchange=" return checkEmail()" required>
+                                            <label id="email_error" class="error" for="mail"></label>
+
+                                        </div>
+
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Kontakt telefon:  </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <input type="text" name="phone" class="date-check" id="phone" placeholder="" onchange="numberLength()" required>
+                                            <label id="phone_error" class="error" for="phone"></label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-12 check-in-date" id="red-letters">
+                                            <p>* Napuštanje apartmana je do 12h</p>
+                                            <p>* Za duži boravak cijena po dogovoru</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-12 check-in-date">
+                                            <h4>Ostavite komentar: </h4>
+                                        </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <textarea name="comment" id="comment-popup" class="text-area" rows="12" style="resize: vertical"></textarea>
+                                            <label id="cbxmessage-error" class="error valid" for="cbxmessage"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                            <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    @if(currentUser !=null && apartment.userId == currentUser.id){
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 margin-bottom-20">
+                        <form method="GET" role="form" action="@routes.Apartments.renderUpdateApartment(apartment.id)">
+                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
+                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-pencil"> AZURIRAJ </i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    }else {
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 margin-bottom-20">
+                        <form method="POST" role="form" action="@routes.Apartments.cookies(apartment.id)">
+                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
+                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-heart">
+                                    DODAJ U LISTU</i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    }
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="apartment-informations margin-bottom-20">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Apartman: </td>
+                                    <td align="right"><b>@apartment.name</b></td>
+                                </tr>
+                                @if(apartment.location.equals("Sarajevo")){
+                                <tr>
+                                    <td>Lokacija: </td>
+                                    <td align="right"><b>@apartment.neighborhood</b></td>
+                                </tr>
+                                }
+
+                                <tr>
+                                    <td>Ulica: </td>
+                                    <td align="right"><b>@apartment.address</b></td>
+                                </tr>
+                                <div class="split-pane-divider"></div>
+                                <tr>
+                                    <td>Cijena: </td>
+                                    <td align="right"><i class="fa fa-euro">@apartment.price</i></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Broj osoba: </td>
+                                    <td align="right">@apartment.capacity</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Broj kreveta: </td>
+                                    <td align="right">@apartment.beds</td>
+                                </tr>
+                                <tr>
+                                    <td>Kvadratura: </td>
+                                    <td align="right">@apartment.area m<sup>2</sup></td>
+                                </tr>
+                                <tr>
+                                    <td>Sprat </td>
+                                    <td align="right">@apartment.floor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="cbx-about-text text-left xs-text-center">
+                        @apartment.description
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-responsive" id="sort">
+                        <h3>Tabela sa datumima kada je apartman zauzet</h3>
+                        <thead>
+                            <tr class="about">
+                                <th>Datum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for(reservation <- reservations){
+
+                            <tr class="about" >
+                                <td>@reservation</td>
+                            </tr>
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <section class="margin-bottom-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cbx-heading2 text-left">
+                        <h2 class="uppercase"><p>Mapa</p></h2>
+                    </div>
+
+                    <div id="map" class="map"></div>
+                </div>
+                <input id="lat" name="lat" value="@apartment.lat" style="display : none">
+                <input id="lng" name="lng" value="@apartment.lng" style="display : none">
+            </div>
+    </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cbx-heading2 text-left">
+                        <h2 class="uppercase"><p>Slicni apartmani</p></h2>
+                    </div>
+                </div>
+                @if(apartments.size() > 0){
+                @for(apartment <- apartments){
+
+                    <div class="item active cbx-single-all">
+                        <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
+                                    <div class="price-picture">
+                                        <i class="fa fa-euro"> @apartment.price</i>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <a href="@routes.Apartments.apartment(apartment.id)" target="">
+                                            <div class=" col-md-12 text-center">
+                                                <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
+                                                <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.location</h5>
+                                                <h5 class="price-text-color">@apartment.address</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
+                                        <p class="btn-details"><i class="fa fa-home"></i>@apartment.rooms Sobe</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!--//Item-->
+                }
+                }
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <script  src='@routes.Assets.versioned("javascripts/googlemap.js")'></script>
+    <script  src='@routes.Assets.versioned("javascripts/bluebox.js")'></script>
+    <script  src='@routes.Assets.versioned("javascripts/popup.js")'></script>
+    <script  src='@routes.Assets.versioned("javascripts/cookies.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/validation.js")'></script>
+
+}

@@ -1,0 +1,72 @@
+@(apartments: java.util.List [Apartment])
+@main{
+
+    <div class="container">
+        <div class="row">
+        <section id="tablemargins" class="col-md-12">
+            <table class="table table-responsive" id="sort">
+                <thead>
+                    <tr class="about">
+                        <th>Ime apartmana</th>
+                        <th>Lokacija</th>
+                        <th>Adresa</th>
+                        <th>Cijena</th>
+                        <th>Kapacitet</th>
+                        <th>Kreveti</th>
+                        <th>Povrsina</th>
+                        <th>Sprat</th>
+                        <th>Galerija</th>
+                        <th>Uredi</th>
+                        <th>Prikazati na pocetnoj stranici</th>
+                        <th>Obisi</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                @for(apartment <- apartments) {
+                    <tr class="about" >
+                        <td>@apartment.name</td>
+                        <td>@apartment.neighborhood</td>
+                        <td>@apartment.address</td>
+                        <td class="text-center">@apartment.price</td>
+                        <td class="text-center">@apartment.capacity</td>
+                        <td class="text-center">@apartment.beds</td>
+                        <td class="text-center">@apartment.area</td>
+                        <td class="text-center">@apartment.floor</td>
+                        <td class="text-center">
+                            <a data-role="get" data-delete-parent="tr" href="@routes.ImageUpload.uploadRender(apartment.id)" role="button">
+                                <i class=" fa fa-file-image-o fa-lg"></i></a>
+                        </td>
+                        <td class="text-center">
+                            <a data-role="post" data-delete-parent="tr" href="@routes.Apartments.renderUpdateApartment(apartment.id)" role="button">
+                                <i class=" fa fa-pencil fa-lg"></i></a>
+                        </td>
+
+                        <td class="text-center">
+                        @if(apartment.isVisible == null || apartment.isVisible == false) {
+                            <a href="@routes.Apartments.showOnHomepage(apartment.id)" >
+                                <button type="submit" class="btn btn-primary" id="middlebuttons">DA</button>
+                            </a>
+                        } else {
+                            <a href="@routes.Apartments.showOnHomepage(apartment.id)" >
+                                <button type="submit" class="btn btn-primary" id="middlebuttons">NE</button>
+
+                            </a>
+                        }
+                        </td>
+                        <td class="text-center">
+                            <a data-role="delete" data-delete-parent="tr" href="@routes.Apartments.deleteApartment(apartment.id)" role="button">
+                                <i class=" fa fa-trash-o fa-lg"></i></a>
+                        </td>
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </section>
+        </div>
+    </div>
+}
+
+    <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/deleteConfirm.js")'></script>

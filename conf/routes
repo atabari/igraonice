@@ -1,0 +1,84 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                   @controllers.Application.index()
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                           @controllers.Assets.versioned(path="/public", file: Asset)
+
+#GET         /apartmani                          @controllers.Apartments.renderApartment()
+GET         /apartman/:apartmentId              @controllers.Apartments.apartment(apartmentId: Integer)
+#POST        /apartmani                          @controllers.Apartments.createApartment()
+
+
+POST        /apartman/:apartmentId              @controllers.Apartments.cookies(apartmentId: Integer)
+GET         /listaapartmana/                    @controllers.Apartments.favouriteApartments()
+GET         /centar                             @controllers.Apartments.centarApartments()
+GET         /novosarajevo                       @controllers.Apartments.nsarajevoApartments()
+GET         /novigrad                           @controllers.Apartments.ngradApartments()
+GET         /starigrad                          @controllers.Apartments.sgradApartments()
+GET         /ilidza                             @controllers.Apartments.ilidzaApartments()
+
+
+GET         /sarajevo                           @controllers.Apartments.sarajevoApartments()
+GET         /mostar                             @controllers.Apartments.mostarApartments()
+GET         /banjaluka                          @controllers.Apartments.banjalukaApartments()
+GET         /zenica                             @controllers.Apartments.zenicaApartments()
+GET         /tuzla                              @controllers.Apartments.tuzlaApartments()
+
+
+GET         /bjelasnica                         @controllers.Apartments.bjelasnicaApartments()
+GET         /jahorina                           @controllers.Apartments.jahorinaApartments()
+GET         /vlasic                             @controllers.Apartments.vlasicApartments()
+GET         /igman                              @controllers.Apartments.igmanApartments()
+GET         /trebevic                           @controllers.Apartments.trebevicApartments()
+
+
+
+
+#Login
+GET         /login                              @controllers.Login.loginIndex()
+POST        /user                               @controllers.Login.renderAdminPanel()
+
+#popup mail
+POST        /apartman/rezervacija/:apartmentId  @controllers.Emails.sendMail(apartmentId: Integer)
+
+#Informations
+GET         /saradnja                           @controllers.Informations.cooperation()
+GET         /kucnired                           @controllers.Informations.rules()
+GET         /sveorezervacijama                  @controllers.Informations.reservations()
+GET         /placanje                           @controllers.Informations.payment()
+GET         /boravakuapartmanu                  @controllers.Informations.apartmentRules()
+GET         /dolazakiodlazak                    @controllers.Informations.arrivalsAndDeparture()
+
+
+#admin
+GET         /adminpage                          @controllers.Login.apartmentsList()
+GET         /adminsnd/:apartmentId              @controllers.Apartments.deleteApartment(apartmentId: Integer)
+DELETE      /adminsnd/:apartmentId              @controllers.Apartments.deleteApartment(apartmentId: Integer)
+GET         /dodajapartman/:userId              @controllers.Apartments.renderApartment(userId: Integer)
+POST        /adminsnd/apartman/:userId          @controllers.Apartments.createApartment(userId: Integer)
+GET         /updateapartman/:apartmentId        @controllers.Apartments.renderUpdateApartment(apartmentId: Integer)
+POST        /updateapartman/:apartmentId        @controllers.Apartments.updateApartment(apartmentId: Integer)
+
+GET         /adminsnd/adminpanel/:email         @controllers.Login.showAdminPanel(email: String)
+POST        /adminsnd/adminpanel/:email         @controllers.Login.updateUser(email: String)
+
+GET         /uploadRender/:apartmentId          @controllers.ImageUpload.uploadRender(apartmentId: Integer)
+POST        /upload/:apartmentId                @controllers.ImageUpload.upload(apartmentId: Integer)
+
+#AppUser
+
+GET         /admin/kreirajkorisnika             @controllers.AppUsers.createUserRender()
+POST        /admin/kreirajkorisnika             @controllers.AppUsers.createUser()
+GET         /admin/listakorisnika               @controllers.AppUsers.listOfUsers()
+GET         /admin/:userId                      @controllers.AppUsers.deleteUser(userId: Integer)
+DELETE      /admin/:userId                      @controllers.AppUsers.deleteUser(userId: Integer)
+GET         /logout                             @controllers.AppUsers.logout()
+
+GET         /korisnickipanel/:email             @controllers.AppUsers.userPanelRender(email: String)
+GET         /user/apartmani/:userId             @controllers.AppUsers.userApartmentsRender(userId: Integer)
+GET        /apartmani/:apartmentId              @controllers.Apartments.showOnHomepage(apartmentId: Integer)
