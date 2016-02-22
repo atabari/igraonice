@@ -44,7 +44,7 @@ html {
 body {
   padding: 0;
   margin: 0 auto;
-  background-color: #f1f1f1;
+  background-color: white;
   color: #222222;
   font-family: 'Raleway', Arial, sans-serif;
   font-weight: 600;
@@ -928,7 +928,7 @@ h1.lz-main-heading span.lz-brand-color {
   color: #fff;
 }
 #cbx-team .cbx-team-inner {
-  background-color: rgba(80, 80, 80, 0.9);
+    /*background-image: url("../../images/eP2ydUh.jpg");*/
   padding-bottom: 130px;
 }
 #cbx-team-text p {
@@ -3705,3 +3705,8 @@ li.cbxgrid-item-none {
 /* Small Devices, Tablets */
 /* Extra Small Devices, Phones */
 /* Custom, iPhone Retina */
+
+.navbar-default{
+  background-color: white;
+    border-color: #f5740a;
+}

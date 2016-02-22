@@ -24,17 +24,6 @@ GET         /ilidza                             @controllers.Apartments.ilidzaAp
 
 
 GET         /sarajevo                           @controllers.Apartments.sarajevoApartments()
-GET         /mostar                             @controllers.Apartments.mostarApartments()
-GET         /banjaluka                          @controllers.Apartments.banjalukaApartments()
-GET         /zenica                             @controllers.Apartments.zenicaApartments()
-GET         /tuzla                              @controllers.Apartments.tuzlaApartments()
-
-
-GET         /bjelasnica                         @controllers.Apartments.bjelasnicaApartments()
-GET         /jahorina                           @controllers.Apartments.jahorinaApartments()
-GET         /vlasic                             @controllers.Apartments.vlasicApartments()
-GET         /igman                              @controllers.Apartments.igmanApartments()
-GET         /trebevic                           @controllers.Apartments.trebevicApartments()
 
 
 

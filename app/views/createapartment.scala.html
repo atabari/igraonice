@@ -5,9 +5,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="cbx-heading2 text-center">
-                        <h2 class="uppercase wow fadeInUp">DODAJ NOVI APARTMAN</h2>
+                        <h2 class="uppercase wow fadeInUp">DODAJ NOVI OBJEKAT</h2>
                         <hr noshade size="" width="" color="">
-                        <p class=" wow flipInY">Molimo unesite sve informacije kako bi apartman bio uspjesno unesen u bazu</p>
+                        <p class=" wow flipInY">Molimo unesite sve informacije kako bi objekat bio uspjesno unesen u bazu</p>
                     </div>
                 </div>
             </div>
@@ -26,13 +26,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
-                                <input type="text" name="name" class="form-control cbxname lz-git-form-control placeholder-style" id="apname" placeholder="Naziv Apartmana" required>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input type="text" name="title" class="form-control cbxname lz-git-form-control placeholder-style" id="aptitle" placeholder="Kratki opis" required>
+                                <input type="text" name="name" class="form-control cbxname lz-git-form-control placeholder-style" id="apname" placeholder="Naziv Objekta" required>
                                 <label id="cbxname-error" class="error valid" for="cbxname"></label>
                             </div>
                         </div>
@@ -44,29 +38,12 @@
                                     <option>Banja Luka</option>
                                     <option>Zenica</option>
                                     <option>Tuzla</option>
-                                    <option>Bjelasnica</option>
-                                    <option>Jahorina</option>
-                                    <option>Vlasic</option>
-                                    <option>Igman</option>
-                                    <option>Trebevic</option>
 
                                 </select>
                                 <label id="cbxname-error" class="error valid" for="cbxname"></label>
                             </div>
                         </div>
 
-                        <div class="form-group" id="opstine">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <select name="neighborhood"  class="form-control cbxname lz-git-form-control placeholder-style" id="ddlocation">
-                                    <option>Centar</option>
-                                    <option>Novo Sarajevo</option>
-                                    <option>Novi Grad</option>
-                                    <option>Stari Grad</option>
-                                    <option>Ilidza</option>
-                                </select>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
                                 <input type="text" name="address" class="form-control cbxname lz-git-form-control placeholder-style" id="apstreet" placeholder="Ulica" required>
@@ -85,64 +62,12 @@
                                 <label id="cbxname-error" class="error valid" for="cbxname"></label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input type="number" min="1" name="beds" class="form-control cbxname lz-git-form-control placeholder-style" id="apbeds" placeholder="Broj kreveta" required>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input type="number" min="1" name="rooms" class="form-control cbxname lz-git-form-control placeholder-style" id="aprooms" placeholder="Broj soba" required>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input type="number" min="1" name="area" class="form-control cbxname lz-git-form-control placeholder-style" id="apares" placeholder="Kvadratura" required>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <input type="number" name="floor" min="1" class="form-control cbxname lz-git-form-control placeholder-style" id="apfloor" placeholder="Sprat" required>
-                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1" >
-                                <div class="cbx-heading4 text-center">
-                                    <p>Dodatni sadrzaji apartmana</p>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="parking" value="parking" style="width: 16px; height: 16px;">
-                                    <label  for="parking">Parking</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="washingmachine" value="washingmachine" class="checkboxs">
-                                    <label  for="washingmachine">Mašina za veš</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="balcony" value="balcony" class="checkboxs">
-                                    <label  for="balcony">Terasa</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="lift" value="lift" class="checkboxs">
-                                    <label  for="lift">Lift</label>
-                                </div>
-                               <div>
-                                   <input type="checkbox" name="pets" value="pets" class="checkboxs">
-                                   <label  for="pets">Ku?ni ljubimci</label>
-                               </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
-                                <textarea name="description" id="textarea_2" class="form-control cbxmessage lz-git-form-control placeholder-style" name="cbxmessage" id="cbxmessage" rows="15" placeholder="Opis Apartmana" required></textarea>
+                                <textarea name="description" id="textarea_2" class="form-control cbxmessage lz-git-form-control placeholder-style" name="cbxmessage" id="cbxmessage" rows="15" placeholder="Opis Objekta" required></textarea>
                                 <label id="cbxmessage-error" class="error valid" for="cbxmessage"></label>
                             </div>
                         </div>

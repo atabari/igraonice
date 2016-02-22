@@ -4,10 +4,6 @@
     margin-bottom: 30px;
     margin-top: 15px;
 }
-.picturemain{
-    background-image: url('../images/Sarajevo.jpg');
-    height: 150px;
-}
 .dropdown-color{
     background-color: white;
 
@@ -79,7 +75,7 @@
     text-align: center;
 }
 .footer-margin{
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 }
 .apdescription p{
     font-size: 18px;
@@ -223,7 +219,6 @@
 }
 .navbar-default { border: none }
 .navbar-brand {
-    color: #bcc0cd;
     font-size: 30px;
     font-weight: 100;
     line-height: 30px;
@@ -287,6 +282,7 @@ ul.dropdown-menu { border: none }
      -o-transition: all .3s ease;
      transition: all .3s ease;
  }
+
 /*.head-section .navbar {*/
     /*min-height: 100px;*/
     /*width: 100%;*/
@@ -771,4 +767,17 @@ ul.dropdown-menu { border: none }
     #login-button-marginbottom{
         margin-bottom: 50px;
     }
+}
+
+.margin-bottom-180{
+    margin-bottom: 180px;
+}
+.margin-bottom-135{
+    margin-bottom: 135px;
+}
+#sekcija{
+    background-image: url('../images/conffeti.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

@@ -40,10 +40,10 @@ public class Apartments extends Controller {
     public Result createApartment(Integer userId) {
         Apartment apart = Apartment.createApartment(userId);
         if (apart != null) {
-            flash("success", "Uspješno ste kreirali apartman.");
+            flash("success", "Uspješno ste kreirali objekat.");
             return redirect(routes.Apartments.apartment(apart.id));
         } else {
-            flash("error", "Desila se greška, apartman nije kreiran.");
+            flash("error", "Desila se greška, objekat nije kreiran.");
             return status(404, createapartment.render(userId));
         }
     }
@@ -64,10 +64,10 @@ public class Apartments extends Controller {
 
         AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
         if (apart != null) {
-            flash("success", "Uspješno ste ažurirali podatke o apartmanu.");
+            flash("success", "Uspješno ste ažurirali podatke o objektu.");
             return ok(apartment.render(apart, currentUser,apartments,reservations));
         } else {
-            flash("error", "Desila se greška, podaci o apartmanu nisu ažurirani.");
+            flash("error", "Desila se greška, podaci o objektu nisu ažurirani.");
             return ok(createapartment.render(apart.userId));
         }
     }
@@ -118,69 +118,6 @@ public class Apartments extends Controller {
         return ok(searchApartments.render(apartments));
     }
 
-    /* --------------- apartments with location Banja Luka ---------------*/
-
-    public Result banjalukaApartments(){
-        List<Apartment> apartments = Apartment.apartmentsBanjaLuka();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments with location Mostar ---------------*/
-
-    public Result mostarApartments(){
-        List<Apartment> apartments = Apartment.apartmentsMostar();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments with location Zenica ---------------*/
-
-    public Result zenicaApartments(){
-        List<Apartment> apartments = Apartment.apartmentsZenica();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments with location Tuzla ---------------*/
-
-    public Result tuzlaApartments(){
-        List<Apartment> apartments = Apartment.apartmentsTuzla();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments in mountain Bjelasnica ---------------*/
-
-    public Result bjelasnicaApartments(){
-        List<Apartment> apartments = Apartment.apartmentsBjelasnica();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments in mountain Jahorina ---------------*/
-
-    public Result jahorinaApartments(){
-        List<Apartment> apartments = Apartment.apartmentsJahorina();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments in mountain Vlasic ---------------*/
-
-    public Result vlasicApartments(){
-        List<Apartment> apartments = Apartment.apartmentsVlasic();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments in mountain Igman ---------------*/
-
-    public Result igmanApartments(){
-        List<Apartment> apartments = Apartment.apartmentsIgman();
-        return ok(searchApartments.render(apartments));
-    }
-
-    /* --------------- apartments in mountain Trebevic ---------------*/
-
-    public Result trebevicApartments(){
-        List<Apartment> apartments = Apartment.apartmentsTrebevic();
-        return ok(searchApartments.render(apartments));
-    }
-
 
         /* --------------- delete apartment ---------------*/
 
@@ -189,12 +126,7 @@ public class Apartments extends Controller {
         List<Apartment> apartments = Apartment.getAllApartments();
         return status(200, adminpage.render(apartments));
     }
-            /* --------------- admin page render ---------------*/
-//    @Security.Authenticated(Authenticator.AdminFilter.class)
-//    public Result adminPageRender(){
-//        List<Apartment> apartments = Apartment.getAllApartments();
-//        return ok(adminpage.render(apartments));
-//    }
+
 
 
      /* --------------- show apartment on homepage ---------------*/

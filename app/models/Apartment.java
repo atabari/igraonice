@@ -21,16 +21,10 @@ public class Apartment extends Model {
     @Id
     public Integer id;
     public String name;
-    public String title;
     public String location;
-    public String neighborhood;
     public String address;
     public Integer price;
     public Integer capacity;
-    public Integer beds;
-    public Integer rooms;
-    public Integer area;
-    public Integer floor;
     @Column(columnDefinition = "TEXT")
     public String description;
     public String lat;
@@ -57,20 +51,14 @@ public class Apartment extends Model {
      * @param lat
      * @param lng
      */
-    public Apartment(Integer id, String name, String title,String location, String neighborhood, String address, Integer price, Integer capacity,
-                     Integer beds, Integer rooms, Integer area, Integer floor, String description, String lat, String lng, Integer userId, Boolean isVisible) {
+    public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,
+                      String description, String lat, String lng, Integer userId, Boolean isVisible) {
         this.id = id;
         this.name = name;
-        this.title = title;
         this.location = location;
-        this.neighborhood = neighborhood;
         this.address = address;
         this.price = price;
         this.capacity = capacity;
-        this.beds = beds;
-        this.rooms = rooms;
-        this.area = area;
-        this.floor = floor;
         this.description = description;
         this.lat = lat;
         this.lng = lng;
@@ -83,16 +71,10 @@ public class Apartment extends Model {
         return "Apartment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", title='" + title + '\'' +
                 ", location='" + location + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
                 ", address='" + address + '\'' +
                 ", price=" + price +
                 ", capacity=" + capacity +
-                ", beds=" + beds +
-                ", rooms=" + rooms +
-                ", area=" + area +
-                ", floor=" + floor +
                 ", description=" + description +
                 ", lat=" + lat +
                 ", lng=" + lng +
@@ -115,9 +97,7 @@ public class Apartment extends Model {
         Apartment apartment = null;
         try {
             apartment = boundForm.get();
-            if(!apartment.location.equals("Sarajevo")){
-                apartment.neighborhood = "";
-            }
+
             apartment.userId = userId;
             apartment.isVisible = false;
             apartment.save();
@@ -136,31 +116,19 @@ public class Apartment extends Model {
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         try {
             String name = boundForm.field("name").value();
-            String title = boundForm.field("title").value();
             String location = boundForm.field("location").value();
-            String neighborhood = boundForm.field("neighborhood").value();
             String address = boundForm.field("address").value();
             Integer price = Integer.parseInt(boundForm.field("price").value());
             Integer capacity = Integer.parseInt(boundForm.field("capacity").value());
-            Integer beds = Integer.parseInt(boundForm.field("beds").value());
-            Integer rooms = Integer.parseInt( boundForm.field("rooms").value());
-            Integer area = Integer.parseInt(boundForm.field("area").value());
-            Integer floor = Integer.parseInt( boundForm.field("floor").value());
             String description = boundForm.field("description").value();
             String lat = boundForm.field("lat").value();
             String lng = boundForm.field("lng").value();
 
             apartment.name = name;
-            apartment.title = title;
             apartment.location = location;
-            apartment.neighborhood = neighborhood;
             apartment.address = address;
             apartment.price = price;
             apartment.capacity = capacity;
-            apartment.beds = beds;
-            apartment.rooms = rooms;
-            apartment.area = area;
-            apartment.floor = floor;
             apartment.description = description;
             apartment.lat = lat;
             apartment.lng = lng;
@@ -239,88 +207,6 @@ public class Apartment extends Model {
         return apartments;
     }
 
-            /* --------------- retrieves apartments with location Mostar ---------------*/
-
-    public static List<Apartment> apartmentsMostar(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Mostar").findList();
-        return apartments;
-    }
-
-            /* --------------- retrieves apartments with location Banja Luka ---------------*/
-
-    public static List<Apartment> apartmentsBanjaLuka(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Banja Luka").findList();
-        return apartments;
-    }
-
-            /* --------------- retrieves apartments with location Zenica ---------------*/
-
-    public static List<Apartment> apartmentsZenica(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Zenica").findList();
-        return apartments;
-    }
-
-            /* --------------- retrieves apartments with location Tuzla ---------------*/
-
-    public static List<Apartment> apartmentsTuzla(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Tuzla").findList();
-        return apartments;
-    }
-
-    /* --------------- retrieves apartments in mountain Bjelasnica---------------*/
-
-    public static List<Apartment> apartmentsBjelasnica(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Bjelasnica").findList();
-        return apartments;
-    }
-
-     /* --------------- retrieves apartments in mountain Jahorina---------------*/
-
-    public static List<Apartment> apartmentsJahorina(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Jahorina").findList();
-        return apartments;
-    }
-
-     /* --------------- retrieves apartments in mountain Vlasic---------------*/
-
-    public static List<Apartment> apartmentsVlasic(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Vlasic").findList();
-        return apartments;
-    }
-
-     /* --------------- retrieves apartments in mountain Igman---------------*/
-
-    public static List<Apartment> apartmentsIgman(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Igman").findList();
-        return apartments;
-    }
-
-     /* --------------- retrieves apartments in mountain Trebevic---------------*/
-
-    public static List<Apartment> apartmentsTrebevic(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Trebevic").findList();
-        return apartments;
-    }
-
-    /**
-     * Retrieves a list of apartments for homepage.
-     * TODO Odluciti i implementirati nacin na koji ce se odlucivati koji se apartmani prikazivati na pocetnoj stranici
-     * @return
-     */
-//    public static List<Apartment> apartmentsForHomepage() {
-//        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-//        List<Apartment> apartments = finder.all();
-//        return apartments;
-//    }
 
     /* --------------- retrieves list of images names for the current apartment ---------------*/
 
@@ -346,7 +232,7 @@ public class Apartment extends Model {
     public static String getFirstImage(Apartment apartment) {
         List<String> images = getListOfApartmentImages(apartment);
 
-        return (images.size() > 0) ? images.get(0) : "/assets/images/stan_na_dan.jpg";
+        return (images.size() > 0) ? images.get(0) : "/assets/images/igraonica.jpg";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/

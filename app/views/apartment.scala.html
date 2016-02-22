@@ -9,13 +9,6 @@
                             <h2 class="uppercase">@apartment.name <p>@apartment.location, @apartment.address</p></h2>
                         </div>
                     </div>
-                    <div class="col-md-3 favourite-div">
-                        <form method="GET" role="form" action="@routes.Apartments.favouriteApartments()">
-                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
-                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="favbutton" onclick="getCookies()"><i class="fa fa-heart" style="font-size: 30px"></i> MOJA LISTA</button>
-                            </div>
-                        </form>
-                    </div>
 
                 </div>
             </div><!-- //ROW Our Team Header -->
@@ -26,11 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <div class="apdescription">
-                        <p>@apartment.title</p>
-                    </div>
-
-                    <div class="duplicate-email">
+                   <div class="duplicate-email">
                     @if(flash.containsKey("success")) {
                         <div class="alert alert-success" role="alert">
                             <i class="fa fa-check-square-o" style="font-size:30px"></i>
@@ -46,7 +35,7 @@
                             <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src='@routes.Assets.versioned("images/stan_na_dan.jpg")' alt="">
+                                <img src='@routes.Assets.versioned("images/igraonica.jpg")' alt="">
                             </div>
                             @if(Apartment.getListOfApartmentImages(apartment).size() > 0) {
                                 @for(image <- Apartment.getListOfApartmentImages(apartment)) {
@@ -244,22 +233,6 @@
             </div>
 
         </section>
-    }else {
-        <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4 margin-bottom-20">
-                        <form method="POST" role="form" action="@routes.Apartments.cookies(apartment.id)">
-                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
-                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-heart">
-                                    DODAJ U LISTU</i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </section>
     }
 
     <section>
@@ -270,17 +243,10 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Apartman: </td>
+                                    <td>Naziv objekta: </td>
                                     <td align="right"><b>@apartment.name</b></td>
                                 </tr>
-                                @if(apartment.location.equals("Sarajevo")){
-                                <tr>
-                                    <td>Lokacija: </td>
-                                    <td align="right"><b>@apartment.neighborhood</b></td>
-                                </tr>
-                                }
-
-                                <tr>
+                                                               <tr>
                                     <td>Ulica: </td>
                                     <td align="right"><b>@apartment.address</b></td>
                                 </tr>
@@ -293,19 +259,6 @@
                                 <tr>
                                     <td>Broj osoba: </td>
                                     <td align="right">@apartment.capacity</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Broj kreveta: </td>
-                                    <td align="right">@apartment.beds</td>
-                                </tr>
-                                <tr>
-                                    <td>Kvadratura: </td>
-                                    <td align="right">@apartment.area m<sup>2</sup></td>
-                                </tr>
-                                <tr>
-                                    <td>Sprat </td>
-                                    <td align="right">@apartment.floor</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -321,41 +274,6 @@
             </div>
         </div>
     </section>
-
-
-
-
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-responsive" id="sort">
-                        <h3>Tabela sa datumima kada je apartman zauzet</h3>
-                        <thead>
-                            <tr class="about">
-                                <th>Datum</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @for(reservation <- reservations){
-
-                            <tr class="about" >
-                                <td>@reservation</td>
-                            </tr>
-                        }
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
 
     <section class="margin-bottom-20">
         <div class="container">
@@ -378,7 +296,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="cbx-heading2 text-left">
-                        <h2 class="uppercase"><p>Slicni apartmani</p></h2>
+                        <h2 class="uppercase"><p>Slicni objekti</p></h2>
                     </div>
                 </div>
                 @if(apartments.size() > 0){
@@ -406,7 +324,6 @@
                                     <div class="separator clear-left">
                                         <p class="btn-add">
                                             <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
-                                        <p class="btn-details"><i class="fa fa-home"></i>@apartment.rooms Sobe</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -426,7 +343,6 @@
     <script  src='@routes.Assets.versioned("javascripts/bluebox.js")'></script>
     <script  src='@routes.Assets.versioned("javascripts/popup.js")'></script>
     <script  src='@routes.Assets.versioned("javascripts/cookies.js")'></script>
-    <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
     <script src='@routes.Assets.versioned("javascripts/validation.js")'></script>
 
 }
