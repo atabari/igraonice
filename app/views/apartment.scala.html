@@ -1,5 +1,6 @@
-@(apartment: Apartment)(currentUser: AppUser)(apartments: java.util.List [Apartment])(reservations: java.util.List[String])
+@(apartment: Apartment)(currentUser: AppUser)(apartments: java.util.List [Apartment])(paketi: java.util.List[Paket])
 @main {
+    <section id="apartment-section">
     <section>
         <div class="container">
             <div class="row">
@@ -60,52 +61,9 @@
                 </div>
 
                 <div class="col-md-4 col-md-offset-1">
-                    <form method="POST" role="form" action="#">
-                        <div class="blue-box">
-                            <div class=" persons-nights">
-                                <p><b id="total" name="totalNights"> 1 </b> Noc</p>
-                                <p><b id="nopersons"> 1 </b> Osoba</p>
-                            </div>
-
-                            <div class="price" id="blue-box-price" >
-                                <p class="" >Po noci: <i class="fa fa-euro" id="cijena" name="price"> @apartment.price</i>  </p>
-                                <p>Ukupno:  <i class="fa fa-euro" id="totalmoney" name="totalPrice"> 0 </i></p>
-                            </div>
-                        </div>
-
-                        <div class="" id="check-in">
-                            <div class="col-md-12 check-in-date">
-                                <h4>Datum dolaska: </h4>
-                            </div>
-                            <div class="col-md-12 padding-left-0">
-                                <input type="date"  class="date-check" name="checkIndate" id="checkIn"  required/>
-                            </div>
-
-                            <div class="col-md-12 check-in-date">
-                                <h4>Datum odlaska: </h4>
-                            </div>
-                            <div class="col-md-12 padding-left-0">
-                                <input type="date" class="date-check" name="checkOutdate" id="checkOut"  required onchange="totalNights(@apartment.price)"/>
-                            </div>
-
-                            <div class="col-md-12 check-in-date">
-                                <h4>Broj osoba: </h4>
-                            </div>
-                            <div class="col-md-6 padding-left-0">
-                                <input type="number" max="@apartment.capacity" min="1"  class="date-check" id="person" onclick="capacity()">
-                            </div>
-                            <div class="col-md-12 check-in-date" id="red-letters">
-                                <p>* Napuštanje apartmana je do 12h</p>
-                                <p>* Za duži boravak cijena po dogovoru</p>
-                            </div>
-
-                            <input id="valchin" hidden>
-                            <input id="valchout" hidden>
-                        </div>
-                        <div class=" xs-text-center cbx-submit-area" id="reservation-button">
-                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" onclick="totalNights(@apartment.price)" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
-                        </div>
-                    </form>
+                    <div class="cbx-about-text text-left xs-text-center">
+                    @apartment.description
+                    </div>
 
                 </div>
 
@@ -127,32 +85,38 @@
                             <div class="modal-body" id="">
                                 <div class="col-md-8">
                                     <div class="col-md-6" id="">
+
+                                        <div id="datepicker">
+                                            <div class="col-md-12 check-in-date">
+                                                <h4>Datum dolaska: </h4>
+                                            </div>
+                                            <div class="col-md-12 padding-left-0">
+                                                <div id="sandbox">
+                                                    <input type="text" class="date-check" name="checkIndate"  id="checkIn" />
+                                                </div>
+                                                <input id="apId" value="@apartment.id" hidden>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-12 check-in-date">
+                                                <h4>Zauzeti termini</h4>
+                                                <p id="datumi" style="color: red; font-size: 15px"> </p>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-12 check-in-date">
-                                            <h4>Datum dolaska: </h4>
+                                            <h4>Vrijeme</h4>
                                         </div>
-                                        <div class="col-md-12 padding-left-0">
-                                            <input type="date"  class="date-check" name="checkIndate" id="checkInpop"  readonly    required/>
-                                            <label id="checkIndate_error" class="error" for="checkIndate"></label>
-
-                                        </div>
-
-                                        <div class="col-md-12 check-in-date">
-                                            <h4>Datum odlaska: </h4>
-                                        </div>
-                                        <div class="col-md-12 padding-left-0">
-                                            <input type="date" class="date-check" name="checkOutdate" id="checkOutpop" readonly  required />
-                                            <label id="checkOutDate_error" class="error" for="checkOutdate"></label>
-
+                                        <div class="col-md-6 padding-left-0">
+                                            <h5>Od </h5>
+                                            <input type='number' class=" date-check" id='datetimepicker2' name="timeFrom" min="0" max="24" required/>
                                         </div>
 
-                                        <div class="col-md-12 check-in-date">
-                                            <h4>Broj osoba: </h4>
+                                        <div class="col-md-6 padding-left-0">
+                                            <h5>Do </h5>
+                                            <input type="number" class=" date-check" id="timeTo" name="timeTo" />
                                         </div>
-                                        <div class="col-md-12 padding-left-0">
-                                            <input type="number" name="numOfPersons" class="date-check" id="personpop" readonly >
-                                            <label id="numOfPersons_error" class="error" for="numOfPersons"></label>
 
-                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -182,12 +146,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="col-md-12 check-in-date" id="red-letters">
-                                            <p>* Napuštanje apartmana je do 12h</p>
-                                            <p>* Za duži boravak cijena po dogovoru</p>
-                                        </div>
-                                    </div>
+
 
                                 </div>
 
@@ -218,87 +177,114 @@
 
 
     </section>
-    @if(currentUser !=null && apartment.userId == currentUser.id){
+        @if(currentUser !=null && apartment.userId == currentUser.id){
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 margin-bottom-20">
+                            <form method="GET" role="form" action="@routes.Apartments.renderUpdateApartment(apartment.id)">
+                                <div class=" xs-text-center cbx-submit-area" id="cookies-button">
+                                    <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-pencil"> AZURIRAJ </i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        }
+
+
+        <section id="paketi-background">
+            <div id="cbx-team" class="cbx-section cbx-team">
+                <div class="cbx-team-inner2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="cbx-heading text-center">
+                                    <h2 class="uppercase wow fadeInUp">Odaberite jedan od ponudjenih paketa</h2>
+                                    <hr noshade size="" width="" color="">
+                                </div>
+                            </div>
+                        </div><!-- //ROW Our Team Header -->
+                        @if(paketi.size() > 0){
+                            @for(paket <- paketi){
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="cbx-single-team text-center">
+                                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                                <div class="flipper">
+                                                        <!-- font content -->
+                                                    <div class="front cbx-font-side2">
+                                                        <div class="font-single-img text-center">
+                                                            <img class="img-circle" src='@routes.Assets.versioned("images/num1.jpg")'alt="Team Image">
+                                                        </div>
+                                                        <div class="font-single-text text-center margin-top80">
+                                                            <h3>@paket.name</h3>
+                                                            <h4>Cijena @paket.cost KM</h4>
+                                                            <h4>Trajanje: @paket.duration h</h4>
+                                                        </div>
+                                                    </div> <!-- //font content -->
+                                                    <!-- back content -->
+                                                    <div class="back cbx-back-side">
+                                                        <div class="text-center">
+                                                            <div class="text-center back-single-text">
+                                                                <p class="position">
+                                                                @paket.description
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <form method="POST" role="form" action="#">
+                                                            <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
+                                                                <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div><!-- //back content -->
+                                                </div>
+                                            </div>
+                                        </div> <!--//single team -->
+                                    </div> <!--//single team main col 3-->
+
+                                </div> <!--//single team main row-->
+                                <input type="number" id="time" value="@paket.duration" hidden>
+                            }
+                        }else{
+                            <div class="text-color text-center">
+                                <h4>Ovaj objekat trenutno nema kreiranih paketa, molimo da nas kontaktirate mailom</h4>
+                            </div>
+                        }
+                    </div> <!--//CONTAINER-->
+                </div> <!--//INNER-->
+            </div> <!--//SECTION-->
+        </section> <!-- //-->
+
+
+        <section class="margin-bottom-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cbx-heading2 text-left">
+                            <h2 class="uppercase"><p>Mapa</p></h2>
+                        </div>
+
+                        <div id="map" class="map"></div>
+                    </div>
+                    <input id="lat" name="lat" value="@apartment.lat" style="display : none">
+                    <input id="lng" name="lng" value="@apartment.lng" style="display : none">
+                </div>
+            </div>
+        </section>
+
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-4 margin-bottom-20">
-                        <form method="GET" role="form" action="@routes.Apartments.renderUpdateApartment(apartment.id)">
-                            <div class=" xs-text-center cbx-submit-area" id="cookies-button">
-                                <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-pencil"> AZURIRAJ </i></button>
-                            </div>
-                        </form>
+                    <div class="col-md-12">
+                        <div class="cbx-heading2 text-left">
+                            <h2 class="uppercase"><p>Slicni objekti</p></h2>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-        </section>
-    }
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="apartment-informations margin-bottom-20">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Naziv objekta: </td>
-                                    <td align="right"><b>@apartment.name</b></td>
-                                </tr>
-                                                               <tr>
-                                    <td>Ulica: </td>
-                                    <td align="right"><b>@apartment.address</b></td>
-                                </tr>
-                                <div class="split-pane-divider"></div>
-                                <tr>
-                                    <td>Cijena: </td>
-                                    <td align="right"><i class="fa fa-euro">@apartment.price</i></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Broj osoba: </td>
-                                    <td align="right">@apartment.capacity</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="col-md-9">
-                    <div class="cbx-about-text text-left xs-text-center">
-                        @apartment.description
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="margin-bottom-20">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="cbx-heading2 text-left">
-                        <h2 class="uppercase"><p>Mapa</p></h2>
-                    </div>
-
-                    <div id="map" class="map"></div>
-                </div>
-                <input id="lat" name="lat" value="@apartment.lat" style="display : none">
-                <input id="lng" name="lng" value="@apartment.lng" style="display : none">
-            </div>
-    </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="cbx-heading2 text-left">
-                        <h2 class="uppercase"><p>Slicni objekti</p></h2>
-                    </div>
-                </div>
                 @if(apartments.size() > 0){
                 @for(apartment <- apartments){
 
@@ -307,9 +293,6 @@
                             <div class="col-item">
                                 <div class="photo">
                                     <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
-                                    <div class="price-picture">
-                                        <i class="fa fa-euro"> @apartment.price</i>
-                                    </div>
                                 </div>
                                 <div class="info">
                                     <div class="row">
@@ -322,7 +305,7 @@
                                         </a>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
+                                        <p>
                                             <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
                                     </div>
                                     <div class="clearfix"></div>
@@ -336,13 +319,34 @@
         </div>
 
     </section>
-
-
+    </section>
+    @*<input type="text" id="reservationDates" value="@reservations.toString" hidden>*@
 
     <script  src='@routes.Assets.versioned("javascripts/googlemap.js")'></script>
-    <script  src='@routes.Assets.versioned("javascripts/bluebox.js")'></script>
-    <script  src='@routes.Assets.versioned("javascripts/popup.js")'></script>
     <script  src='@routes.Assets.versioned("javascripts/cookies.js")'></script>
     <script src='@routes.Assets.versioned("javascripts/validation.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/popup.js")'></script>
 
+
+    <script>
+//        var dates = $('#reservationDates').val();
+//        console.log(dates)
+
+        $('#sandbox input').datepicker({
+            startDate: new Date(),
+            todayBtn: "linked",
+            forceParse: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            autoclose: true
+
+        });
+
+    </script>
+
+    @*<script>*@
+    @*$('#datetimepicker2').datetimepicker({*@
+    @*format: 'HH:mm'*@
+    @*});*@
+    @*</script>*@
 }

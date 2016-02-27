@@ -1,14 +1,14 @@
 package models;
 
 import com.avaje.ebean.Model;
-import play.data.DynamicForm;
-import play.data.Form;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 /**
  * Created by ajla on 26-Dec-15.
@@ -18,12 +18,11 @@ public class Reservation extends Model {
     @Id
     public Integer id;
 
-//    @Column(columnDefinition = "datetime")
-
     public String dateFrom;
-//    @Column(columnDefinition = "datetime")
 
-    public String dateTo;
+    public String timeFrom;
+    public String timeTo;
+
     public String visitorName;
     public String visitorLastname;
     public String visitorEmail;
@@ -37,10 +36,11 @@ public class Reservation extends Model {
 
     public Reservation() {
     }
-    public Reservation(Apartment apartment, String dateTo, String dateFrom, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost) {
+    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost) {
         this.apartment = apartment;
-        this.dateTo = dateTo;
         this.dateFrom = dateFrom;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
         this.visitorName = visitorName;
         this.visitorLastname = visitorLastname;
         this.visitorEmail = visitorEmail;
@@ -50,10 +50,8 @@ public class Reservation extends Model {
         this.cost = cost;
     }
 
-//    private static Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
 
-    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String checkOutDate, String numOfPersons, String comment){
-        DynamicForm form = Form.form().bindFromRequest();
+    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment){
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
 
@@ -62,7 +60,6 @@ public class Reservation extends Model {
         reservation.comment = comment;
         reservation.phone = phone;
         reservation.visitorEmail = email;
-        reservation.capacity = numOfPersons;
         reservation.visitorName = name;
 
         if(reservation.visitorName.contains(" ")) {
@@ -73,21 +70,48 @@ public class Reservation extends Model {
             reservation.visitorLastname = " ";
         }
         reservation.dateFrom = checkInDate;
-        reservation.dateTo = checkOutDate;
+        reservation.timeFrom = timeFrom;
+        reservation.timeTo = timeTo;
 
         reservation.save();
     }
 
-    public static List<String> getReservationsByApartmentId(Integer apartmentId) {
+    public static List<String> reservationTimes(Integer apartmentId, String dateToCheck){
+        Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
+        List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
+        List<String> times = new ArrayList<>();
+
+        for (int i=0; i < reservations.size(); i ++){
+            if(dateToCheck.equals(reservations.get(i).dateFrom)) {
+
+                times.add(reservations.get(i).timeFrom +":00 h " + " - " + reservations.get(i).timeTo +":00 h " );
+            }
+        }
+        return times;
+    }
+
+    public static HashMap<String, List<String>> getReservationsByApartmentId(Integer apartmentId, String dateToCheck) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
 
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-        List<String> dates = new ArrayList<>();
+
+        HashMap<String, List<String>> hashMap = new HashMap<>();
 
         for (int i=0; i < reservations.size(); i ++){
-            dates.add(reservations.get(i).dateFrom.toString()+" do " + reservations.get(i).dateTo.toString() );
-        }
+           hashMap.put(reservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
 
-        return dates;
+        }
+        return hashMap;
+    }
+
+    public static List<String> getReservations(String datum) {
+
+        String dateToCheck = datum.split("-")[0];
+        Integer apartmentId =Integer.parseInt(datum.split("-")[1]) ;
+
+        HashMap<String, List<String>> hashMap = getReservationsByApartmentId(apartmentId, dateToCheck);
+
+        return hashMap.get(dateToCheck);
+
     }
 }

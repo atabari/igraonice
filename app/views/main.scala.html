@@ -77,6 +77,22 @@
         <script src='@routes.Assets.versioned("javascripts/jquery.shuffle.min.js")'></script>
         <script src='@routes.Assets.versioned("javascripts/hover-dropdown.js")'></script>
 
+
+        <script src='@routes.Assets.versioned("javascripts/moment.js")'></script>
+        <script src='@routes.Assets.versioned("javascripts/bootstrap-datetimepicker.js")'></script>
+
+        <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/bootstrap-datetimepicker.css")' media="all" />
+        <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/bootstrap-datetimepicker.min.css")' media="all" />
+
+        <script src='@routes.Assets.versioned("javascripts/bootstrap-datepicker.js")'></script>
+        <script src='@routes.Assets.versioned("javascripts/bootstrap-datepicker.min.js")'></script>
+
+        <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/bootstrap-datepicker3.css")' media="all" />
+        <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/bootstrap-datepicker3.min.css")' media="all" />
+
+
+
+
         <script src="https://maps.googleapis.com/maps/api/js"></script>
 
         <script>
@@ -106,11 +122,23 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">Izaberi grad <i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="#">GRADOVI <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
                                     <a href="@routes.Apartments.sarajevoApartments()">Sarajevo </a>
+                                </li>
+                                <li>
+                                    <a href="@routes.Apartments.mostarApartments()">Mostar</a>
+                                </li>
+                                <li>
+                                    <a href="@routes.Apartments.banjalukaApartments()">Banja Luka</a>
+                                </li>
+                                <li>
+                                    <a href="@routes.Apartments.zenicaApartments()">Zenica</a>
+                                </li>
+                                <li>
+                                    <a href="@routes.Apartments.tuzlaApartments()">Tuzla</a>
                                 </li>
 
                             </ul>
@@ -118,87 +146,22 @@
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="">Cesta pitanja <i class="fa fa-angle-down"></i>
+                            "dropdown" data-toggle="dropdown" href="">TORTE <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="@routes.Informations.rules()">Kucni red</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Informations.reservations()">Sve o rezervacijama</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Informations.payment()">Placanje</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Informations.arrivalsAndDeparture()">Dolazak i odlazak </a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Informations.apartmentRules()">Boravak u apartmanu </a>
-                                </li>
+
                             </ul>
                         </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                        "dropdown" data-toggle="dropdown" href="#">Informacije <i class="fa fa-angle-down"></i>
+                        "dropdown" data-toggle="dropdown" href="#">ZABAVLJACI <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="#" tabindex="-1">Vodic kroz Sarajevo</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#" tabindex="-1">Gdje izaci</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" tabindex="-1">Gdje jesti</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" tabindex="-1">Sta vidjeti</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" tabindex="-1">Sta raditi</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="table.html">Plan grada</a>
-                            </li>
-                            <li>
-                                <a href="table.html">Klima Sarajeva</a>
-                            </li>
-                            <li>
-                                <a href="table.html">Parkiranje i parking zone</a>
-                            </li>
-                            <li>
-                                <a href="table.html">Javni gradski prevoz</a>
-                            </li>
-                            <li>
-                                <a href="table.html">Valuta i placanje</a>
-                            </li>
-                            <li>
-                                <a href="table.html">Korisni kontakti</a>
-                            </li>
 
-                            <li class="dropdown-submenu">
-                                <a href="#" tabindex="-1">Kako do Sarajeva?</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#" tabindex="-1">Avionom </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" tabindex="-1">Vozom</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" tabindex="-1">Autom</a>
-                                    </li>
-                                </ul>
-                            </li>
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="@routes.Informations.cooperation()" id="saradnja" >Saradnja</a>
-                    </li>
+
                     @if(currentUser == null) {
                         <li>
                             <a href="@routes.Login.loginIndex()" id="saradnja" >Login</a>

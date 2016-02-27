@@ -1,47 +1,45 @@
-@(apartments: java.util.List[Apartment])(userId: Integer)
+@(paketi: java.util.List[Paket])(apartmentId: Integer)
 @main{
     <section class="margin-bottom-135">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="cbx-heading text-center">
-                        <h2 class="uppercase wow fadeInUp">Vasi trenutni objekti</h2>
+                        <h2 class="uppercase wow fadeInUp">Vasi trenutni paketi</h2>
                     </div>
                 </div>
             </div>
-           <!-- //ROW Our Team Header -->
+                <!-- //ROW Our Team Header -->
             <div class="clearfix" style="margin-bottom: 5px"> </div>
             <div class="cbx-latest-area">
-            @if(apartments.size() > 0) {
+            @if(paketi.size() > 0) {
                 <section id="tablemargins" class="col-md-12">
                     <table class="table table-responsive" id="sort">
                         <thead>
                             <tr class="about">
-                                <th>Ime apartmana</th>
-                                <th>Lokacija</th>
-                                <th>Adresa</th>
+                                <th>Naziv paketa</th>
                                 <th>Cijena</th>
-                                <th>Kapacitet</th>
-                                <th>Paketi</th>
+                                <th>Opis</th>
+                                <th>Trajanje</th>
                                 <th>Uredi</th>
+                                <th>Obrisi</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                        @for(apartment <- apartments) {
+                        @for(package1 <- paketi) {
                             <tr class="about" >
-                                <td>@apartment.name</td>
-                                <td>@apartment.location</td>
-                                <td>@apartment.address</td>
-                                <td>@apartment.price</td>
-                                <td>@apartment.capacity</td>
+                                <td>@package1.name</td>
+                                <td>@package1.cost</td>
+                                <td>@package1.description</td>
+                                <td>@package1.duration</td>
                                 <td>
-                                    <a data-role="get" data-delete-parent="tr" href="@routes.Paketi.listOfPackages(apartment.id)" role="button">
-                                        <i class=" fa fa-list fa-lg"></i></a>
-                                </td>
-                                <td>
-                                    <a data-role="post" data-delete-parent="tr" href="@routes.Apartments.renderUpdateApartment(apartment.id)" role="button">
+                                    <a data-role="post" data-delete-parent="tr" href="@routes.Paketi.updatePackageRender(package1.id)" role="button">
                                         <i class=" fa fa-pencil fa-lg"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <a data-role="delete" data-delete-parent="tr" href="@routes.Paketi.deletePackage(package1.id)" role="button">
+                                        <i class=" fa fa-trash-o fa-lg"></i></a>
                                 </td>
 
                             </tr>
@@ -61,18 +59,15 @@
             }
             </div><!-- cbx-latest-area -->
 
-            <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Apartments.renderApartment(userId)" >
+            <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Paketi.createPackageRender(apartmentId)" >
                 <div class="col-md-12">
                     <div class="col-md-4 col-md-offset-4 xs-text-center cbx-submit-area" id="">
-                        <button type="submit"  class="btn btn-block lz-git-submit-btn cbx-submit" id="addApartment">DODAJ OBJEKAT</button>
+                        <button type="submit"  class="btn btn-block lz-git-submit-btn cbx-submit" id="addApartment">DODAJ PAKET</button>
                     </div>
                 </div>
             </form>
         </div><!-- container end -->
     </section>
-
-
-
     <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
 
 }

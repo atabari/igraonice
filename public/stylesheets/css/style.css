@@ -928,8 +928,12 @@ h1.lz-main-heading span.lz-brand-color {
   color: #fff;
 }
 #cbx-team .cbx-team-inner {
-    /*background-image: url("../../images/eP2ydUh.jpg");*/
+  /*background-image: url("../../images/eP2ydUh.jpg");*/
   padding-bottom: 130px;
+}
+#cbx-team .cbx-team-inner2 {
+    /*background-image: url("../../images/eP2ydUh.jpg");*/
+  /*padding-bottom: 130px;*/
 }
 #cbx-team-text p {
   padding-bottom: 20px;
@@ -2706,6 +2710,14 @@ Browse Happy prompt
   background: #505050;
   border: 1px solid #f5740a;
 }
+#cbx-team .cbx-font-side2 {
+  /*background: #505050;*/
+  /*background-image: url("../../images/zvjezdice.jpg");*/
+  /*background-image: url("../../images/pruge.jpg");*/
+  background-image: url("../../images/baloni.jpg");
+  /*background-image: url("../../images/baloni1.jpg");*/
+  border: 1px solid #f5740a;
+}
 #cbx-team .cbx-back-side {
   background: #f5740a;
 }
@@ -3709,4 +3721,35 @@ li.cbxgrid-item-none {
 .navbar-default{
   background-color: white;
     border-color: #f5740a;
+}
+.position{
+  position: relative;
+  text-align: center;
+
+}
+.position-button{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+#apartment-section{
+  /*background-image: url("../../images/stardust.png");*/
+  /*background-color: #ffffff;*/
+}
+#paketi-background{
+  /*background-image: url("../../images/stardust.png");*/
+
+}
+.navbar-default .navbar-nav>li>a{
+  color:black;
+  font-weight: 500;
+}
+.margin-top80{
+  margin-top: 80px;
+}
+
+.text-color h4{
+  color: #f5740a;
 }

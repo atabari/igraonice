@@ -37,16 +37,10 @@ public class Apartment extends Model {
      * Default constructor
      * @param id
      * @param name
-     * @param title
      * @param location
-     * @param neighborhood
      * @param address
      * @param price
      * @param capacity
-     * @param beds
-     * @param rooms
-     * @param area
-     * @param floor
      * @param description
      * @param lat
      * @param lng
@@ -163,41 +157,7 @@ public class Apartment extends Model {
     public static Apartment getApartmentById(Integer apartmentId) {
         return finder.where().eq("id", apartmentId).findUnique();
     }
-        /* --------------- retrieves apartments with neighbourhood centar ---------------*/
 
-    public static List<Apartment> apartmentsCentar(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("neighborhood", "Centar").findList();
-        return apartments;
-    }
-        /* --------------- retrieves apartments with neighbourhood novo sarajevo ---------------*/
-
-    public static List<Apartment> apartmentsNSarajevo(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("neighborhood", "Novo Sarajevo").findList();
-        return apartments;
-    }
-        /* --------------- retrieves apartments with neighbourhood novi grad ---------------*/
-
-    public static List<Apartment> apartmentsNGrad(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("neighborhood", "Novi Grad").findList();
-        return apartments;
-    }
-        /* --------------- retrieves apartments with neighbourhood stari grad ---------------*/
-
-    public static List<Apartment> apartmentsSGrad(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("neighborhood", "Stari Grad").findList();
-        return apartments;
-    }
-        /* --------------- retrieves apartments with neighbourhood ilidza ---------------*/
-
-    public static List<Apartment> apartmentsIlidza(){
-        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("neighborhood", "Ilidza").findList();
-        return apartments;
-    }
 
             /* --------------- retrieves apartments with location Sarajevo ---------------*/
 
@@ -206,7 +166,37 @@ public class Apartment extends Model {
         List<Apartment> apartments = finder.where().eq("location", "Sarajevo").findList();
         return apartments;
     }
+       /* --------------- retrieves apartments with location Mostar ---------------*/
 
+    public static List<Apartment> apartmentsMostar(){
+        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartments = finder.where().eq("location", "Mostar").findList();
+        return apartments;
+    }
+
+            /* --------------- retrieves apartments with location Banja Luka ---------------*/
+
+    public static List<Apartment> apartmentsBanjaLuka(){
+        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartments = finder.where().eq("location", "Banja Luka").findList();
+        return apartments;
+    }
+
+            /* --------------- retrieves apartments with location Zenica ---------------*/
+
+    public static List<Apartment> apartmentsZenica(){
+        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartments = finder.where().eq("location", "Zenica").findList();
+        return apartments;
+    }
+
+            /* --------------- retrieves apartments with location Tuzla ---------------*/
+
+    public static List<Apartment> apartmentsTuzla(){
+        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartments = finder.where().eq("location", "Tuzla").findList();
+        return apartments;
+    }
 
     /* --------------- retrieves list of images names for the current apartment ---------------*/
 

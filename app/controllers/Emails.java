@@ -25,11 +25,11 @@ public class Emails extends Controller {
         String mail = form.field("mail").value();
         String phone = form.field("phone").value();
         String checkIndate = form.field("checkIndate").value();
-        String checkOutdate = form.field("checkOutdate").value();
-        String numOfPersons = form.field("numOfPersons").value();
+        String timeFrom = form.field("timeFrom").value();
+        String timeTo = form.field("timeTo").value();
         String comment = form.field("comment").value();
 
-            Email.sendMailReservation(name, mail, phone, checkIndate, checkOutdate, numOfPersons, comment, apartmentId);
+            Email.sendMailReservation(name, mail, phone, checkIndate,timeFrom, timeTo, comment, apartmentId);
             /*If mail is sent flash appears and user is redirected to index page */
             flash("success", "Vasa poruka je poslana. Potrudit cemo se da odgovorimo u najkracem mogucem roku. Zahvaljujemo!");
             return redirect(routes.Apartments.apartment(apartmentId));
