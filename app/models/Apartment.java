@@ -241,7 +241,7 @@ public class Apartment extends Model {
     public static String getFirstImage(Apartment apartment) {
         List<String> images = getListOfApartmentImages(apartment);
 
-        return (images.size() > 0) ? images.get(0) : "/assets/images/igraonica.jpg";
+        return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna.png";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/
