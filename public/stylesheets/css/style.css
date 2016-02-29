@@ -3733,6 +3733,11 @@ li.cbxgrid-item-none {
   left: 0;
   width: 100%;
 }
+#background{
+  background-image: url("../../images/stardust.png");
+    /*background-color: #EBFCE6;*/
+}
+
 
 #apartment-section{
   /*background-image: url("../../images/stardust.png");*/

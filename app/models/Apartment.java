@@ -204,7 +204,7 @@ public class Apartment extends Model {
         List<String> results = new ArrayList<>();
 
         String folderName = apartment.name + apartment.id;
-        String location = "E:/StanNaDan/public/apartmentPhotos/" + folderName;
+        String location = "E:/igraonice/public/apartmentPhotos/" + folderName;
 
         File[] files = new File(location).listFiles();
 

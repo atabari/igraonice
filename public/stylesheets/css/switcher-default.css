@@ -277,6 +277,9 @@ div.lz-kkcountdown .kkc-hours-text {
 #cbx-team .cbx-back-side {
     background: #3498db;
 }
+#cbx-team .cbx-back-side1 {
+    background: #5b5b5b;
+}
 #cbx-team .cbx-member-social i {
     color: #ba5808;
 }

@@ -5,7 +5,7 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import views.html.index;
+import views.html.index2;
 import views.html.upload;
 
 import java.io.File;
@@ -33,7 +33,7 @@ public class ImageUpload extends Controller {
             String fileName = picture.getFilename();
             File file = picture.getFile();
 
-            File theDir = new File("E:\\StanNaDan\\public\\apartmentPhotos\\" + folder);
+            File theDir = new File("E:\\igraonice\\public\\apartmentPhotos\\" + folder);
 
             // if the directory does not exist, create it
 
@@ -55,14 +55,12 @@ public class ImageUpload extends Controller {
 
 
             List<Apartment> apartments = Apartment.apartmentsForHomepage();
-            Logger.debug("uspjesno");
-            return ok(index.render(apartments));
+            return ok(index2.render(apartments));
 
         } else {
             flash("error", "Missing file");
             List<Apartment> apartments = Apartment.apartmentsForHomepage();
-            Logger.debug("neuspjesno!!!!!!");
-            return ok(index.render(apartments));
+            return ok(index2.render(apartments));
         }
     }
 }

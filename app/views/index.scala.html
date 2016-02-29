@@ -1,4 +1,3 @@
-@(apartments: java.util.List[Apartment])
 @main {
     <section>
         <div class="container">
@@ -10,55 +9,8 @@
             </div>
         </div>
     </section>
-
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="cbx-heading text-center">
-                        <h2 class="uppercase wow fadeInUp">Igraonice za proslavu rodjendana</h2>
-                    </div>
-                </div>
-            </div><!-- //ROW Our Team Header -->
-            <div class="clearfix" style="margin-bottom: 5px"> </div>
-            <div class="cbx-latest-area">
-            @if(apartments.size() > 0) {
-                @for(apartment <- apartments) {
-                    <div class="item active cbx-single-all">
-                        <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <a href="@routes.Apartments.apartment(apartment.id)" target="">
-                                            <div class=" col-md-12 text-center">
-                                                <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
-                                                <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.location</h5>
-                                                <h5 class="price-text-color">@apartment.address</h5>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="">
-                                            <i class="fa fa-male"></i> @apartment.capacity Osoba</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!--//Item-->
-                }
-            }
-            </div><!-- cbx-latest-area -->
-        </div><!-- container end -->
-    </section>
-
-
     <!-- TEAM SECTION START -->
-    <section id="sekcija">
+    @*<section id="sekcija">*@
         <div id="cbx-team" class="cbx-section cbx-team">
             <div class="cbx-team-inner">
                 <div class="container">
@@ -73,8 +25,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="cbx-single-team text-center">
-                                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="flipper">
+                                <a href="@routes.Application.index2()" style="color:white">
+                                    <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                        <div class="flipper">
                                             <!-- font content -->
                                         <div class="front cbx-font-side">
                                             <div class="font-single-img text-center">
@@ -82,23 +35,24 @@
                                             </div>
                                             <div class="font-single-text text-center">
                                                 <h3>Igraonice</h3>
-                                                <p>Ukoliko Vam je potreban apartman u Beogradu na dan, dva ili vise na pravom ste mestu!!! </p>
+                                                <p>Mjesto gdje pocinje nezaboravan rodjendan Vaseg djeteta </p>
                                             </div>
                                         </div> <!-- //font content -->
                                         <!-- back content -->
-                                        <div class="back cbx-back-side">
+                                        <div class="back cbx-back-side1">
                                             <div class="text-center">
                                                 <div class="text-center back-single-text">
                                                     <p>
-                                                        Znatno visi kvalitet usluge nego u hostelima, drasticno nize cene nego u hotelima, sve ukupno nasi apartmani su najbolja opcija za smestaj u Sarajevu.
-                                                        Svi apartmani su klimatizovani, opremljeni posteljinom i peskirima, bezicnim internetom, kablovskom televizijom kao i nekim oblikom grijanja (centralno ili na struju).
-                                                        Kroz nasu jednostavnu pretragu mozete pronaci apartman kakav bas Vama odgovara.
+                                                       Ukoliko zelite djetetu osigurati nezaboravan rodjendan, odabrali ste pravo mjesto. Rodjendani.ba raspolaze velikim brojem djecijih igraonica koje su savrsene za proslave rodjendana.
+                                                        Kontaktirajte igraonicu i priredite svom djetetu rodjendan iz snova. Uskoro ce se u nasoj ponudi naci i torte, animatori i pokloni.
                                                     </p>
                                                 </div>
                                             </div>
                                         </div><!-- //back content -->
                                     </div>
+
                                 </div>
+                                </a>
                             </div> <!--//single team -->
                         </div> <!--//single team main col 3-->
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -112,16 +66,15 @@
                                             </div>
                                             <div class="font-single-text text-center">
                                                 <h3>Torte</h3>
-                                                <p>Pored iznajmljivanja na vise dana najveci broj apartmana se moze iznajmiti i na samo dan tj. noc.</p>
+                                                <p>USKORO</p>
                                             </div>
                                         </div> <!-- //font content -->
                                         <!-- back content -->
-                                        <div class="back cbx-back-side">
+                                        <div class="back cbx-back-side1">
                                             <div class="text-center">
                                                 <div class="text-center back-single-text">
-                                                    <p> Stan na jedan dan odnosno stanovi na dan su upravo nasa uza specijalnost kao sto i samo ime nase agencije govori.
-                                                        Nas cilj je da Vam obezbedimo idealan smestaj u Sarajevu po sistemu "stan na dan" na najboljim lokacijama u Sarajevu.
-                                                        Obzirom da mi nismo hotel vec njegova alternativa rezervacije na samo jedan dan moguce je izvrsiti na sam dan dolaska ili dan pred planirani dolazak.
+                                                    <p>
+                                                        Uskoro ocekujte i veliki broj torti sa djecijim omiljenim likovima iz crtanih filmova.
                                                     </p>
                                                 </div>
                                             </div>
@@ -141,17 +94,16 @@
                                             </div>
                                             <div class="font-single-text text-center">
                                                 <h3>Animatori</h3>
-                                                <p>Apartmanski smestaj u Sarajevu se u poslednjih nekoliko godina popularizovao</p>
+                                                <p>USKORO</p>
                                             </div>
                                         </div> <!-- //font content -->
                                         <!-- back content -->
-                                        <div class="back cbx-back-side">
+                                        <div class="back cbx-back-side1">
                                             <div class="text-center">
 
                                                 <div class="text-center back-single-text">
                                                     <p>
-                                                        Smestaj u Sarajevu je odlican izbor za sve: turiste, poslovne ljude, omladinu. kao i Vase romanticne i porodicne trenutke.
-                                                        Iznajmite smesaj u Sarajevu po Vasoj meri i pristojnim cenama koristeci nasu naprednu pretragu.
+                                                       Nasu ponudu obogatit cemo sa veselim animatorima koji ce se pobrinuti za osmijeh na licu vaseg djeteta
                                                     </p>
                                                 </div>
                                             </div>
@@ -170,17 +122,16 @@
                                                 <img class="img-circle" src='@routes.Assets.versioned("images/b4.jpg")' alt="Team Image">
                                             </div>
                                             <div class="font-single-text text-center">
-                                                <h3>Fotografi</h3>
-                                                <p>Stan Na Dan Sarajevo raspolaze sa vecim brojem apartmana na atraktivnim lokacijama u Sarajevu </p>
+                                                <h3>Pokloni</h3>
+                                                <p>USKORO </p>
                                             </div>
                                         </div> <!-- //font content -->
                                         <!-- back content -->
-                                        <div class="back cbx-back-side">
+                                        <div class="back cbx-back-side1">
                                             <div class="text-center">
                                                 <div class="text-center back-single-text">
                                                     <p>
-                                                        Dovoljno je da nas samo kontaktirate na sam dan dolaska i obezbedite idealno prenociste u Sarajevu po povoljnim a u nekim slucajevima i "last minute" cijenama.
-                                                        Provod i nocni zivot u Sarajevu su samo jedan od razloga.
+                                                        Uskoro u pondi i veliki broj poklona za djecu.
                                                     </p>
                                                 </div>
                                             </div>
@@ -193,7 +144,7 @@
                 </div> <!--//CONTAINER-->
             </div> <!--//INNER-->
         </div> <!--//SECTION-->
-    </section> <!-- //-->
+    @*</section> <!-- //-->*@
 
 
     <script src='@routes.Assets.versioned("javascripts/informations.js")'></script>

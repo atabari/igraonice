@@ -781,3 +781,7 @@ ul.dropdown-menu { border: none }
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+.dimensions{
+    width: 700px;
+    height: 600px;
+}
