@@ -40,6 +40,7 @@ public class Apartments extends Controller {
     @Security.Authenticated(Authenticator.AdminUserFilter.class)
     public Result createApartment(Integer userId) {
         DynamicForm form = Form.form().bindFromRequest();
+
         String name = form.field("name").value();
         String location = form.field("loation").value();
         String address = form.field("address").value();
@@ -49,11 +50,7 @@ public class Apartments extends Controller {
         String lat = form.field("lat").value();
         String lng = form.field("lng").value();
 
-
-
         Apartment apart = Apartment.createApartment(name, location, address, price, capacity, description, lat, lng, userId);
-
-
 
         if (apart != null) {
             flash("success", "Uspješno ste kreirali objekat.");
@@ -130,6 +127,13 @@ public class Apartments extends Controller {
 
     public Result tuzlaApartments(){
         List<Apartment> apartments = Apartment.apartmentsTuzla();
+        return ok(searchApartments.render(apartments));
+    }
+
+     /* --------------- apartments with location Brcko ---------------*/
+
+    public Result brckoApartments(){
+        List<Apartment> apartments = Apartment.apartmentsBrcko();
         return ok(searchApartments.render(apartments));
     }
 

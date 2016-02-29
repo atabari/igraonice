@@ -23,6 +23,7 @@ GET           /mostar                                   @controllers.Apartments.
 GET           /banjaluka                                @controllers.Apartments.banjalukaApartments()
 GET           /zenica                                   @controllers.Apartments.zenicaApartments()
 GET           /tuzla                                    @controllers.Apartments.tuzlaApartments()
+GET           /brcko                                    @controllers.Apartments.brckoApartments()
 
 
 

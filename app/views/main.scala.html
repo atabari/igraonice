@@ -140,27 +140,30 @@
                                 <li>
                                     <a href="@routes.Apartments.tuzlaApartments()">Tuzla</a>
                                 </li>
+                                <li>
+                                    <a href="@routes.Apartments.brckoApartments()">Brcko</a>
+                                </li>
 
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="">TORTE <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
+                        @*<li class="dropdown">*@
+                            @*<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=*@
+                            @*"dropdown" data-toggle="dropdown" href="">TORTE <i class="fa fa-angle-down"></i>*@
+                            @*</a>*@
+                            @*<ul class="dropdown-menu">*@
 
-                            </ul>
-                        </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                        "dropdown" data-toggle="dropdown" href="#">ZABAVLJACI <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
+                            @*</ul>*@
+                        @*</li>*@
+                    @*<li class="dropdown">*@
+                        @*<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=*@
+                        @*"dropdown" data-toggle="dropdown" href="#">ZABAVLJACI <i class="fa fa-angle-down"></i>*@
+                        @*</a>*@
+                        @*<ul class="dropdown-menu">*@
 
 
-                        </ul>
-                    </li>
+                        @*</ul>*@
+                    @*</li>*@
 
                     @if(currentUser == null) {
                         <li>
@@ -219,6 +222,10 @@
     <body id="background">
         @content
     </body>
+
+    <section id="balloons">
+
+    </section>
 
     <footer >
         <div class="cblz-footer-bottom footer-margin">

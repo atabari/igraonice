@@ -208,6 +208,15 @@ public class Apartment extends Model {
         return apartments;
     }
 
+
+            /* --------------- retrieves apartments with location Brcko ---------------*/
+
+    public static List<Apartment> apartmentsBrcko(){
+        Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartments = finder.where().eq("location", "Brcko").findList();
+        return apartments;
+    }
+
     /* --------------- retrieves list of images names for the current apartment ---------------*/
 
     public static List<String> getListOfApartmentImages(Apartment apartment) {
@@ -269,7 +278,8 @@ public class Apartment extends Model {
 
         for(int i=0; i < prices.size(); i++) {
             for (int j = price - 10; j <= price + 10; j++) {
-                if (apartments.get(i).price == j) {
+
+                if (apartments.size() != 0 && apartments.get(i).price == j) {
                     recommendedApartments.add(apartments.get(i));
                 }
 

@@ -53,7 +53,7 @@
     background-color: white;
 }
 .map{
-    height: 320px;
+    height: 500px;
 }
 .map2{
     height: 520px;
@@ -776,7 +776,7 @@ ul.dropdown-menu { border: none }
     margin-bottom: 135px;
 }
 #sekcija{
-    background-image: url('../images/conffeti.png');
+
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -784,4 +784,9 @@ ul.dropdown-menu { border: none }
 .dimensions{
     width: 700px;
     height: 600px;
+}
+.title{
+    font-size: 40px;
+    color: #2FA7E6;
+    font-weight: 600;
 }

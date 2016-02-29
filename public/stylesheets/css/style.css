@@ -166,11 +166,11 @@ a:focus {
 
 .cbx-heading p {
   font-family: 'Raleway', Arial, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  font-size: 2rem;
-  padding-top: 10px;
-  line-height: 30px;
+  /*font-weight: 400;*/
+  /*font-size: 20px;*/
+  /*font-size: 2rem;*/
+  /*padding-top: 10px;*/
+  /*line-height: 30px;*/
   letter-spacing: 1px;
 }
 .cbx-heading2 p {
@@ -928,7 +928,8 @@ h1.lz-main-heading span.lz-brand-color {
   color: #fff;
 }
 #cbx-team .cbx-team-inner {
-  /*background-image: url("../../images/eP2ydUh.jpg");*/
+  /*background-image: url("../../images/balloons-background-for-you-design-vector-2294268.jpg");*/
+  background-repeat: no-repeat;
   padding-bottom: 130px;
 }
 #cbx-team .cbx-team-inner2 {
@@ -3720,7 +3721,9 @@ li.cbxgrid-item-none {
 
 .navbar-default{
   background-color: white;
-    border-color: #f5740a;
+    /*border-color: #f5740a;*/
+  /*background-image: url(../../images/slide000.gif);*/
+  /*background-repeat: repeat-x;*/
 }
 .position{
   position: relative;
@@ -3734,7 +3737,7 @@ li.cbxgrid-item-none {
   width: 100%;
 }
 #background{
-  background-image: url("../../images/stardust.png");
+  /*background-image: url("../../images/slide0001_background.gif");*/
     /*background-color: #EBFCE6;*/
 }
 
@@ -3758,3 +3761,7 @@ li.cbxgrid-item-none {
 .text-color h4{
   color: #f5740a;
 }
+
+/*#balloons{*/
+  /*background-image: url("../../images/balloons-background-for-you-design-vector-2294268.jpg");*/
+/*}*/
