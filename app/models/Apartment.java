@@ -45,6 +45,9 @@ public class Apartment extends Model {
      * @param lat
      * @param lng
      */
+    public Apartment(){
+
+    }
     public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,
                       String description, String lat, String lng, Integer userId, Boolean isVisible) {
         this.id = id;
@@ -86,14 +89,21 @@ public class Apartment extends Model {
      */
     /* --------------- create apartment ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
-    public static Apartment createApartment(Integer userId) {
-        Form<Apartment> boundForm = form.bindFromRequest();
-        Apartment apartment = null;
-        try {
-            apartment = boundForm.get();
+    public static Apartment createApartment(String name, String location, String address, Integer price, Integer capacity, String description, String lat, String lng, Integer userId) {
 
+        Apartment apartment = new Apartment();
+        try {
+            apartment.name = name;
+            apartment.location = location;
+            apartment.address = address;
+            apartment.price = price;
+            apartment.capacity = capacity;
+            apartment.description = description;
+            apartment.lat = lat;
+            apartment.lng = lng;
             apartment.userId = userId;
             apartment.isVisible = false;
+
             apartment.save();
 
             return apartment;

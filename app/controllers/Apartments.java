@@ -6,10 +6,9 @@ import helpers.UserAccessLevel;
 import models.Apartment;
 import models.AppUser;
 import models.Paket;
-import models.Reservation;
-import play.Logger;
+import play.data.DynamicForm;
+import play.data.Form;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.*;
@@ -40,7 +39,22 @@ public class Apartments extends Controller {
     }
     @Security.Authenticated(Authenticator.AdminUserFilter.class)
     public Result createApartment(Integer userId) {
-        Apartment apart = Apartment.createApartment(userId);
+        DynamicForm form = Form.form().bindFromRequest();
+        String name = form.field("name").value();
+        String location = form.field("loation").value();
+        String address = form.field("address").value();
+        Integer price = Integer.parseInt(form.field("price").value());
+        Integer capacity = Integer.parseInt(form.field("capacity").value());
+        String description = form.field("description").value();
+        String lat = form.field("lat").value();
+        String lng = form.field("lng").value();
+
+
+
+        Apartment apart = Apartment.createApartment(name, location, address, price, capacity, description, lat, lng, userId);
+
+
+
         if (apart != null) {
             flash("success", "Uspješno ste kreirali objekat.");
             return redirect(routes.Apartments.apartment(apart.id));
