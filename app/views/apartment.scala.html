@@ -179,8 +179,17 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal">Odustani</button>
-                            <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
+                            <div class="row">
+                                <div class="col-md-6" style="">
+                                    <p style="font-size: 10px;text-align: left">Nakon odabira datuma proslave, lista zauzetih termina ce biti prikazana, molimo odaberite termin koji nije na listi. Hvala.</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                                    <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
+                                </div>
+
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -329,8 +338,7 @@
 
 
     <script>
-//        var dates = $('#reservationDates').val();
-//        console.log(dates)
+
 
         $('#sandbox input').datepicker({
             startDate: new Date(),
@@ -344,9 +352,4 @@
 
     </script>
 
-    @*<script>*@
-    @*$('#datetimepicker2').datetimepicker({*@
-    @*format: 'HH:mm'*@
-    @*});*@
-    @*</script>*@
 }

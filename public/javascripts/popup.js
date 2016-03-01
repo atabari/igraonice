@@ -6,9 +6,9 @@ var apId = $('#apId').val();
 var obavijest = "Trenutno nema zauzetih termina";
 
 $('#checkIn').change(function(){
-
     var date = $('#checkIn').val();
     var dateApId = date +"-"+ apId
+
     $.ajax({
         data:dateApId,
         type: "GET",

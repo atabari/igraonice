@@ -21,6 +21,7 @@
                                 <th>Cijena</th>
                                 <th>Opis</th>
                                 <th>Trajanje</th>
+                                <th>Rezervisi</th>
                                 <th>Uredi</th>
                                 <th>Obrisi</th>
 
@@ -33,7 +34,10 @@
                                 <td>@package1.cost</td>
                                 <td>@package1.description</td>
                                 <td>@package1.duration</td>
-                                <td>
+                               <td class="text-center">
+                                   <a data-toggle="modal" data-target="#basicModal" role="button"><i class=" fa fa-plus fa-lg"></i></a>
+                               </td>
+                                <td class="text-center">
                                     <a data-role="post" data-delete-parent="tr" href="@routes.Paketi.updatePackageRender(package1.id)" role="button">
                                         <i class=" fa fa-pencil fa-lg"></i></a>
                                 </td>
@@ -59,6 +63,98 @@
             }
             </div><!-- cbx-latest-area -->
 
+            <div class="modal fade modal-reservation" id="basicModal" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content ">
+                        <form method="POST" action="@routes.Reservations.saveReservation(apartmentId)">
+                            <div class="modal-header">
+                                <button type="button" style="font-size: 30px;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h2 class="modal-title" id="myModalLabel" style="text-align: center;">POTVRDITE REZERVACIJU</h2>
+                            </div>
+                            <div class="row">
+
+                                <div class="modal-body" id="">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6" id="">
+
+                                            <div id="datepicker">
+                                                <div class="col-md-12 check-in-date">
+                                                    <h4>Datum proslave: </h4>
+                                                </div>
+                                                <div class="col-md-6 padding-left-0">
+                                                    <div id="sandbox">
+                                                        <input type="text" class="date-check" name="checkIndate"  id="checkIn" />
+                                                    </div>
+                                                    <input id="apId" value="@apartmentId" hidden>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="col-md-12 check-in-date">
+                                                    <h4>Zauzeti termini</h4>
+                                                    <p id="datumi" style="color: red; font-size: 15px"> </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 check-in-date">
+                                                <h4>Vrijeme</h4>
+                                            </div>
+                                            <div class="col-md-6 padding-left-0">
+                                                <h5>Od </h5>
+                                                <input type='number' class=" date-check" id='datetimepicker2' name="timeFrom" min="0" max="24" required/>
+                                            </div>
+
+                                            <div class="col-md-6 padding-left-0">
+                                                <h5>Do </h5>
+                                                <input type="number" class=" date-check" id="timeTo" name="timeTo" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 check-in-date">
+                                                <h4>Ime i Prezime:  </h4>
+                                            </div>
+                                            <div class="col-md-12 padding-left-0">
+                                                <input type="text" name="name"  class="date-check" id="name"  onchange="return checkName()" required>
+                                                <label id="name_error" class="error" for="name"></label>
+
+                                            </div>
+
+                                            <div class="col-md-12 check-in-date">
+                                                <h4>Kontakt telefon:  </h4>
+                                            </div>
+                                            <div class="col-md-12 padding-left-0">
+                                                <input type="text" name="phone" class="date-check" id="phone" placeholder="" onchange="numberLength()" required>
+                                                <label id="phone_error" class="error" for="phone"></label>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-md-6" style="">
+                                        <p style="font-size: 10px;text-align: left">Nakon odabira datuma proslave, lista zauzetih termina ce biti prikazana, molimo odaberite termin koji nije na listi. Hvala.</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                                        <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Reservations.saveReservation(apartmentId)">Potvrdi</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
             @if(paketi.size() < 3) {
                 <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Paketi.createPackageRender(apartmentId)" >
                     <div class="col-md-12">
@@ -69,11 +165,23 @@
                     </div>
                 </form>
             }else{
-                <h4 class="text-center">Dostigli ste maksimalni broj paketa, molimo Vas da izbrisete jedan od kreiranih paketa kako bi mogli dodati novi. Hvala</h4>
+                <h4 class="text-center">Dostigli ste maksimalni broj paketa, molimo Vas da izbrisete jedan od kreiranih paketa kako bi mogli dodati novi. Hvala.</h4>
             }
         </div><!-- container end -->
     </section>
     <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
     <script src='@routes.Assets.versioned("javascripts/deleteConfirm.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/validation.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/popup.js")'></script>
 
+    <script>
+        $('#sandbox input').datepicker({
+            startDate: new Date(),
+            todayBtn: "linked",
+            forceParse: false,
+            calendarWeeks: true,
+            todayHighlight: true,
+            autoclose: true
+        });
+    </script>
 }

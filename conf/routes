@@ -76,3 +76,6 @@ GET           /updatepaket/:paketId                     @controllers.Paketi.upda
 POST          /updatepaket/:paketId                     @controllers.Paketi.updatePackage(paketId: Integer)
 GET           /obrisipaket/:paketId                     @controllers.Paketi.deletePackage(paketId: Integer)
 DELETE        /obrisipaket/:paketId                     @controllers.Paketi.deletePackage(paketId: Integer)
+
+#RESERVATION
+POST          /rezervacija/:apartmentId                 @controllers.Reservations.saveReservation(apartmentId: Integer)
