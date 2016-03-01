@@ -17,6 +17,7 @@ public class Paket extends Model {
     public Integer id;
     public String name;
     public Integer cost;
+
     public String description;
     public Integer duration;
 

@@ -114,4 +114,9 @@ public class Reservation extends Model {
         return hashMap.get(dateToCheck);
 
     }
+
+    public static List<Reservation> getApartmentReservations(Integer apartmentId){
+        Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
+        return finder.where().eq("apartment_id", apartmentId).findList();
+    }
 }

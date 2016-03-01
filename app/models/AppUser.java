@@ -9,6 +9,7 @@ import play.data.Form;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -103,10 +104,28 @@ public class AppUser extends Model {
         return users;
     }
 
+
+
     /* ------------------- delete user ------------------ */
     public static void deleteUser(Integer userId){
         AppUser user = finder.where().eq("id", userId).findUnique();
+        List<Apartment> userApartments = Apartment.userApartments(userId);
+        List<Paket> paketi = new ArrayList<>();
         if(user != null){
+            for(int i = 0; i < userApartments.size(); i ++){
+                for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)){
+                    Logger.info("PAKETI  " + p);
+                    p.delete();
+                }
+                for(Reservation r: Reservation.getApartmentReservations(userApartments.get(i).id)){
+                    r.delete();
+                }
+            }
+
+
+            for(int k = 0; k < userApartments.size(); k++){
+                userApartments.get(k).delete();
+            }
             user.delete();
         }
     }

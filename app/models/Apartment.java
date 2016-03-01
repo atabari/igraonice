@@ -6,6 +6,7 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Security;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,6 +30,7 @@ public class Apartment extends Model {
     public String description;
     public String lat;
     public String lng;
+
     public Integer userId;
 
     @Column
@@ -149,6 +151,14 @@ public class Apartment extends Model {
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public static void deleteApartment(Integer apartmentId){
         Apartment apartment = finder.where().eq("id", apartmentId).findUnique();
+        List<Reservation> reservations = Reservation.getApartmentReservations(apartmentId);
+        List<Paket> paketi = Paket.getPackageByApartmentId(apartmentId);
+        for(Reservation r: reservations){
+            r.delete();
+        }
+        for(Paket p: paketi){
+            p.delete();
+        }
         apartment.delete();
     }
 
