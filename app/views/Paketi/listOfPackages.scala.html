@@ -38,7 +38,7 @@
                                         <i class=" fa fa-pencil fa-lg"></i></a>
                                 </td>
                                 <td class="text-center">
-                                    <a data-role="delete" data-delete-parent="tr" href="@routes.Paketi.deletePackage(package1.id)" role="button">
+                                    <a data-role="delete-paket" data-delete-parent="tr" href="@routes.Paketi.deletePackage(package1.id)" role="button">
                                         <i class=" fa fa-trash-o fa-lg"></i></a>
                                 </td>
 
@@ -74,5 +74,6 @@
         </div><!-- container end -->
     </section>
     <script src='@routes.Assets.versioned("javascripts/sort.js")'></script>
+    <script src='@routes.Assets.versioned("javascripts/deleteConfirm.js")'></script>
 
 }
