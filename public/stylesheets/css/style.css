@@ -1399,6 +1399,7 @@ label {
   padding: 10px;
   border-radius: 0 0 5px 5px;
   margin-top: 1px;
+  background-color: #5b5b5b;
 }
 .col-item:hover .info {
   /*background-color: #F5F5DC;*/
@@ -1437,9 +1438,11 @@ label {
   margin-bottom: 0;
   margin-top: 10px;
   text-align: center;
+  color: white;
 }
 .col-item .separator p i {
   margin-right: 5px;
+  color: white;
 }
 .col-item .btn-add {
   width: 50%;
@@ -3732,7 +3735,7 @@ li.cbxgrid-item-none {
 }
 .position-button{
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   left: 0;
   width: 100%;
 }

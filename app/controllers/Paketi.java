@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Paket;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -19,6 +20,8 @@ public class Paketi extends Controller {
 
     public Result listOfPackages(Integer apartmentId){
         List<Paket> packages = Paket.getPackageByApartmentId(apartmentId);
+        Logger.info("BROJ PAKETA " + packages.size());
+
         return ok(views.html.Paketi.listOfPackages.render(packages, apartmentId));
     }
 

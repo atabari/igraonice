@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="cbx-heading2 text-center">
-                        <h2 class="uppercase wow fadeInUp">DODAJ NOVI APARTMAN</h2>
+                        <h2 class="uppercase wow fadeInUp">Uredi Igraonicu</h2>
                         <hr noshade size="" width="" color="">
-                        <p class=" wow flipInY">Molimo unesite sve informacije kako bi apartman bio uspjesno unesen u bazu</p>
+                        <p class=" wow flipInY">Molimo unesite sve informacije kako bi igraonica bila uspjesno azurirana</p>
                     </div>
                 </div>
             </div><!-- //ROW Our Team Header -->
@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
-                                <h4 class="edit-label">Naziv apartmana</h4>
+                                <h4 class="edit-label">Naziv igraonice</h4>
                                 <input type="text" name="name" class="form-control cbxname lz-git-form-control" id="apname" value="@apartment.name" required>
                             </div>
                         </div>
@@ -40,6 +40,7 @@
                                     <option>Banja Luka</option>
                                     <option>Zenica</option>
                                     <option>Tuzla</option>
+                                    <option>Brcko</option>
                                 </select>
                             </div>
                         </div>
@@ -62,43 +63,19 @@
                                 <input type="number" min="1" name="capacity" class="form-control cbxname lz-git-form-control" id="appersons" value="@apartment.capacity" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-10 col-sm-offset-1" >
-                                <div class="cbx-heading4 text-center">
-                                    <h3 class="edit-label">Dodatni sadržaji apartmana</h3>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="parking" value="parking" style="width: 16px; height: 16px;">
-                                    <label  for="parking">Parking</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="washingmachine" value="washingmachine" class="checkboxs">
-                                    <label  for="washingmachine">Mašina za veš</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="balcony" value="balcony" class="checkboxs">
-                                    <label  for="balcony">Terasa</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="lift" value="lift" class="checkboxs">
-                                    <label  for="lift">Lift</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="pets" value="pets" class="checkboxs">
-                                    <label  for="pets">Kućni ljubimci</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
-                                <textarea name="description" id="textarea_2" class="form-control cbxmessage lz-git-form-control" rows="15" required>@apartment.description</textarea>
+                                <h4 class="edit-label">Opis igraonice (kratki tekst o igraonici)</h4>
+                                <textarea name="description" id="textarea_2" class="form-control cbxmessage lz-git-form-control" rows="16" required>@apartment.description</textarea>
                                 <label id="cbxmessage-error" class="error valid" for="cbxmessage"></label>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="col-md-12">
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
                                 <div id="map" class="map2"></div>

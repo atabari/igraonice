@@ -786,6 +786,9 @@ ul.dropdown-menu { border: none }
     height: 600px;
 }
 .title{
+    position: absolute;
+    bottom: 0;
+    left: 0;
     font-size: 40px;
     color: #2FA7E6;
     font-weight: 600;

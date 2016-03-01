@@ -58,7 +58,7 @@ public class Email extends Model {
             email.setMsg("Ime i prezime:  " + name + "\n" +
                     "Email:  " + mail + "\n" +
                     "Telefon:  " + phone + "\n" +
-                    "Datum dolaska:  " + checkInDate + "\n" +
+                    "Datum proslave:  " + checkInDate + "\n" +
                     "Od:  " + timeFrom + " sati " + " do" + timeTo + "sati" + "\n" +
                     "Komentar:  " + comment);
 
