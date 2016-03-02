@@ -51,7 +51,7 @@ public class Reservation extends Model {
     }
 
 
-    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment){
+    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment) {
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
 
@@ -76,15 +76,14 @@ public class Reservation extends Model {
         reservation.save();
     }
 
-    public static List<String> reservationTimes(Integer apartmentId, String dateToCheck){
+    public static List<String> reservationTimes(Integer apartmentId, String dateToCheck) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
         List<String> times = new ArrayList<>();
 
         for (int i=0; i < reservations.size(); i ++){
             if(dateToCheck.equals(reservations.get(i).dateFrom)) {
-
-                times.add(reservations.get(i).timeFrom +":00 h " + " - " + reservations.get(i).timeTo +":00 h " );
+                times.add(reservations.get(i).timeFrom +":00 h " + " - " + reservations.get(i).timeTo +":00 h" );
             }
         }
         return times;
@@ -115,7 +114,7 @@ public class Reservation extends Model {
 
     }
 
-    public static List<Reservation> getApartmentReservations(Integer apartmentId){
+    public static List<Reservation> getApartmentReservations(Integer apartmentId) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         return finder.where().eq("apartment_id", apartmentId).findList();
     }

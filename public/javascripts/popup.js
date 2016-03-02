@@ -5,7 +5,7 @@ var apId = $('#apId').val();
 
 var obavijest = "Trenutno nema zauzetih termina";
 
-$('#checkIn').change(function(){
+$('#checkIn').change(function() {
     var date = $('#checkIn').val();
     var dateApId = date +"-"+ apId
 
@@ -14,18 +14,17 @@ $('#checkIn').change(function(){
         type: "GET",
         url: "/ajax/" + dateApId
     }).success(function(response) {
-        if(response != null){
-            $('#datumi').text(response)
-        }else{
+        if(response == 'null') {
             $('#datumi').text(obavijest)
+        } else {
+            $('#datumi').text(response)
         }
-
     });
 
 });
 var time = $('#time').val();
 
-$('#datetimepicker2').change(function(){
+$('#datetimepicker2').change(function() {
     var timeFrom = $('#datetimepicker2').val();
     var timeTo = (1*timeFrom) + (1*time);
 
