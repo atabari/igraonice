@@ -17,23 +17,23 @@
                     <table class="table table-responsive" id="sort">
                         <thead>
                             <tr class="about">
-                                <th>Naziv paketa</th>
-                                <th>Cijena</th>
-                                <th>Opis</th>
-                                <th>Trajanje</th>
-                                <th>Rezervisi</th>
-                                <th>Uredi</th>
-                                <th>Obrisi</th>
+                                <th class="text-center">Naziv</th>
+                                <th class="text-center">Cijena</th>
+                                <th class="text-center">Opis</th>
+                                <th class="text-center">Trajanje</th>
+                                <th class="text-center">Rezervisi</th>
+                                <th class="text-center">Uredi</th>
+                                <th class="text-center">Obrisi</th>
 
                             </tr>
                         </thead>
                         <tbody>
                         @for(package1 <- paketi) {
                             <tr class="about" >
-                                <td>@package1.name</td>
-                                <td>@package1.cost</td>
-                                <td>@package1.description</td>
-                                <td>@package1.duration</td>
+                                <td class="text-center">@package1.name</td>
+                                <td class="text-center">@package1.cost</td>
+                                <td class="text-center">@package1.description</td>
+                                <td class="text-center">@package1.duration</td>
                                <td class="text-center">
                                    <a data-toggle="modal" data-target="#basicModal" role="button"><i class=" fa fa-plus fa-lg"></i></a>
                                </td>

@@ -3,79 +3,79 @@
 # ~~~~
 
 # Home page
-GET           /                                         @controllers.Application.index()
-GET           /objekti                                  @controllers.Application.index2()
+GET           /                                          @controllers.Application.index()
+GET           /objekti                                   @controllers.Application.index2()
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                             @controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                              @controllers.Assets.versioned(path="/public", file: Asset)
 
 
-GET           /apartman/:apartmentId                    @controllers.Apartments.apartment(apartmentId: Integer)
+GET           /igraonica/:apartmentId                    @controllers.Apartments.apartment(apartmentId: Integer)
 
 
 
-POST          /apartman/:apartmentId                    @controllers.Apartments.cookies(apartmentId: Integer)
-GET           /listaapartmana/                          @controllers.Apartments.favouriteApartments()
+POST          /igraonica/:apartmentId                    @controllers.Apartments.cookies(apartmentId: Integer)
+GET           /listaigraonica/                           @controllers.Apartments.favouriteApartments()
 
 
-GET           /sarajevo                                 @controllers.Apartments.sarajevoApartments()
-GET           /mostar                                   @controllers.Apartments.mostarApartments()
-GET           /banjaluka                                @controllers.Apartments.banjalukaApartments()
-GET           /zenica                                   @controllers.Apartments.zenicaApartments()
-GET           /tuzla                                    @controllers.Apartments.tuzlaApartments()
-GET           /brcko                                    @controllers.Apartments.brckoApartments()
+GET           /sarajevo                                  @controllers.Apartments.sarajevoApartments()
+GET           /mostar                                    @controllers.Apartments.mostarApartments()
+GET           /banjaluka                                 @controllers.Apartments.banjalukaApartments()
+GET           /zenica                                    @controllers.Apartments.zenicaApartments()
+GET           /tuzla                                     @controllers.Apartments.tuzlaApartments()
+GET           /brcko                                     @controllers.Apartments.brckoApartments()
 
 
 
 #Login
-GET           /login                                    @controllers.Login.loginIndex()
-POST          /user                                     @controllers.Login.renderAdminPanel()
+GET           /login                                     @controllers.Login.loginIndex()
+POST          /user                                      @controllers.Login.renderAdminPanel()
 
 #popup mail
-POST          /apartman/rezervacija/:apartmentId        @controllers.Emails.sendMail(apartmentId: Integer)
+POST          /igraonica/rezervacija/:apartmentId        @controllers.Emails.sendMail(apartmentId: Integer)
 
 
 #admin
-GET           /adminpage                                @controllers.Login.apartmentsList()
-GET           /adminsnd/:apartmentId                    @controllers.Apartments.deleteApartment(apartmentId: Integer)
-DELETE        /adminsnd/:apartmentId                    @controllers.Apartments.deleteApartment(apartmentId: Integer)
-GET           /dodajapartman/:userId                    @controllers.Apartments.renderApartment(userId: Integer)
-POST          /adminsnd/apartman/:userId                @controllers.Apartments.createApartment(userId: Integer)
-GET           /updateapartman/:apartmentId              @controllers.Apartments.renderUpdateApartment(apartmentId: Integer)
-POST          /updateapartman/:apartmentId              @controllers.Apartments.updateApartment(apartmentId: Integer)
+GET           /adminpage                                 @controllers.Login.apartmentsList()
+GET           /adminsnd/:apartmentId                     @controllers.Apartments.deleteApartment(apartmentId: Integer)
+DELETE        /adminsnd/:apartmentId                     @controllers.Apartments.deleteApartment(apartmentId: Integer)
+GET           /dodajigraonicu/:userId                    @controllers.Apartments.renderApartment(userId: Integer)
+POST          /dodajigraonicu/:userId                    @controllers.Apartments.createApartment(userId: Integer)
+GET           /updateigraonice/:apartmentId              @controllers.Apartments.renderUpdateApartment(apartmentId: Integer)
+POST          /updateigraonice/:apartmentId              @controllers.Apartments.updateApartment(apartmentId: Integer)
 
-GET           /adminsnd/adminpanel/:email               @controllers.Login.showAdminPanel(email: String)
-POST          /adminsnd/adminpanel/:email               @controllers.Login.updateUser(email: String)
+GET           /adminsnd/adminpanel/:email                @controllers.Login.showAdminPanel(email: String)
+POST          /adminsnd/adminpanel/:email                @controllers.Login.updateUser(email: String)
 
-GET           /uploadRender/:apartmentId                @controllers.ImageUpload.uploadRender(apartmentId: Integer)
-POST          /upload/:apartmentId                      @controllers.ImageUpload.upload(apartmentId: Integer)
+GET           /uploadRender/:apartmentId                 @controllers.ImageUpload.uploadRender(apartmentId: Integer)
+POST          /upload/:apartmentId                       @controllers.ImageUpload.upload(apartmentId: Integer)
 
 #AppUser
 
-GET           /admin/kreirajkorisnika                   @controllers.AppUsers.createUserRender()
-POST          /admin/kreirajkorisnika                   @controllers.AppUsers.createUser()
-GET           /admin/listakorisnika                     @controllers.AppUsers.listOfUsers()
-GET           /admin/:userId                            @controllers.AppUsers.deleteUser(userId: Integer)
-DELETE        /admin/:userId                            @controllers.AppUsers.deleteUser(userId: Integer)
-GET           /logout                                   @controllers.AppUsers.logout()
+GET           /admin/kreirajkorisnika                    @controllers.AppUsers.createUserRender()
+POST          /admin/kreirajkorisnika                    @controllers.AppUsers.createUser()
+GET           /admin/listakorisnika                      @controllers.AppUsers.listOfUsers()
+GET           /admin/:userId                             @controllers.AppUsers.deleteUser(userId: Integer)
+DELETE        /admin/:userId                             @controllers.AppUsers.deleteUser(userId: Integer)
+GET           /logout                                    @controllers.AppUsers.logout()
 
-GET           /korisnickipanel/:email                   @controllers.AppUsers.userPanelRender(email: String)
-GET           /user/apartmani/:userId                   @controllers.AppUsers.userApartmentsRender(userId: Integer)
-GET           /apartmani/:apartmentId                   @controllers.Apartments.showOnHomepage(apartmentId: Integer)
+GET           /korisnickipanel/:email                    @controllers.AppUsers.userPanelRender(email: String)
+GET           /user/igraonice/:userId                    @controllers.AppUsers.userApartmentsRender(userId: Integer)
+GET           /igraonkice/:apartmentId                   @controllers.Apartments.showOnHomepage(apartmentId: Integer)
 
 
 #AJAX
 
-GET           /ajax/*date                               @controllers.Reservations.listOfReservationTimes(date: String)
+GET           /ajax/*date                                @controllers.Reservations.listOfReservationTimes(date: String)
 
 #PACKAGE
-GET           /kreirajpaket/:apartmetnId                @controllers.Paketi.createPackageRender(apartmetnId: Integer)
-GET           /listapaketa/:apartmentId                 @controllers.Paketi.listOfPackages(apartmentId: Integer)
-POST          /kreirajpaket/:apartmentId                @controllers.Paketi.createPackage(apartmentId: Integer)
-GET           /updatepaket/:paketId                     @controllers.Paketi.updatePackageRender(paketId: Integer)
-POST          /updatepaket/:paketId                     @controllers.Paketi.updatePackage(paketId: Integer)
-GET           /obrisipaket/:paketId                     @controllers.Paketi.deletePackage(paketId: Integer)
-DELETE        /obrisipaket/:paketId                     @controllers.Paketi.deletePackage(paketId: Integer)
+GET           /kreirajpaket/:apartmetnId                 @controllers.Paketi.createPackageRender(apartmetnId: Integer)
+GET           /listapaketa/:apartmentId                  @controllers.Paketi.listOfPackages(apartmentId: Integer)
+POST          /kreirajpaket/:apartmentId                 @controllers.Paketi.createPackage(apartmentId: Integer)
+GET           /updatepaket/:paketId                      @controllers.Paketi.updatePackageRender(paketId: Integer)
+POST          /updatepaket/:paketId                      @controllers.Paketi.updatePackage(paketId: Integer)
+GET           /obrisipaket/:paketId                      @controllers.Paketi.deletePackage(paketId: Integer)
+DELETE        /obrisipaket/:paketId                      @controllers.Paketi.deletePackage(paketId: Integer)
 
 #RESERVATION
-POST          /rezervacija/:apartmentId                 @controllers.Reservations.saveReservation(apartmentId: Integer)
+POST          /rezervacija/:apartmentId                  @controllers.Reservations.saveReservation(apartmentId: Integer)

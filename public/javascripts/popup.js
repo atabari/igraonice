@@ -23,11 +23,21 @@ $('#checkIn').change(function() {
 
 });
 var time = $('#time').val();
+var timeFromCheck = $('#timeFromCheck').val();
+var timeToCheck = $('#timeToCheck').val();
 
-$('#datetimepicker2').change(function() {
-    var timeFrom = $('#datetimepicker2').val();
+console.log("TIME from CHECK" + timeFromCheck);
+console.log("TIME to CHECK" + timeToCheck);
+
+$('#timeFrom').change(function() {
+    var timeFrom = $('#timeFrom').val();
     var timeTo = (1*timeFrom) + (1*time);
-
     $('#timeTo').val(timeTo)
+
+    if(timeFrom < timeFromCheck && timeTo > timeToCheck){
+        $('#time_error').text("Odabrani termini nisu u okviru radnog vremena!")
+    }else{
+        $('#time_error').text(" ");
+    }
 
 });

@@ -6,6 +6,7 @@ import helpers.UserAccessLevel;
 import models.Apartment;
 import models.AppUser;
 import models.Paket;
+import org.omg.DynamicAny.DynAny;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -43,15 +44,18 @@ public class Apartments extends Controller {
         DynamicForm form = Form.form().bindFromRequest();
 
         String name = form.field("name").value();
-        String location = form.field("loation").value();
+        String location = form.field("location").value();
+        Logger.info("location  " + location);
         String address = form.field("address").value();
         Integer price = Integer.parseInt(form.field("price").value());
         Integer capacity = Integer.parseInt(form.field("capacity").value());
+        String timeFrom = form.field("timeFrom").value();
+        String timeTo = form.field("timeTo").value();
         String description = form.field("description").value();
         String lat = form.field("lat").value();
         String lng = form.field("lng").value();
 
-        Apartment apart = Apartment.createApartment(name, location, address, price, capacity, description, lat, lng, userId);
+        Apartment apart = Apartment.createApartment(name, location, address, price, capacity,timeFrom,timeTo, description, lat, lng, userId);
 
         if (apart != null) {
             flash("success", "Uspješno ste kreirali objekat.");
@@ -72,10 +76,23 @@ public class Apartments extends Controller {
 
     @Security.Authenticated(Authenticator.AdminUserFilter.class)
     public Result updateApartment(Integer apartmentId) {
-        Apartment apart = Apartment.updateApartment(apartmentId);
+        DynamicForm form = Form.form().bindFromRequest();
+
         List<Apartment> apartments = Apartment.apartmentsToRecommend(apartmentId);
         List<Paket> paketi = Paket.getPackageByApartmentId(apartmentId);
 
+        String name = form.field("name").value();
+        String location = form.field("location").value();
+        String address = form.field("address").value();
+        Integer price = Integer.parseInt(form.field("price").value());
+        Integer capacity = Integer.parseInt(form.field("capacity").value());
+        String timeFrom = form.field("timeFrom").value();
+        String timeTo = form.field("timeTo").value();
+        String description = form.field("description").value();
+        String lat = form.field("lat").value();
+        String lng = form.field("lng").value();
+
+        Apartment apart = Apartment.updateApartment(apartmentId, name, location, address, price, capacity,timeFrom, timeTo, description, lat, lng);
 
         AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
         if (apart != null) {

@@ -26,6 +26,8 @@ public class Apartment extends Model {
     public String address;
     public Integer price;
     public Integer capacity;
+    public String timeFrom;
+    public String timeTo;
     @Column(columnDefinition = "TEXT")
     public String description;
     public String lat;
@@ -43,6 +45,8 @@ public class Apartment extends Model {
      * @param address
      * @param price
      * @param capacity
+     * @param timeFrom
+     * @param timeTo
      * @param description
      * @param lat
      * @param lng
@@ -50,7 +54,7 @@ public class Apartment extends Model {
     public Apartment(){
 
     }
-    public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,
+    public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo,
                       String description, String lat, String lng, Integer userId, Boolean isVisible) {
         this.id = id;
         this.name = name;
@@ -58,6 +62,8 @@ public class Apartment extends Model {
         this.address = address;
         this.price = price;
         this.capacity = capacity;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
         this.description = description;
         this.lat = lat;
         this.lng = lng;
@@ -74,6 +80,8 @@ public class Apartment extends Model {
                 ", address='" + address + '\'' +
                 ", price=" + price +
                 ", capacity=" + capacity +
+                ", timeFrom=" + timeFrom +
+                ", timeTo=" + timeTo +
                 ", description=" + description +
                 ", lat=" + lat +
                 ", lng=" + lng +
@@ -91,7 +99,7 @@ public class Apartment extends Model {
      */
     /* --------------- create apartment ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
-    public static Apartment createApartment(String name, String location, String address, Integer price, Integer capacity, String description, String lat, String lng, Integer userId) {
+    public static Apartment createApartment(String name, String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng, Integer userId) {
 
         Apartment apartment = new Apartment();
         try {
@@ -100,6 +108,8 @@ public class Apartment extends Model {
             apartment.address = address;
             apartment.price = price;
             apartment.capacity = capacity;
+            apartment.timeFrom = timeFrom;
+            apartment.timeTo = timeTo;
             apartment.description = description;
             apartment.lat = lat;
             apartment.lng = lng;
@@ -116,25 +126,17 @@ public class Apartment extends Model {
     }
     /* --------------- update apartment ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
-    public static Apartment updateApartment(Integer apartmentId) {
-        Form<Apartment> boundForm = form.bindFromRequest();
+    public static Apartment updateApartment(Integer apartmentId, String name,String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng) {
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         try {
-            String name = boundForm.field("name").value();
-            String location = boundForm.field("location").value();
-            String address = boundForm.field("address").value();
-            Integer price = Integer.parseInt(boundForm.field("price").value());
-            Integer capacity = Integer.parseInt(boundForm.field("capacity").value());
-            String description = boundForm.field("description").value();
-            String lat = boundForm.field("lat").value();
-            String lng = boundForm.field("lng").value();
-
             apartment.name = name;
             apartment.location = location;
             apartment.address = address;
             apartment.price = price;
             apartment.capacity = capacity;
+            apartment.timeFrom = timeFrom;
+            apartment.timeTo = timeTo;
             apartment.description = description;
             apartment.lat = lat;
             apartment.lng = lng;

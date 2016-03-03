@@ -666,7 +666,7 @@ ul.dropdown-menu { border: none }
 }
 #tablemargins{
     margin-bottom: 100px;
-    margin-top: 100px;
+    /*margin-top: 100px;*/
 }
 
 
@@ -792,4 +792,10 @@ ul.dropdown-menu { border: none }
     font-size: 40px;
     color: #2FA7E6;
     font-weight: 600;
+}
+#proba{
+    font-size: 10px;
+    font-stretch: expanded;
+    width: 50px;
+    height: 20px;
 }

@@ -3,6 +3,13 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="cbx-heading text-center">
+                    <h2 class="uppercase wow fadeInUp">Igraonice</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
         <section id="tablemargins" class="col-md-12">
             <table class="table table-responsive" id="sort">
                 <thead>
@@ -47,7 +54,7 @@
                         }
                         </td>
                         <td class="text-center">
-                            <a data-role="delete" data-delete-parent="tr" href="@routes.Apartments.deleteApartment(apartment.id)" role="button">
+                            <a data-role="delete-apartment" href="@routes.Apartments.deleteApartment(apartment.id)" role="button">
                                 <i class=" fa fa-trash-o fa-lg"></i></a>
                         </td>
 

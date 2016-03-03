@@ -5,9 +5,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="duplicate-email">
+                    @if(flash.containsKey("success")) {
+                        <div class="alert alert-success" role="alert">
+                            <i class="fa fa-check-square-o" style="font-size:30px"></i>
+                            <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
+                        </div>
+                    }
+                    </div>
                     <div class="col-md-8">
                         <div class="cbx-heading2 text-left">
                             <h2 class="uppercase">@apartment.name <p>@apartment.location, @apartment.address</p></h2>
+                            <h2><p>Radno vrijeme: @apartment.timeFrom:00  -  @apartment.timeTo:00</p></h2>
                         </div>
                     </div>
 
@@ -20,17 +29,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                   <div class="duplicate-email">
-                    @if(flash.containsKey("success")) {
-                        <div class="alert alert-success" role="alert">
-                            <i class="fa fa-check-square-o" style="font-size:30px"></i>
-                            <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
-
-                        </div>
-                    }
-                    </div>
-
-
 
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                             <!-- Wrapper for slides -->
@@ -121,13 +119,19 @@
                                         </div>
                                         <div class="col-md-6 padding-left-0">
                                             <h5>Od </h5>
-                                            <input type='number' class=" date-check" id='datetimepicker2' name="timeFrom" min="0" max="24" required/>
+                                            <input type='number' class=" date-check" id='timeFrom' name="timeFrom" min="@apartment.timeFrom" max="@apartment.timeTo" required/>
                                         </div>
 
                                         <div class="col-md-6 padding-left-0">
                                             <h5>Do </h5>
-                                            <input type="number" class=" date-check" id="timeTo" name="timeTo" />
+                                            <input type="number" class=" date-check" id="timeTo" name="timeTo" max="@apartment.timeTo"/>
                                         </div>
+                                        <div class="col-md-12 padding-left-0">
+                                            <label id="time_error" class="error" for="timeTo"></label>
+                                        </div>
+                                        <input id="timeFromCheck" value="@apartment.timeFrom" hidden>
+                                        <input id="timeToCheck" value="@apartment.timeTo" hidden>
+
 
                                     </div>
 

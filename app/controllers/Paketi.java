@@ -1,7 +1,7 @@
 package controllers;
 
+import models.Apartment;
 import models.Paket;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -15,12 +15,12 @@ import java.util.List;
 public class Paketi extends Controller {
 
     public Result createPackageRender(Integer apartmentId){
-        return ok(views.html.Paketi.createPackage.render(apartmentId));
+        Apartment apartment = Apartment.getApartmentById(apartmentId);
+        return ok(views.html.Paketi.createPackage.render(apartment));
     }
 
     public Result listOfPackages(Integer apartmentId){
         List<Paket> packages = Paket.getPackageByApartmentId(apartmentId);
-        Logger.info("BROJ PAKETA " + packages.size());
 
         return ok(views.html.Paketi.listOfPackages.render(packages, apartmentId));
     }
