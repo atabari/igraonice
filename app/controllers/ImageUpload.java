@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.ConfigProvider;
 import models.Apartment;
 import play.Logger;
 import play.mvc.Controller;
@@ -27,13 +28,15 @@ public class ImageUpload extends Controller {
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         String folder = apartment.name + apartment.id;
 
-        Logger.debug(folder);
+        Logger.debug("FOLDER " + folder);
 
         if (picture != null) {
             String fileName = picture.getFilename();
             File file = picture.getFile();
 
-            File theDir = new File("E:\\igraonice\\public\\apartmentPhotos\\" + folder);
+            File theDir = new File(ConfigProvider.UPLOAD_IMAGES_FOLDER + folder);
+
+            Logger.debug(theDir.getAbsolutePath());
 
             // if the directory does not exist, create it
 

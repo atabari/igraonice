@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 import helpers.Authenticator;
+import helpers.ConfigProvider;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Security;
@@ -235,7 +236,7 @@ public class Apartment extends Model {
         List<String> results = new ArrayList<>();
 
         String folderName = apartment.name + apartment.id;
-        String location = "E:/igraonice/public/apartmentPhotos/" + folderName;
+        String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
 
         File[] files = new File(location).listFiles();
 
@@ -253,7 +254,7 @@ public class Apartment extends Model {
     public static String getFirstImage(Apartment apartment) {
         List<String> images = getListOfApartmentImages(apartment);
 
-        return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna.png";
+        return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna.jpg";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/

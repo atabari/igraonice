@@ -21,6 +21,7 @@
                                 <th>Adresa</th>
                                 <th class="text-center">Cijena</th>
                                 <th class="text-center">Kapacitet</th>
+                                <th class="text-center">Galerija</th>
                                 <th class="text-center">Paketi</th>
                                 <th class="text-center"> Uredi</th>
                                 <th class="text-center">Pogledaj</th>
@@ -36,6 +37,10 @@
                                 <td>@apartment.address</td>
                                 <td class="text-center">@apartment.price</td>
                                 <td class="text-center">@apartment.capacity</td>
+                                <td class="text-center">
+                                    <a data-role="get" data-delete-parent="tr" href="@routes.ImageUpload.uploadRender(apartment.id)" role="button">
+                                        <i class=" fa fa-file-image-o fa-lg"></i></a>
+                                </td>
                                 <td class="text-center">
                                     <a data-role="get" data-delete-parent="tr" href="@routes.Paketi.listOfPackages(apartment.id)" role="button">
                                         <i class=" fa fa-list fa-lg"></i></a>
