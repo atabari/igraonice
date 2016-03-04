@@ -6,6 +6,7 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.reports;
 
 import java.util.List;
 
@@ -29,5 +30,10 @@ public class Reservations extends Controller {
 
         Reservation.saveReservation(apartmentId, name, null, phone, date, timeFrom, timeTo,null);
         return redirect(routes.Paketi.listOfPackages(apartmentId));
+    }
+
+    public Result allReservations(Integer apartmentId){
+        List<Reservation> reservations = Reservation.getApartmentReservations(apartmentId);
+        return ok(reports.render(reservations));
     }
 }
