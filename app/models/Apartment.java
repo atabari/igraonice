@@ -243,7 +243,7 @@ public class Apartment extends Model {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    results.add("/" + ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName + "/" + file.getName());
+                    results.add("/assets/apartmentPhotos/" + folderName + "/" + file.getName());
                 }
             }
         }
