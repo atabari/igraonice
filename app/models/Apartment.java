@@ -230,7 +230,7 @@ public class Apartment extends Model {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    results.add("/assets/apartmentPhotos/" + folderName + "/" + file.getName());
+                    results.add("/assets/images/apartmentPhotos/" + folderName + "/" + file.getName());
                 }
             }
         }
