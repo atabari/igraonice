@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -28,15 +29,17 @@ public class Reservation extends Model {
     public String visitorEmail;
     public String capacity;
     public String phone;
+    @Column(columnDefinition = "TEXT")
     public String comment;
     public Integer cost;
     @ManyToOne
     public Apartment apartment;
+    public Boolean confirmed;
 
 
     public Reservation() {
     }
-    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost) {
+    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost, Boolean confirmed) {
         this.apartment = apartment;
         this.dateFrom = dateFrom;
         this.timeFrom = timeFrom;
@@ -48,6 +51,7 @@ public class Reservation extends Model {
         this.phone = phone;
         this.comment = comment;
         this.cost = cost;
+        this.confirmed = confirmed;
     }
 
 
@@ -72,6 +76,7 @@ public class Reservation extends Model {
         reservation.dateFrom = checkInDate;
         reservation.timeFrom = timeFrom;
         reservation.timeTo = timeTo;
+        reservation.confirmed = false;
 
         reservation.save();
     }
@@ -91,13 +96,17 @@ public class Reservation extends Model {
 
     public static HashMap<String, List<String>> getReservationsByApartmentId(Integer apartmentId, String dateToCheck) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
-
+        List <Reservation> confirmedReservations = new ArrayList<>();
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-
+        for(int e = 0; e < reservations.size(); e++){
+            if(reservations.get(e).confirmed == true){
+                confirmedReservations.add(reservations.get(e));
+            }
+        }
         HashMap<String, List<String>> hashMap = new HashMap<>();
 
-        for (int i=0; i < reservations.size(); i ++){
-           hashMap.put(reservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
+        for (int i=0; i < confirmedReservations.size(); i ++){
+           hashMap.put(confirmedReservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
 
         }
         return hashMap;
@@ -117,5 +126,22 @@ public class Reservation extends Model {
     public static List<Reservation> getApartmentReservations(Integer apartmentId) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         return finder.where().eq("apartment_id", apartmentId).findList();
+    }
+
+    public static Reservation getReservationById(Integer reservationId){
+        Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
+        return finder.where().eq("id", reservationId).findUnique();
+    }
+
+      /* --------------- confirm reservation ---------------*/
+
+    public static void confirmReservation(Integer reservationId){
+        Reservation reservation = getReservationById(reservationId);
+        if(reservation.confirmed == false){
+            reservation.confirmed = true;
+        }else if (reservation.confirmed == true){
+            reservation.confirmed = false;
+        }
+        reservation.update();
     }
 }

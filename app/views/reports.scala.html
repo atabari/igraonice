@@ -19,6 +19,7 @@
                             <th>Telefon</th>
                             <th class="text-center">Datum</th>
                             <th class="text-center">Vrijeme</th>
+                            <th class="text-center">Potvrdi</th>
 
                         </tr>
                     </thead>
@@ -30,6 +31,18 @@
                             <td>@reservation.phone</td>
                             <td class="text-center">@reservation.dateFrom</td>
                             <td class="text-center">@reservation.timeFrom:00h - @reservation.timeTo:00h</td>
+                            <td class="text-center">
+                            @if(reservation.confirmed == null || reservation.confirmed == false) {
+                                <a href="@routes.Reservations.confirmReservation(reservation.id)" >
+                                    <button type="submit" class="btn btn-primary" id="middlebuttons">DA</button>
+                                </a>
+                            } else {
+                                <a href="@routes.Reservations.confirmReservation(reservation.id)" >
+                                    <button type="submit" class="btn btn-primary" id="middlebuttons">NE</button>
+
+                                </a>
+                            }
+                            </td>
 
                         </tr>
                     }

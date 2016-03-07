@@ -36,4 +36,13 @@ public class Reservations extends Controller {
         List<Reservation> reservations = Reservation.getApartmentReservations(apartmentId);
         return ok(reports.render(reservations));
     }
+
+      /* --------------- confirm reservation ---------------*/
+
+    public Result confirmReservation(Integer reservationId){
+        Reservation.confirmReservation(reservationId);
+        Reservation reservation = Reservation.getReservationById(reservationId);
+        Integer apartmentId = reservation.apartment.id;
+        return redirect(routes.Reservations.allReservations(apartmentId));
+    }
 }

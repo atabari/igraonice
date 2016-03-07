@@ -81,6 +81,96 @@
         </div>
 
 
+
+    </section>
+        @if(currentUser !=null && apartment.userId == currentUser.id){
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 margin-bottom-20">
+                            <form method="GET" role="form" action="@routes.Apartments.renderUpdateApartment(apartment.id)">
+                                <div class=" xs-text-center cbx-submit-area" id="cookies-button">
+                                    <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-pencil"> AZURIRAJ </i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        }
+
+
+        <section id="paketi-background">
+            <div id="cbx-team" class="cbx-section cbx-team">
+                <div class="cbx-team-inner2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="cbx-heading text-center">
+                                    <h2 class="uppercase wow fadeInUp">Odaberite jedan od ponudjenih paketa</h2>
+                                    <hr noshade size="" width="" color="">
+                                </div>
+                            </div>
+                        </div><!-- //ROW Our Team Header -->
+                        @if(paketi.size() > 0){
+
+                            <div class="row">
+                            @for(paket <- paketi){
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                    <div class="cbx-single-team text-center">
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                            <div class="flipper">
+                                                    <!-- font content -->
+                                                <div class="front cbx-font-side2">
+                                                    <div class="font-single-img text-center">
+                                                        <img class="img-circle" src='@routes.Assets.versioned("images/num1.jpg")'alt="Team Image">
+                                                    </div>
+                                                    <div class="font-single-text text-center margin-top80">
+                                                        <h3>@paket.name</h3>
+                                                        <h4>Cijena @paket.cost KM</h4>
+                                                        <h4>Trajanje: @paket.duration h</h4>
+                                                    </div>
+                                                </div> <!-- //font content -->
+                                                <!-- back content -->
+                                                <div class="back cbx-back-side">
+                                                    <div class="text-center">
+                                                        <div class="text-center back-single-text">
+                                                            <p class="position">
+                                                            @paket.description
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <input type="number" id="time" value="@Paket.getPackageById(paket.id).duration" hidden>
+                                                    <form method="POST" role="form" action="#">
+                                                        <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
+                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div><!-- //back content -->
+                                            </div>
+                                        </div>
+                                    </div> <!--//single team -->
+                                </div> <!--//single team main col 3-->
+
+                            }
+
+                            </div> <!--//single team main row-->
+
+
+                        }else{
+                            <div class="text-color text-center">
+                                <h4>Ovaj objekat trenutno nema kreiranih paketa, molimo da nas kontaktirate mailom</h4>
+                            </div>
+                        }
+                    </div> <!--//CONTAINER-->
+                </div> <!--//INNER-->
+            </div> <!--//SECTION-->
+        </section> <!-- //-->
+
+
         <div class="modal fade modal-reservation" id="basicModal" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
             <div class="modal-dialog modal-lg">
@@ -200,96 +290,6 @@
             </div>
         </div>
 
-
-    </section>
-        @if(currentUser !=null && apartment.userId == currentUser.id){
-            <section>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-4 margin-bottom-20">
-                            <form method="GET" role="form" action="@routes.Apartments.renderUpdateApartment(apartment.id)">
-                                <div class=" xs-text-center cbx-submit-area" id="cookies-button">
-                                    <button type="submit" name="cookies" class="btn btn-block lz-git-submit-btn cbx-submit" id="cookiesbutton" onclick="setCookie(@apartment);"><i class="fa fa-pencil"> AZURIRAJ </i></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-        }
-
-
-        <section id="paketi-background">
-            <div id="cbx-team" class="cbx-section cbx-team">
-                <div class="cbx-team-inner2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="cbx-heading text-center">
-                                    <h2 class="uppercase wow fadeInUp">Odaberite jedan od ponudjenih paketa</h2>
-                                    <hr noshade size="" width="" color="">
-                                </div>
-                            </div>
-                        </div><!-- //ROW Our Team Header -->
-                        @if(paketi.size() > 0){
-
-                            <div class="row">
-                            @for(paket <- paketi){
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <div class="cbx-single-team text-center">
-                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                            <div class="flipper">
-                                                    <!-- font content -->
-                                                <div class="front cbx-font-side2">
-                                                    <div class="font-single-img text-center">
-                                                        <img class="img-circle" src='@routes.Assets.versioned("images/num1.jpg")'alt="Team Image">
-                                                    </div>
-                                                    <div class="font-single-text text-center margin-top80">
-                                                        <h3>@paket.name</h3>
-                                                        <h4>Cijena @paket.cost KM</h4>
-                                                        <h4>Trajanje: @paket.duration h</h4>
-                                                    </div>
-                                                </div> <!-- //font content -->
-                                                <!-- back content -->
-                                                <div class="back cbx-back-side">
-                                                    <div class="text-center">
-                                                        <div class="text-center back-single-text">
-                                                            <p class="position">
-                                                            @paket.description
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <form method="POST" role="form" action="#">
-                                                        <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
-                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
-                                                        </div>
-                                                    </form>
-
-                                                </div><!-- //back content -->
-                                            </div>
-                                        </div>
-                                    </div> <!--//single team -->
-                                </div> <!--//single team main col 3-->
-                                <input type="number" id="time" value="@paket.duration" hidden>
-                            }
-
-                            </div> <!--//single team main row-->
-
-
-                        }else{
-                            <div class="text-color text-center">
-                                <h4>Ovaj objekat trenutno nema kreiranih paketa, molimo da nas kontaktirate mailom</h4>
-                            </div>
-                        }
-                    </div> <!--//CONTAINER-->
-                </div> <!--//INNER-->
-            </div> <!--//SECTION-->
-        </section> <!-- //-->
-
-
-
-
         <section>
             <div class="container">
                 <div class="row">
@@ -298,12 +298,12 @@
                             <h2 class="uppercase">Slicni objekti</h2>
                         </div>
                     </div>
-                @if(apartments.size() > 0){
-                @for(apartment <- apartments){
+                    @if(apartments.size() > 0){
+                        @for(apartment <- apartments){
 
-                    <div class="item active cbx-single-all">
-                        <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
-                            <div class="col-item">
+                            <div class="item active cbx-single-all">
+                                <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
+                                    <div class="col-item">
                                 <div class="photo">
                                     <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
                                 </div>
@@ -355,5 +355,6 @@
         });
 
     </script>
+
 
 }

@@ -21,13 +21,15 @@ $('#checkIn').change(function() {
         }
     });
 
+
+
 });
+
 var time = $('#time').val();
 var timeFromCheck = $('#timeFromCheck').val();
 var timeToCheck = $('#timeToCheck').val();
 
-console.log("TIME from CHECK" + timeFromCheck);
-console.log("TIME to CHECK" + timeToCheck);
+console.log("TIME " + time);
 
 $('#timeFrom').change(function() {
     var timeFrom = $('#timeFrom').val();

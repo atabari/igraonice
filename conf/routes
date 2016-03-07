@@ -80,3 +80,4 @@ DELETE        /obrisipaket/:paketId                      @controllers.Paketi.del
 #RESERVATION
 POST          /rezervacija/:apartmentId                  @controllers.Reservations.saveReservation(apartmentId: Integer)
 GET           /rezervacije/:apartmentId                  @controllers.Reservations.allReservations(apartmentId: Integer)
+GET           /rezervacija/:reservationId                @controllers.Reservations.confirmReservation(reservationId: Integer)

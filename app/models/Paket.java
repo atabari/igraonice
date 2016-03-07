@@ -18,6 +18,7 @@ public class Paket extends Model {
     public String name;
     public Integer cost;
 
+    @Column(columnDefinition = "TEXT")
     public String description;
     public Integer duration;
 

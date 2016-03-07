@@ -63,6 +63,12 @@ public class AppUser extends Model {
         return user;
     }
 
+    /* ------------------- finds user by id ------------------ */
+
+    public static AppUser findUserById(Integer id){
+
+        return finder.where().eq("id", id).findUnique();
+    }
         /* ------------------- authenticate user by email and password ------------------ */
 
     public static AppUser authenticate(String email, String password) {

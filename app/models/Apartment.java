@@ -7,7 +7,6 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Security;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,20 +37,8 @@ public class Apartment extends Model {
 
     @Column
     public Boolean isVisible;
-    /**
-     * Default constructor
-     * @param id
-     * @param name
-     * @param location
-     * @param address
-     * @param price
-     * @param capacity
-     * @param timeFrom
-     * @param timeTo
-     * @param description
-     * @param lat
-     * @param lng
-     */
+
+
     public Apartment(){
 
     }
