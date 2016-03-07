@@ -224,7 +224,7 @@ public class Apartment extends Model {
 
         String folderName = apartment.name + apartment.id;
         String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
-
+        Logger.info("LOCATION  " + location);
         File[] files = new File(location).listFiles();
 
         if (files != null) {
@@ -234,6 +234,7 @@ public class Apartment extends Model {
                 }
             }
         }
+        Logger.info("RESULTS  " + results);
         return results;
     }
 

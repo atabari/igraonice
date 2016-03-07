@@ -62,8 +62,7 @@ public class ImageUpload extends Controller {
 
         } else {
             flash("error", "Missing file");
-            List<Apartment> apartments = Apartment.apartmentsForHomepage();
-            return ok(index2.render(apartments));
+            return redirect(routes.Application.index2());
         }
     }
 }
