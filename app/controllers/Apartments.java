@@ -1,6 +1,7 @@
 package controllers;
 
 import helpers.Authenticator;
+import helpers.ConfigProvider;
 import helpers.Cookies;
 import helpers.UserAccessLevel;
 import models.Apartment;
@@ -15,6 +16,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.*;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +34,26 @@ public class Apartments extends Controller {
         List<Apartment> apartments = Apartment.apartmentsToRecommend(apartmentId);
         List<Paket> paketi = Paket.getPackageByApartmentId(apartmentId);
 
-        return ok(apartment.render(apart, currentUser, apartments, paketi));
+
+            List<String> results = new ArrayList<>();
+
+            String folderName = apart.name + apart.id;
+            String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
+            Logger.info("LOCATION  " + location);
+            File[] files = new File(location).listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        results.add("/assets/images/" + folderName + "/" + file.getName());
+                    }
+                }
+            }
+            Logger.info("RESULTS  " + results);
+
+
+
+        return ok(apartment.render(apart, currentUser, apartments, paketi, results));
     }
 
     // Create apartment
@@ -94,10 +116,24 @@ public class Apartments extends Controller {
 
         Apartment apart = Apartment.updateApartment(apartmentId, name, location, address, price, capacity,timeFrom, timeTo, description, lat, lng);
 
+
+        List<String> results = new ArrayList<>();
+
+        String folderName = apart.name + apart.id;
+        String location2 = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
+        File[] files = new File(location2).listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    results.add("/assets/images/" + folderName + "/" + file.getName());
+                }
+            }
+        }
         AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
         if (apart != null) {
             flash("success", "Uspješno ste ažurirali podatke o objektu.");
-            return ok(apartment.render(apart, currentUser,apartments,paketi ));
+            return ok(apartment.render(apart, currentUser,apartments,paketi,results ));
         } else {
             flash("error", "Desila se greška, podaci o objektu nisu ažurirani.");
             return ok(createapartment.render(apart.userId));

@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.ConfigProvider;
 import models.Apartment;
+import models.AppUser;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -26,6 +27,7 @@ public class ImageUpload extends Controller {
         Http.MultipartFormData.FilePart picture = body.getFile("picture");
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
+        Integer userId = apartment.userId;
         String folder = apartment.name + apartment.id;
 
         Logger.debug("FOLDER " + folder);
@@ -48,7 +50,7 @@ public class ImageUpload extends Controller {
                     result = true;
                 }
                 catch(SecurityException se){
-                    //handle it
+                    Logger.info("NESTO SE ZBILO :D");
                 }
             } else {
                 result = true;
@@ -57,12 +59,12 @@ public class ImageUpload extends Controller {
             file.renameTo(new File(theDir, fileName));
 
 
-            List<Apartment> apartments = Apartment.apartmentsForHomepage();
-            return ok(index2.render(apartments));
+
+            return redirect(routes.AppUsers.userApartmentsRender(userId));
 
         } else {
             flash("error", "Missing file");
-            return redirect(routes.Application.index2());
+            return redirect(routes.AppUsers.userApartmentsRender(userId));
         }
     }
 }
