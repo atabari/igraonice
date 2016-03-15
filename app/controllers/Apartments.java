@@ -126,7 +126,7 @@ public class Apartments extends Controller {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    results.add("\assets\images\" + folderName + "\" + file.getName());
+                    results.add("/assets/images/" + folderName + "/" + file.getName());
                 }
             }
         }
