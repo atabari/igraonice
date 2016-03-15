@@ -1,18 +1,19 @@
 /**
- * Created by User on 2/3/2016.
+ * Created by User on 3/15/2016.
  */
-$('body').on('click', 'a[data-role="delete-user"]', function (e) {
+
+$('body').on('click', 'a[data-role="delete-paket"]', function (e) {
     e.preventDefault();
     $toDelete = $(this);
     swal({
         title: 'BRISANJE!!!',
-        text: 'Ukoliko izbrišete korisnika, automatski će se izbrisati sve njegove igraonice, paketi i rezervacije',
+        text: 'Da li sigurno želite obrisati paket?',
         type: 'warning',
         showCancelButton: true,
         showConfirmButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'DA, obriši!',
+        confirmButtonText: 'DA, obrisi!',
         cancelButtonText: 'NE, odustani!',
         confirmButtonClass: 'confirm-class',
         cancelButtonClass: 'cancel-class',
@@ -29,7 +30,7 @@ $('body').on('click', 'a[data-role="delete-user"]', function (e) {
                 $toDelete.parents($toDelete.attr("data-delete-parent")).remove();
                 swal({
                     title: 'Obrisan!',
-                    text: 'Korisnik uspješno obrisan.',
+                    text: 'Paket uspješno obrisan.',
                     type: 'success',
                     timer: 1000
                 });
@@ -37,12 +38,3 @@ $('body').on('click', 'a[data-role="delete-user"]', function (e) {
         }
     });
 });
-
-
-
-
-
-
-
-
-

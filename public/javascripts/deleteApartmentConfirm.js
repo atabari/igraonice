@@ -1,12 +1,12 @@
 /**
  * Created by User on 2/3/2016.
  */
-$('body').on('click', 'a[data-role="delete-user"]', function (e) {
+$('body').on('click', 'a[data-role="delete-igraonica"]', function (e) {
     e.preventDefault();
     $toDelete = $(this);
     swal({
         title: 'BRISANJE!!!',
-        text: 'Ukoliko izbrišete korisnika, automatski će se izbrisati sve njegove igraonice, paketi i rezervacije',
+        text: 'Ukoliko izbrišete igraonicu, automatski će se izbrisati svi njeni paketi i rezervacije',
         type: 'warning',
         showCancelButton: true,
         showConfirmButton: true,
@@ -27,6 +27,7 @@ $('body').on('click', 'a[data-role="delete-user"]', function (e) {
                 method: "delete"
             }).success(function (response) {
                 $toDelete.parents($toDelete.attr("data-delete-parent")).remove();
+                location.reload();
                 swal({
                     title: 'Obrisan!',
                     text: 'Korisnik uspješno obrisan.',

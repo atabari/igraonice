@@ -5,9 +5,10 @@
 
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Rodjendani.ba</title>
+        <title>Rodjendan.ba</title>
+        <title>Rodjendan.ba</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -116,32 +117,32 @@
             </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
-                            "dropdown" data-toggle="dropdown" href="#">GRADOVI <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu ">
-                                <li>
-                                    <a href="@routes.Apartments.sarajevoApartments()">Sarajevo </a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Apartments.mostarApartments()">Mostar</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Apartments.banjalukaApartments()">Banja Luka</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Apartments.zenicaApartments()">Zenica</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Apartments.tuzlaApartments()">Tuzla</a>
-                                </li>
-                                <li>
-                                    <a href="@routes.Apartments.brckoApartments()">Brcko</a>
-                                </li>
+                        @*<li class="dropdown">*@
+                            @*<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=*@
+                            @*"dropdown" data-toggle="dropdown" href="#">GRADOVI <i class="fa fa-angle-down"></i>*@
+                            @*</a>*@
+                            @*<ul class="dropdown-menu ">*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.sarajevoApartments()">Sarajevo </a>*@
+                                @*</li>*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.mostarApartments()">Mostar</a>*@
+                                @*</li>*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.banjalukaApartments()">Banja Luka</a>*@
+                                @*</li>*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.zenicaApartments()">Zenica</a>*@
+                                @*</li>*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.tuzlaApartments()">Tuzla</a>*@
+                                @*</li>*@
+                                @*<li>*@
+                                    @*<a href="@routes.Apartments.brckoApartments()">Brcko</a>*@
+                                @*</li>*@
 
-                            </ul>
-                        </li>
+                            @*</ul>*@
+                        @*</li>*@
 
                         @*<li class="dropdown">*@
                             @*<a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=*@
@@ -176,13 +177,13 @@
                                         <a href="@routes.Login.showAdminPanel(currentUser.email)"><i class="fa fa-bars fa-fw"></i>Admin panel</a>
                                     </li>
                                     <li>
-                                        <a href="@routes.Login.apartmentsList()"><i class="fa fa-home fa-fw"></i>Objekti</a>
+                                        <a href="@routes.Login.apartmentsList()"><i class="fa fa-home fa-fw"></i>Igraonice</a>
                                     </li>
                                     <li>
                                         <a href="@routes.AppUsers.listOfUsers()"><i class="fa fa-users fa-fw"></i>Korisnici</a>
                                     </li>
                                     <li>
-                                        <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Log out</a>
+                                        <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                                     </li>
 
                                 </ul>
@@ -195,13 +196,13 @@
                                     </a>
                                     <ul class="dropdown-menu ">
                                         <li>
-                                            <a href="@routes.AppUsers.userPanelRender(currentUser.email)"><i class="fa fa-bars fa-fw"></i>Korisnicki panel</a>
+                                            <a href="@routes.AppUsers.userPanelRender(currentUser.email)"><i class="fa fa-bars fa-fw"></i>Korisnički panel</a>
                                         </li>
                                         <li>
                                             <a href="@routes.AppUsers.userApartmentsRender(currentUser.id)"><i class="fa fa-home fa-fw"></i>Objekti</a>
                                         </li>
                                         <li>
-                                            <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Log out</a>
+                                            <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                                         </li>
 
                                     </ul>
@@ -218,10 +219,6 @@
     <body id="background">
         @content
     </body>
-
-    <section id="balloons">
-
-    </section>
 
     <footer >
         <div class="cblz-footer-bottom footer-margin">

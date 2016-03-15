@@ -15,10 +15,10 @@ GET           /igraonica/:apartmentId                    @controllers.Apartments
 
 
 POST          /igraonica/:apartmentId                    @controllers.Apartments.cookies(apartmentId: Integer)
-GET           /listaigraonica/                           @controllers.Apartments.favouriteApartments()
 
 
-GET           /sarajevo                                  @controllers.Apartments.sarajevoApartments()
+
+GET           /sarajevo                                 @controllers.Apartments.sarajevoApartments()
 GET           /mostar                                    @controllers.Apartments.mostarApartments()
 GET           /banjaluka                                 @controllers.Apartments.banjalukaApartments()
 GET           /zenica                                    @controllers.Apartments.zenicaApartments()

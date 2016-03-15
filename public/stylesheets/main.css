@@ -796,3 +796,7 @@ ul.dropdown-menu { border: none }
     color: #2FA7E6;
     font-weight: 600;
 }
+#margin-top-10{
+    margin-top: 10px;
+    font-size: 15px;
+}

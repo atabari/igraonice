@@ -15,7 +15,7 @@ public class Application extends Controller {
         return ok(index.render());
     }
     public Result index2() {
-        List<Apartment> apartments = Apartment.apartmentsForHomepage();
+        List<Apartment> apartments = Apartment.apartmentsSarajevo();
         return ok(index2.render(apartments));
     }
 

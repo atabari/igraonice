@@ -144,10 +144,7 @@ public class Apartments extends Controller {
         return redirect(routes.Apartments.apartment(apartmentId));
     }
 
-    public Result favouriteApartments(){
-//        String apartment = ctx.session().get(" ");
-        return ok(favourite.render());
-    }
+
 
 
      /* --------------- apartments with location Sarajevo ---------------*/
