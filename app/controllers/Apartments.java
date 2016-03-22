@@ -39,7 +39,7 @@ public class Apartments extends Controller {
 
             String folderName = apart.name + apart.id;
             String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
-            Logger.info("LOCATION  " + location);
+
             File[] files = new File(location).listFiles();
 
             if (files != null) {
@@ -49,10 +49,7 @@ public class Apartments extends Controller {
                     }
                 }
             }
-            Logger.info("RESULTS  " + results);
-
-
-
+            results.remove(0);
         return ok(apartment.render(apart, currentUser, apartments, paketi, results));
     }
 

@@ -121,6 +121,7 @@ a:focus {
   margin-top: 80px;
   margin-bottom: 80px;
 }
+
 .cbx-heading2 {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -3765,6 +3766,10 @@ li.cbxgrid-item-none {
   color: #f5740a;
 }
 
+.width-margin{
+    width: 500px;
+    margin-top: 40px;
+}
 /*#balloons{*/
   /*background-image: url("../../images/balloons-background-for-you-design-vector-2294268.jpg");*/
 /*}*/

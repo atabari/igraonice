@@ -1,86 +1,82 @@
 @(apartment: Apartment)(currentUser: AppUser)(apartments: java.util.List [Apartment])(paketi: java.util.List[Paket])(slike: java.util.List[String])
 @main {
     <section id="apartment-section">
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="duplicate-email">
-                    @if(flash.containsKey("success")) {
-                        <div class="alert alert-success" role="alert">
-                            <i class="fa fa-check-square-o" style="font-size:30px"></i>
-                            <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
-                        </div>
-                    }
-                    </div>
-                    <div class="col-md-8">
-                        <div class="cbx-heading2 text-left">
-                            <h2 class="uppercase">@apartment.name <p>@apartment.location, @apartment.address</p></h2>
-                            <h2><p>Radno vrijeme: @apartment.timeFrom:00  -  @apartment.timeTo:00</p></h2>
-                        </div>
-                    </div>
-
-                </div>
-            </div><!-- //ROW Our Team Header -->
-        </div>
-    </section>
-
-    <section class="margin-bottom-20">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <!-- Wrapper for slides -->
-                        <div class="carousel-inner"  role="listbox">
-                            <div class="item active">
-                                <img  src='@routes.Assets.versioned("images/pocetna.jpg")' alt="" style="width: 700px; height: 500px;">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="duplicate-email">
+                        @if(flash.containsKey("success")) {
+                            <div class="alert alert-success" role="alert">
+                                <i class="fa fa-check-square-o" style="font-size:30px"></i>
+                                <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
                             </div>
+                        }
+                        </div>
+                    </div>
+                </div><!-- //ROW Our Team Header -->
+            </div>
+        </section>
+
+        <section class="margin-bottom-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <div id="myCarousel" class="carousel slide width-margin" data-ride="carousel">
+                                <!-- Wrapper for slides -->
+                            <div class="carousel-inner"  role="listbox">
+                                <div class="item active">
+                                @if(slike.size() > 0) {
+                                    <img src='@Apartment.getFirstImage(apartment)' alt='' style="width: 500px; height: 300px;">
+                                    
+                                }else{
+                                    <img  src='@routes.Assets.versioned("images/pocetna.jpg")' alt="" style="width: 500px; height: 300px;">
+
+                                    }
+                                </div>
                                 @for(image <- slike) {
+
                                     <div class="item">
-                                        <img src='@image' alt='@image' style="width: 700px; height: 500px;">
+                                        <img src='@image' alt='' style="width: 500px; height: 300px;">
                                     </div>
                                 }
-                        </div>
-
-                            <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-
-                </div>
-
-                <section class="margin-bottom-20">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-1">
-                                <div id="map" class="map"></div>
                             </div>
-                            <input id="lat" name="lat" value="@apartment.lat" style="display : none">
-                            <input id="lng" name="lng" value="@apartment.lng" style="display : none">
+
+                                <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                    </div>
-                </section>
 
-                <div class="col-md-12">
-                    <div class="cbx-about-text text-left xs-text-center">
-                    @apartment.description
                     </div>
 
+                    <section class="margin-bottom-20">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="cbx-heading2 text-left">
+                                        <h2 class="uppercase">@apartment.name</h2>
+                                        <h6>Adresa: @apartment.location, @apartment.address</h6>
+                                        <h6>Radno vrijeme: @apartment.timeFrom:00  -  @apartment.timeTo:00</h6>
+                                    </div>
+                                    <div class="cbx-about-text text-left xs-text-center">
+                                    @apartment.description
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
             </div>
-        </div>
 
 
-
-    </section>
+        </section>
         @if(currentUser !=null && apartment.userId == currentUser.id){
             <section>
                 <div class="container">
@@ -100,14 +96,13 @@
 
 
         <section id="paketi-background">
-            <div id="cbx-team" class="cbx-section cbx-team">
+            <div id="cbx-team" class="cbx-section cbx-team margin-bottom-20">
                 <div class="cbx-team-inner2">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="cbx-heading text-center">
+                                <div class="cbx-heading3 text-center">
                                     <h2 class="uppercase wow fadeInUp">Odaberite jedan od ponuđenih paketa</h2>
-                                    <hr noshade size="" width="" color="">
                                 </div>
                             </div>
                         </div><!-- //ROW Our Team Header -->
@@ -292,6 +287,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <div id="map" class="map"></div>
+                    </div>
+                    <input id="lat" name="lat" value="@apartment.lat" style="display : none">
+                    <input id="lng" name="lng" value="@apartment.lng" style="display : none">
+
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="cbx-heading2 text-left">
                             <h2 class="uppercase">Slični objekti</h2>
                         </div>
@@ -302,34 +311,34 @@
                             <div class="item active cbx-single-all">
                                 <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
                                     <div class="col-item">
-                                <div class="photo">
-                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <a href="@routes.Apartments.apartment(apartment.id)" target="">
-                                            <div class=" col-md-12 text-center">
-                                                <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
-                                                <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.location</h5>
-                                                <h5 class="price-text-color">@apartment.address</h5>
+                                        <div class="photo">
+                                            <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
+                                        </div>
+                                        <div class="info">
+                                            <div class="row">
+                                                <a href="@routes.Apartments.apartment(apartment.id)" target="">
+                                                    <div class=" col-md-12 text-center">
+                                                        <h4 class="product-title-color"><strong>@apartment.name</strong></h4>
+                                                        <h5 class="price-text-color"><i class="fa fa-map-marker" id="font-size20"></i> @apartment.location</h5>
+                                                        <h5 class="price-text-color">@apartment.address</h5>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        </a>
+                                            <div class="separator clear-left">
+                                                <p>
+                                                    <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
                                     </div>
-                                    <div class="separator clear-left">
-                                        <p>
-                                            <i class="fa fa-male"></i>@apartment.capacity Osoba</p>
-                                    </div>
-                                    <div class="clearfix"></div>
                                 </div>
-                            </div>
-                        </div>
-                    </div> <!--//Item-->
-                }
-                }
+                            </div> <!--//Item-->
+                        }
+                    }
+                </div>
             </div>
-        </div>
 
-    </section>
+        </section>
     </section>
     @*<input type="text" id="reservationDates" value="@reservations.toString" hidden>*@
 

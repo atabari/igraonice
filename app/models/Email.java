@@ -26,14 +26,14 @@ public class Email extends Model {
             email.addTo(mail);
             email.setSubject("Uspjesno kreiran profil");
             email.setMsg("Postovani, " + "\n" +
-                    "Zelimo Vas obavijestiti da je Vas profil napravljen." + "\n" +
-                    "Profilu mozete pristupiti uz sljedece podatke:" + "\n" +
+                    "Želimo Vas obavijestiti da je Vaš profil napravljen." + "\n" +
+                    "Profilu možete pristupiti uz sljedeće podatke:" + "\n" +
                     "Username: " + mail + "\n" +
                     "Password: " + password + "\n" +
 
-                    "Zelimo Vam puno uspjeha." + "\n" +
-                    "Vas," + "\n" +
-                    "StanNaDan");
+                    "Želimo Vam puno uspjeha." + "\n" +
+                    "Vaš," + "\n" +
+                    "Rodjendan.ba");
             email.send();
         } catch (EmailException e) {
             e.printStackTrace();

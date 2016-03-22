@@ -20,16 +20,11 @@ $('#checkIn').change(function() {
             $('#datumi').text(response)
         }
     });
-
-
-
 });
 
 var time = $('#time').val();
 var timeFromCheck = $('#timeFromCheck').val();
 var timeToCheck = $('#timeToCheck').val();
-
-console.log("TIME " + time);
 
 $('#timeFrom').change(function() {
     var timeFrom = $('#timeFrom').val();
@@ -41,5 +36,4 @@ $('#timeFrom').change(function() {
     }else{
         $('#time_error').text(" ");
     }
-
 });

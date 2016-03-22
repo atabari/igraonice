@@ -173,7 +173,13 @@ public class Apartment extends Model {
 
     public static List<Apartment> apartmentsSarajevo(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Sarajevo").findList();
+        List<Apartment> apartmentsList = finder.where().eq("location", "Sarajevo").findList();
+        List<Apartment> apartments = new ArrayList<>();
+        for(int i = 0; i < apartmentsList.size(); i ++){
+            if(apartmentsList.get(i).isVisible){
+                apartments.add(apartmentsList.get(i));
+            }
+        }
         return apartments;
     }
        /* --------------- retrieves apartments with location Mostar ---------------*/
@@ -181,6 +187,7 @@ public class Apartment extends Model {
     public static List<Apartment> apartmentsMostar(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
         List<Apartment> apartments = finder.where().eq("location", "Mostar").findList();
+
         return apartments;
     }
 
@@ -189,6 +196,7 @@ public class Apartment extends Model {
     public static List<Apartment> apartmentsBanjaLuka(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
         List<Apartment> apartments = finder.where().eq("location", "Banja Luka").findList();
+
         return apartments;
     }
 
@@ -197,6 +205,7 @@ public class Apartment extends Model {
     public static List<Apartment> apartmentsZenica(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
         List<Apartment> apartments = finder.where().eq("location", "Zenica").findList();
+
         return apartments;
     }
 
@@ -205,6 +214,7 @@ public class Apartment extends Model {
     public static List<Apartment> apartmentsTuzla(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
         List<Apartment> apartments = finder.where().eq("location", "Tuzla").findList();
+
         return apartments;
     }
 
@@ -213,7 +223,8 @@ public class Apartment extends Model {
 
     public static List<Apartment> apartmentsBrcko(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Brcko").findList();
+        List<Apartment> apartments = finder.where().eq("location", "Brčko").findList();
+
         return apartments;
     }
 
@@ -224,7 +235,6 @@ public class Apartment extends Model {
 
         String folderName = apartment.name + apartment.id;
         String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
-        Logger.info("LOCATION  " + location);
         File[] files = new File(location).listFiles();
 
         if (files != null) {
@@ -234,7 +244,6 @@ public class Apartment extends Model {
                 }
             }
         }
-        Logger.info("RESULTS  " + results);
         return results;
     }
 

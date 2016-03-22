@@ -6,7 +6,6 @@
                 <div class="col-md-2">
                     <a href="@routes.Apartments.sarajevoApartments()">Sarajevo </a>
                 </div>
-
                 <div class="col-md-2">
                     <a href="@routes.Apartments.mostarApartments()">Mostar</a>
                 </div>
@@ -44,7 +43,7 @@
                         <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src='@routes.Assets.versioned("images/pocetna.png")' class="" alt="a">
+                                    <img src='@Apartment.getFirstImage(apartment)' class="" alt="" style="height: 253px">
                                    
                                 </div>
                                 <div class="info">

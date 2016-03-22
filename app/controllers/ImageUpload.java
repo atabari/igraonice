@@ -30,7 +30,6 @@ public class ImageUpload extends Controller {
         Integer userId = apartment.userId;
         String folder = apartment.name + apartment.id;
 
-        Logger.debug("FOLDER " + folder);
 
         if (picture != null) {
             String fileName = picture.getFilename();
@@ -38,7 +37,6 @@ public class ImageUpload extends Controller {
 
             File theDir = new File(ConfigProvider.UPLOAD_IMAGES_FOLDER + folder);
 
-            Logger.debug(theDir.getAbsolutePath());
 
             // if the directory does not exist, create it
 
@@ -50,16 +48,12 @@ public class ImageUpload extends Controller {
                     result = true;
                 }
                 catch(SecurityException se){
-                    Logger.info("NESTO SE ZBILO :D");
                 }
             } else {
                 result = true;
             }
 
             file.renameTo(new File(theDir, fileName));
-
-
-
             return redirect(routes.AppUsers.userApartmentsRender(userId));
 
         } else {
