@@ -106,10 +106,10 @@
                                 </div>
                             </div>
                         </div><!-- //ROW Our Team Header -->
-                        @if(paketi.size() > 0){
+                        @if(paketi.size() > 0) {
 
                             <div class="row">
-                            @for(paket <- paketi){
+                            @for(paket <- paketi) {
                                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                     <div class="cbx-single-team text-center">
                                         <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
@@ -134,11 +134,10 @@
                                                             </p>
                                                         </div>
                                                     </div>
-
-                                                    <input type="number" id="time" value="@Paket.getPackageById(paket.id).duration" hidden>
+                                                    <input type="number" id="@paket.id" class="time" value="@paket.duration" hidden>
                                                     <form method="POST" role="form" action="#">
                                                         <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
-                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal">Rezerviši</button>
+                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal" onclick="pkgDuration(@paket.duration)">Rezerviši</button>
                                                         </div>
                                                     </form>
 
@@ -271,7 +270,7 @@
                                     <p style="font-size: 10px;text-align: left">Nakon odabira datuma proslave, lista zauzetih termina će biti prikazana, molimo odaberite termin koji nije na listi. Hvala.</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal">Odustani</button>
+                                    <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal" onclick="clearData()">Odustani</button>
                                     <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
                                 </div>
 
@@ -305,14 +304,14 @@
                             <h2 class="uppercase">Slični objekti</h2>
                         </div>
                     </div>
-                    @if(apartments.size() > 0){
+                    @if(apartments.size() > 0) {
                         @for(apartment <- apartments){
 
                             <div class="item active cbx-single-all">
                                 <div class="col-md-3 col-sm-4 col-xs-12 margin-bottom-20">
                                     <div class="col-item">
                                         <div class="photo">
-                                            <img src='@Apartment.getFirstImage(apartment)' class="" alt="a">
+                                            <img src='@Apartment.getFirstImageSmall(apartment)' class="" alt="a" style="height: 253px">
                                         </div>
                                         <div class="info">
                                             <div class="row">
@@ -360,6 +359,12 @@
             autoclose: true
 
         });
+
+        function clearData() {
+            $('#basicModal').on('hidden.bs.modal', function () {
+                $(this).find('form').trigger('reset');
+             });
+        }
 
     </script>
 

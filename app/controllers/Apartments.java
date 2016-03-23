@@ -14,6 +14,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import scala.concurrent.java8.FuturesConvertersImpl;
 import views.html.*;
 
 import java.io.File;
@@ -49,7 +50,11 @@ public class Apartments extends Controller {
                     }
                 }
             }
-            results.remove(0);
+
+            if (results.size() > 0) {
+                results.remove(0);
+            }
+
         return ok(apartment.render(apart, currentUser, apartments, paketi, results));
     }
 
@@ -130,7 +135,7 @@ public class Apartments extends Controller {
         AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
         if (apart != null) {
             flash("success", "Uspješno ste ažurirali podatke o objektu.");
-            return ok(apartment.render(apart, currentUser,apartments,paketi,results ));
+            return ok(apartment.render(apart, currentUser, apartments, paketi, results ));
         } else {
             flash("error", "Desila se greška, podaci o objektu nisu ažurirani.");
             return ok(createapartment.render(apart.userId));

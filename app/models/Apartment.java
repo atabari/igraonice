@@ -223,7 +223,7 @@ public class Apartment extends Model {
 
     public static List<Apartment> apartmentsBrcko(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartments = finder.where().eq("location", "Brčko").findList();
+        List<Apartment> apartments = finder.where().eq("location", "BrÄ�ko").findList();
 
         return apartments;
     }
@@ -252,6 +252,13 @@ public class Apartment extends Model {
         List<String> images = getListOfApartmentImages(apartment);
 
         return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna.jpg";
+    }
+
+    /* --------------- retrieves first picture name for the current apartment ---------------*/
+    public static String getFirstImageSmall(Apartment apartment) {
+        List<String> images = getListOfApartmentImages(apartment);
+
+        return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna-mala.jpg";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/

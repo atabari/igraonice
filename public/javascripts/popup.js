@@ -4,6 +4,10 @@
 var apId = $('#apId').val();
 
 var obavijest = "Trenutno nema zauzetih termina";
+var time;
+function pkgDuration(duration) {
+    time = duration;
+}
 
 $('#checkIn').change(function() {
     var date = $('#checkIn').val();
@@ -22,7 +26,7 @@ $('#checkIn').change(function() {
     });
 });
 
-var time = $('#time').val();
+//var time = $('.time').val();
 var timeFromCheck = $('#timeFromCheck').val();
 var timeToCheck = $('#timeToCheck').val();
 

@@ -54,11 +54,11 @@ public class ImageUpload extends Controller {
             }
 
             file.renameTo(new File(theDir, fileName));
-            return redirect(routes.AppUsers.userApartmentsRender(userId));
+            return redirect(routes.Apartments.apartment(apartment.id));
 
         } else {
             flash("error", "Missing file");
-            return redirect(routes.AppUsers.userApartmentsRender(userId));
+            return redirect(routes.Apartments.apartment(apartment.id));
         }
     }
 }
