@@ -5,8 +5,11 @@ var apId = $('#apId').val();
 
 var obavijest = "Trenutno nema zauzetih termina";
 var time;
-function pkgDuration(duration) {
+var pkg;
+function pkgDuration(duration, pkgId) {
     time = duration;
+    pkg = pkgId;
+
 }
 
 $('#checkIn').change(function() {
@@ -34,6 +37,7 @@ $('#timeFrom').change(function() {
     var timeFrom = $('#timeFrom').val();
     var timeTo = (1*timeFrom) + (1*time);
     $('#timeTo').val(timeTo)
+    $('#paketId').val(pkg);
 
     if(timeFrom < timeFromCheck && timeTo > timeToCheck){
         $('#time_error').text("Odabrani termini nisu u okviru radnog vremena!")

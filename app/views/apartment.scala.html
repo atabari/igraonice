@@ -130,14 +130,15 @@
                                                     <div class="text-center">
                                                         <div class="text-center back-single-text">
                                                             <p class="position">
-                                                            @paket.description
+                                                                @paket.description
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <input type="number" id="@paket.id" class="time" value="@paket.duration" hidden>
+                                                        <!--<input type="number" id="@paket.id" class="time" value="@paket.duration" hidden>-->
                                                     <form method="POST" role="form" action="#">
                                                         <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
-                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal" onclick="pkgDuration(@paket.duration)">Rezerviši</button>
+                                                            <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal"
+                                                            onclick="pkgDuration(@paket.duration, @paket.id)">Rezerviši</button>
                                                         </div>
                                                     </form>
 
@@ -187,6 +188,7 @@
                                                     <input type="text" class="date-check" name="checkIndate"  id="checkIn" />
                                                 </div>
                                                 <input id="apId" value="@apartment.id" hidden>
+                                                <input id="paketId" name="paketId" hidden>
                                             </div>
                                         </div>
                                         <div>

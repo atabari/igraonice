@@ -42,7 +42,7 @@ public class Email extends Model {
 
          /* ------------------- send mail reservation ------------------ */
 
-    public static void sendMailReservation(String name, String mail, String phone, String checkInDate,String timeFrom,String timeTo, String comment, Integer apartmentId){
+    public static void sendMailReservation(String name, String mail, String phone, String checkInDate,String timeFrom,String timeTo, String comment, Integer apartmentId, Integer paketId){
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         AppUser user = AppUser.findUserById(apartment.userId);
@@ -67,7 +67,7 @@ public class Email extends Model {
                     "Od:  " + timeFrom + " sati " + " do " + timeTo + " sati" + "\n" +
                     "Komentar:  " + comment);
 
-            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate,timeFrom,timeTo, comment);
+            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate,timeFrom,timeTo, comment, paketId);
             multiPartEmail.send();
         } catch (EmailException e) {
             e.printStackTrace();

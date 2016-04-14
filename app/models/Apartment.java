@@ -284,12 +284,13 @@ public class Apartment extends Model {
         List<Apartment> recommendedApartments = new ArrayList<>();
 
         Apartment apartment = finder.where().eq("id", apartmentId).findUnique();
+
         Integer price = apartment.price;
 
         List<Apartment> apartments = finder.where().eq("location", apartment.location).findList();
         List<Integer> prices = new ArrayList<>();
 
-        for(int k=0; k < apartments.size(); k++) {
+        for(int k = 0; k < apartments.size(); k++) {
             prices.add(apartments.get(k).price);
         }
 

@@ -25,8 +25,10 @@ public class Paket extends Model {
     @ManyToOne
     public Apartment apartment;
 
-    public Paket(){
+    @OneToMany
+    public Paket paket;
 
+    public Paket() {
     }
 
     public Paket(String name, Integer cost, String description, Integer duration, Apartment apartment) {

@@ -35,11 +35,13 @@ public class Reservation extends Model {
     @ManyToOne
     public Apartment apartment;
     public Boolean confirmed;
+    @ManyToOne
+    public Paket paket;
 
 
     public Reservation() {
     }
-    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost, Boolean confirmed) {
+    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost, Boolean confirmed, Paket paket) {
         this.apartment = apartment;
         this.dateFrom = dateFrom;
         this.timeFrom = timeFrom;
@@ -52,10 +54,11 @@ public class Reservation extends Model {
         this.comment = comment;
         this.cost = cost;
         this.confirmed = confirmed;
+        this.paket = paket;
     }
 
 
-    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment) {
+    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment, Integer paketId) {
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
 
@@ -69,7 +72,7 @@ public class Reservation extends Model {
         if(reservation.visitorName.contains(" ")) {
             reservation.visitorName = name.split(" ")[0];
             reservation.visitorLastname = name.split(" ")[1];
-        }else{
+        } else {
             reservation.visitorName = name;
             reservation.visitorLastname = " ";
         }
@@ -77,6 +80,9 @@ public class Reservation extends Model {
         reservation.timeFrom = timeFrom;
         reservation.timeTo = timeTo;
         reservation.confirmed = false;
+
+        Paket paket = Paket.getPackageById(paketId);
+        reservation.paket = paket;
 
         reservation.save();
     }
