@@ -36,7 +36,7 @@ public class AppUser extends Model {
 
         /* ------------------- create user ------------------ */
 
-    public static void createUser(){
+    public static void createUser() {
         DynamicForm form = Form.form().bindFromRequest();
         String email = form.field("email").value();
         String password = form.field("password").value();
@@ -96,7 +96,7 @@ public class AppUser extends Model {
                 user.hashPass();
                 user.update();
                 return true;
-            }catch (PersistenceException e ){
+            }catch (PersistenceException e ) {
                 Logger.error("Failed to update user password" + e.getMessage());
                 return false;
             }
@@ -104,7 +104,7 @@ public class AppUser extends Model {
         return false;
     }
     /* ------------------- get all users ------------------ */
-    public static List<AppUser> getAllAppUsers(){
+    public static List<AppUser> getAllAppUsers() {
         Model.Finder<String, AppUser> finder = new Model.Finder<>(AppUser.class);
         List<AppUser> users = finder.all();
         return users;
@@ -113,21 +113,19 @@ public class AppUser extends Model {
 
 
     /* ------------------- delete user ------------------ */
-    public static void deleteUser(Integer userId){
+    public static void deleteUser(Integer userId) {
         AppUser user = finder.where().eq("id", userId).findUnique();
         List<Apartment> userApartments = Apartment.userApartments(userId);
         List<Paket> paketi = new ArrayList<>();
-        if(user != null){
+        if(user != null) {
             for(int i = 0; i < userApartments.size(); i ++){
-                for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)){
-                    Logger.info("PAKETI  " + p);
+                for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)) {
                     p.delete();
                 }
                 for(Reservation r: Reservation.getApartmentReservations(userApartments.get(i).id)){
                     r.delete();
                 }
             }
-
 
             for(int k = 0; k < userApartments.size(); k++){
                 userApartments.get(k).delete();

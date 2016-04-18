@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Paketi extends Controller {
 
-    public Result createPackageRender(Integer apartmentId){
+    public Result createPackageRender(Integer apartmentId) {
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         return ok(views.html.Paketi.createPackage.render(apartment));
     }
@@ -25,7 +25,7 @@ public class Paketi extends Controller {
         return ok(views.html.Paketi.listOfPackages.render(packages, apartmentId));
     }
 
-    public Result createPackage(Integer apartmentId){
+    public Result createPackage(Integer apartmentId) {
         DynamicForm form = Form.form().bindFromRequest();
 
         String name = form.field("name").value();
@@ -37,12 +37,13 @@ public class Paketi extends Controller {
         return redirect(routes.Paketi.listOfPackages(apartmentId));
 
     }
-    public Result updatePackageRender(Integer packageId){
+
+    public Result updatePackageRender(Integer packageId) {
         Paket paket = Paket.getPackageById(packageId);
         return ok(views.html.Paketi.updatePackage.render(paket));
     }
 
-    public Result updatePackage(Integer packageId){
+    public Result updatePackage(Integer packageId) {
         DynamicForm form = Form.form().bindFromRequest();
 
         String name = form.field("name").value();
@@ -54,7 +55,7 @@ public class Paketi extends Controller {
         return redirect(routes.Paketi.listOfPackages(apartmentId));
     }
 
-    public Result deletePackage(Integer packageId){
+    public Result deletePackage(Integer packageId) {
         Integer apartmentId = Paket.deletePackage(packageId);
         return redirect(routes.Paketi.listOfPackages(apartmentId));
     }

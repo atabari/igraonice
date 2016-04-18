@@ -104,8 +104,8 @@ public class Reservation extends Model {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         List <Reservation> confirmedReservations = new ArrayList<>();
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-        for(int e = 0; e < reservations.size(); e++){
-            if(reservations.get(e).confirmed == true){
+        for(int e = 0; e < reservations.size(); e++) {
+            if(reservations.get(e).confirmed == true) {
                 confirmedReservations.add(reservations.get(e));
             }
         }
@@ -116,6 +116,11 @@ public class Reservation extends Model {
 
         }
         return hashMap;
+    }
+
+    public static List<Reservation> getAllPackageReservations(Integer paketid) {
+        Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
+        return finder.where().eq("paket_id", paketid).findList();
     }
 
     public static List<String> getReservations(String datum) {

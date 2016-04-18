@@ -2,6 +2,7 @@ package controllers;
 
 import models.Apartment;
 import models.Reservation;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class Reservations extends Controller {
 
-    public Result listOfReservationTimes(String datum){
+    public Result listOfReservationTimes(String datum) {
         List<String> times =  Reservation.getReservations(datum);
         return ok(String.valueOf(times));
     }

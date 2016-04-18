@@ -185,7 +185,7 @@
                                             </div>
                                             <div class="col-md-12 padding-left-0">
                                                 <div id="sandbox">
-                                                    <input type="text" class="date-check" name="checkIndate"  id="checkIn" />
+                                                    <input type="text" class="date-check" name="checkIndate"  id="checkIn" required/>
                                                 </div>
                                                 <input id="apId" value="@apartment.id" hidden>
                                                 <input id="paketId" name="paketId" hidden>
@@ -226,7 +226,6 @@
                                         <div class="col-md-12 padding-left-0">
                                             <input type="text" name="name"  class="date-check" id="name"  onchange="return checkName()" required>
                                             <label id="name_error" class="error" for="name"></label>
-
                                         </div>
                                         <div class="col-md-12 check-in-date">
                                             <h4>Email:  </h4>
@@ -234,7 +233,6 @@
                                         <div class="col-md-12 padding-left-0">
                                             <input type="text" name="mail" class="date-check" id="email" style="font-size: 15px" onchange=" return checkEmail()" required>
                                             <label id="email_error" class="error" for="mail"></label>
-
                                         </div>
 
                                         <div class="col-md-12 check-in-date">
@@ -243,11 +241,8 @@
                                         <div class="col-md-12 padding-left-0">
                                             <input type="text" name="phone" class="date-check" id="phone" placeholder="" onchange="numberLength()" required>
                                             <label id="phone_error" class="error" for="phone"></label>
-
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="col-md-4">

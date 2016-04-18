@@ -42,7 +42,7 @@ public class Paket extends Model {
     private static Form<Paket> form = Form.form(Paket.class);
     private static Model.Finder<String, Paket> finder = new Model.Finder<>(Paket.class);
 
-    public static void createPackage(String name, Integer cost, String description, Integer duration, Integer apartmentId){
+    public static void createPackage(String name, Integer cost, String description, Integer duration, Integer apartmentId) {
         Apartment apartment = Apartment.getApartmentById(apartmentId);
 
         Paket package1 = new Paket();
@@ -60,7 +60,7 @@ public class Paket extends Model {
         return finder.where().eq("id", packageId).findUnique();
     }
 
-    public static Integer updatePackage(Integer packageId,String name, Integer cost, String description, Integer duration ){
+    public static Integer updatePackage(Integer packageId,String name, Integer cost, String description, Integer duration ) {
         Paket p = getPackageById(packageId);
         try {
             p.name = name;
@@ -70,20 +70,27 @@ public class Paket extends Model {
 
             p.update();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.debug("Nisam uspio uraditi update paketa :(");
         }
         return p.apartment.id;
     }
 
-    public static Integer deletePackage(Integer packageId){
+    public static Integer deletePackage(Integer packageId) {
         Paket p = getPackageById(packageId);
+
+        List<Reservation> reservations = Reservation.getAllPackageReservations(packageId);
+
+        for (int i = 0; i < reservations.size(); i++) {
+            reservations.get(i).delete();
+        }
+        
         Integer apartmentId = p.apartment.id;
         p.delete();
         return apartmentId;
     }
 
-    public static List<Paket> getPackageByApartmentId(Integer apartmentId){
+    public static List<Paket> getPackageByApartmentId(Integer apartmentId) {
         return finder.where().eq("apartment_id", apartmentId).findList();
     }
 }
