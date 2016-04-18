@@ -84,7 +84,7 @@ public class Paket extends Model {
         for (int i = 0; i < reservations.size(); i++) {
             reservations.get(i).delete();
         }
-        
+
         Integer apartmentId = p.apartment.id;
         p.delete();
         return apartmentId;
