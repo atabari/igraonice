@@ -29,6 +29,12 @@ public class Reservations extends Controller {
         String name = form.field("name").value();
         String phone = form.field("phone").value();
         String paket = form.field("paketId").value();
+        Logger.debug("DATE" + date);
+        Logger.debug("TIME FROM " + timeFrom);
+        Logger.debug("TIE TO " + timeTo);
+        Logger.debug("NAME " + name);
+        Logger.debug("PHONE " + phone);
+        Logger.debug("PAKET " + paket);
 
         Reservation.saveReservation(apartmentId, name, null, phone, date, timeFrom, timeTo, null, Integer.parseInt(paket));
         return redirect(routes.Paketi.listOfPackages(apartmentId));

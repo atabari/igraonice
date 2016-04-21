@@ -35,7 +35,7 @@
                                 <td class="text-center">@package1.description</td>
                                 <td class="text-center">@package1.duration</td>
                                <td class="text-center">
-                                   <a data-toggle="modal" data-target="#basicModal" role="button"><i class=" fa fa-plus fa-lg"></i></a>
+                                   <a data-toggle="modal" data-target="#basicModal" role="button" onclick="pkgDuration(@package1.duration, @package1.id)"><i class=" fa fa-plus fa-lg"></i></a>
                                </td>
                                 <td class="text-center">
                                     <a data-role="post" data-delete-parent="tr" href="@routes.Paketi.updatePackageRender(package1.id)" role="button">
@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="cbx-heading text-center">
-                            <h3 class="uppercase wow fadeInUp">Trenutno nemate kreiranih igraonica</h3>
+                            <h3 class="uppercase wow fadeInUp">Trenutno nemate kreiranih paketa</h3>
                         </div>
                     </div>
                 </div>
@@ -87,6 +87,8 @@
                                                         <input type="text" class="date-check" name="checkIndate"  id="checkIn" />
                                                     </div>
                                                     <input id="apId" value="@apartmentId" hidden>
+                                                    <input id="paketId" name="paketId" hidden>
+
                                                 </div>
                                             </div>
                                             <div>
