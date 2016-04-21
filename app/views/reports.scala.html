@@ -17,6 +17,7 @@
                             <th>Ime</th>
                             <th>Email</th>
                             <th>Telefon</th>
+                            <th class="text-center">Naziv paketa</th>
                             <th class="text-center">Datum</th>
                             <th class="text-center">Vrijeme</th>
                             <th class="text-center">Potvrdi</th>
@@ -29,6 +30,7 @@
                             <td>@reservation.visitorName @reservation.visitorLastname</td>
                             <td>@reservation.visitorEmail</td>
                             <td>@reservation.phone</td>
+                            <td class="text-center">@reservation.paket.name</td>
                             <td class="text-center">@reservation.dateFrom</td>
                             <td class="text-center">@reservation.timeFrom:00h - @reservation.timeTo:00h</td>
                             <td class="text-center">
