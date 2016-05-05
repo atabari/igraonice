@@ -1,0 +1,24 @@
+@(apartmentId: Integer)
+@main {
+    <div class="container">
+        <div class="row">
+            <div style="margin-top: 20%; margin-bottom: 20%">
+                <form method="POST" role="form" action="@routes.Images.imagesUpload(apartmentId)" enctype="multipart/form-data"  >
+
+                    <div col-md-6>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <input id="height" type="file" name="image" class="form-control" multiple accept="image/*"/>
+                            </div>
+                            <div class="buttons-set">
+                                <button class="button create-account"><span>Dodaj</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+}

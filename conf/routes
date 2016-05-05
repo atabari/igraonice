@@ -18,7 +18,7 @@ POST          /igraonica/:apartmentId                    @controllers.Apartments
 
 
 
-GET           /sarajevo                                 @controllers.Apartments.sarajevoApartments()
+GET           /sarajevo                                  @controllers.Apartments.sarajevoApartments()
 GET           /mostar                                    @controllers.Apartments.mostarApartments()
 GET           /banjaluka                                 @controllers.Apartments.banjalukaApartments()
 GET           /zenica                                    @controllers.Apartments.zenicaApartments()
@@ -46,9 +46,6 @@ POST          /updateigraonice/:apartmentId              @controllers.Apartments
 
 GET           /adminsnd/adminpanel/:email                @controllers.Login.showAdminPanel(email: String)
 POST          /adminsnd/adminpanel/:email                @controllers.Login.updateUser(email: String)
-
-GET           /uploadRender/:apartmentId                 @controllers.ImageUpload.uploadRender(apartmentId: Integer)
-POST          /upload/:apartmentId                       @controllers.ImageUpload.upload(apartmentId: Integer)
 
 #AppUser
 
@@ -81,3 +78,10 @@ DELETE        /obrisipaket/:paketId                      @controllers.Paketi.del
 POST          /rezervacija/:apartmentId                  @controllers.Reservations.saveReservation(apartmentId: Integer)
 GET           /rezervacije/:apartmentId                  @controllers.Reservations.allReservations(apartmentId: Integer)
 GET           /rezervacija/:reservationId                @controllers.Reservations.confirmReservation(reservationId: Integer)
+
+#IMAGES
+GET           /uploadslika/:apartmentId                  @controllers.Images.imagesUploadRender(apartmentId: Integer)
+POST          /uploadslika/:apartmentId                  @controllers.Images.imagesUpload(apartmentId: Integer)
+GET           /listaslika/:apartmentId                   @controllers.Images.listOfPicturesRender(apartmentId: Integer)
+GET           /brisanjeslike/:imageId                    @controllers.Images.deleteImage(imageId: String)
+DELETE        /brisanjeslike/:imageId                    @controllers.Images.deleteImage(imageId: String)

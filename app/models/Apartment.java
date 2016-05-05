@@ -7,9 +7,12 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Security;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +41,10 @@ public class Apartment extends Model {
     @Column
     public Boolean isVisible;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "apartment")
+    public List<Image> images;
 
-    public Apartment(){
+    public Apartment() {
 
     }
     public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo,
@@ -149,6 +154,13 @@ public class Apartment extends Model {
         for(Paket p: paketi){
             p.delete();
         }
+
+        List<Image> itemImages = Image.findImagesByItemId(apartmentId);
+
+        for(int i = 0; i < itemImages.size(); i ++){
+            Image.deleteImage(itemImages.get(i));
+        }
+
         apartment.delete();
     }
 
@@ -325,5 +337,15 @@ public class Apartment extends Model {
         return apartments;
     }
 
+        /* ------------------- get first image if item has images, else return default image ------------------ */
+
+    public static Image getFirstItemImage(Integer apartmentId) {
+        Apartment apartment = getApartmentById(apartmentId);
+        if (apartment.images.size() > 0) {
+            return apartment.images.get(0);
+        } else {
+            return null;
+        }
+    }
 }
 
