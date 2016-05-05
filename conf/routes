@@ -79,9 +79,20 @@ POST          /rezervacija/:apartmentId                  @controllers.Reservatio
 GET           /rezervacije/:apartmentId                  @controllers.Reservations.allReservations(apartmentId: Integer)
 GET           /rezervacija/:reservationId                @controllers.Reservations.confirmReservation(reservationId: Integer)
 
+
 #IMAGES
 GET           /uploadslika/:apartmentId                  @controllers.Images.imagesUploadRender(apartmentId: Integer)
 POST          /uploadslika/:apartmentId                  @controllers.Images.imagesUpload(apartmentId: Integer)
 GET           /listaslika/:apartmentId                   @controllers.Images.listOfPicturesRender(apartmentId: Integer)
 GET           /brisanjeslike/:imageId                    @controllers.Images.deleteImage(imageId: String)
 DELETE        /brisanjeslike/:imageId                    @controllers.Images.deleteImage(imageId: String)
+
+#STORE
+GET           /listaprodavnica/:userId                   @controllers.Stores.listOfUserStores(userId: Integer)
+GET           /kreirajprodavnicu/:userId                 @controllers.Stores.createStoreRender(userId: Integer)
+POST          /kreirajprodavnicu/:userId                 @controllers.Stores.createStore(userId: Integer)
+GET           /updateprodavnice/:storeId                 @controllers.Stores.updateStoreRender(storeId: Integer)
+POST          /updateprodavnice/:storeId                 @controllers.Stores.updateStore(storeId: Integer)
+GET           /brisanjeprodavnice/:storeId               @controllers.Stores.deleteStore(storeId: Integer)
+DELETE        /brisanjeprodavnice/:storeId               @controllers.Stores.deleteStore(storeId: Integer)
+
