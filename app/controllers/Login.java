@@ -57,7 +57,7 @@ public class Login extends Controller {
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(adminpanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.USER){
+        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA){
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(userpanel.render(user));

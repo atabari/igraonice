@@ -8,7 +8,10 @@ import play.mvc.Http;
  */
 public class UserAccessLevel {
     public static final Integer ADMIN = 1;
-    public static final Integer USER = 2;
+    public static final Integer IGRAONICA = 2;
+    public static final Integer POKLONI = 3;
+    public static final Integer TORTE = 4;
+    public static final Integer ANIMATORI = 5;
 
 
 
