@@ -3773,3 +3773,204 @@ li.cbxgrid-item-none {
 /*#balloons{*/
   /*background-image: url("../../images/balloons-background-for-you-design-vector-2294268.jpg");*/
 /*}*/
+
+/* Product View */
+.product-view .product-img-box .product-image {
+  margin: 0 0 13px;
+}
+#cloud-zoom-big {
+  border: 3px #ddd solid;
+  z-index: 10000 !important;
+}
+.product-shop button.button.btn-cart:before {
+  content: "\f07a";
+  font-family: 'FontAwesome';
+}
+/* Product Images */
+.product-view .new-label {
+  display: none;
+}
+.product-view .sale-label {
+  display: none;
+}
+.product-view {
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  margin-top: 10px;
+}
+.product-view .flexslider-thumb {
+  margin: 30px auto 0;
+  padding: 0 30px;
+  position: relative
+}
+.product-view-compact .flexslider-thumb {
+  margin: 17px auto 0
+}
+.product-view .flexslider-thumb .flex-viewport {
+  z-index: 10
+}
+.product-view .flexslider-thumb .flex-direction-nav {
+  top: 30%;
+  left: 0;
+  width: 100%;
+}
+.product-view .flexslider-thumb .flex-prev {
+  position: absolute;
+  left: 10px;
+  top: -5px;
+}
+.product-view .flexslider-thumb .flex-next {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+}
+.product-view .flexslider-thumb li img {
+  cursor: pointer;
+  -moz-user-select: none;
+  border: 1px #ddd solid;
+}
+.product-view .previews-list {
+  padding: 0;
+  list-style-type: none;
+  text-align: center
+}
+.product-view .previews-list li {
+  width: 76px;
+  margin-right: 7px;
+  padding: 0;
+  float: none;
+  display: inline-block;
+}
+.product-view-compact .rating {
+  padding: 18px 0 21px
+}
+.product-view-compact .btn-toolbar {
+  margin: 0;
+  padding: 7px 0 22px
+}
+.product-view-compact .price {
+  display: block;
+  padding: 6px 0 20px
+}
+.product-view .flexslider-thumb-vertical-outer {
+  margin: 0 10px 15px 0;
+  width: 76px;
+  float: left;
+  position: relative;
+  z-index: 1
+}
+.product-view .flexslider-thumb-vertical .flex-viewport {
+  height: 300px!important
+}
+.product-view .flexslider-thumb-vertical .slides {
+  margin: -4px 0 0;
+  padding: 0;
+  list-style-type: none
+}
+.product-view .flexslider-thumb-vertical .slides li {
+  margin: 0;
+  padding: 0;
+  overflow: hidden
+}
+.product-view .flexslider-thumb-vertical .slides li img {
+  width: 100%;
+  padding: 4px 0;
+  cursor: pointer;
+  -moz-user-select: none
+}
+.flex-direction-nav, .slider-controls {
+  -webkit-transform: translate3d(0, 0, 0)
+}
+.product-essential {
+  background-color: #FFFFFF;
+}
+.product-collateral .box-collateral {
+  margin: 0 0 15px;
+}
+.product-essential .product-image.no-gallery {
+  margin-left: auto;
+}
+
+.product-essential .product-image img {
+  height: auto;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+.product-essential .button-viewall {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  text-indent: -999em;
+  z-index: 9999;
+}
+.more-views {
+  margin: 8px auto 10px;
+  width: 100%;
+  clear: both;
+}
+.more-views li {
+  float: left;
+  margin: 0 12px 0 0;
+  border: 1px #ddd solid;
+  height: 85px
+}
+.more-views li a {
+  display: block;
+  text-align: center;
+  width: 70px;
+}
+.more-views li a img {
+  width: 70px;
+}
+.more-views .jcarousel-next:before {
+  content: "\f105";
+  font-family: FontAwesome;
+  font-size: 26px;
+  padding-right: 5px;
+  vertical-align: top;
+  right: -20px;
+  top: 28px;
+  display: inline-block!important;
+  position: absolute;
+  cursor: pointer;
+}
+.more-views .jcarousel-prev:before {
+  content: "\f104";
+  font-family: FontAwesome;
+  font-size: 26px;
+  padding-right: 5px;
+  vertical-align: top;
+  left: -20px;
+  top: 28px;
+  display: inline-block!important;
+  position: absolute;
+  cursor: pointer;
+}
+.more-views .jcarousel-clip {
+  overflow: hidden;
+}
+.product-essential .more-images {
+  width: 92px;
+  float: left;
+  overflow: hidden;
+  margin-top: -20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.product-essential .more-images .normal-list {
+  margin-top: -6px;
+}
+.product-essential .more-images ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.product-essential .elastislide-vertical {
+  margin-top: -6px;
+}
+.product-essential .more-images img {
+  padding: 6px 0;
+  width: 100%;
+}
