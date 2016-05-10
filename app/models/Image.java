@@ -32,6 +32,10 @@ public class Image extends Model {
     @JsonBackReference
     public Apartment apartment;
 
+    @ManyToOne
+    @JsonBackReference
+    public Item item;
+
     public static Cloudinary cloudinary;
 
 
@@ -132,8 +136,8 @@ public class Image extends Model {
 
     /* ------------------- find images by news id ------------------ */
 
-    public static List<Image> findImagesByNewsId(Integer newsId){
-        return finder.where().eq("news_id", newsId).findList();
+    public static List<Image> findItemImages(Integer itemId){
+        return finder.where().eq("item_id", itemId).findList();
     }
 
 
@@ -143,4 +147,38 @@ public class Image extends Model {
     public static Image findImageById(String public_id){
         return finder.where().eq("public_id", public_id).findUnique();
     }
+
+
+    /* ------------------- create image for items ------------------ */
+
+    public static Image createItemImage(File image, Integer itemId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createItemImage(result, itemId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createItemImage(Map uploadResult, Integer itemId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(itemId != null) {
+            image.item = Item.findItemById(itemId);
+        }
+        image.save();
+        return image;
+    }
+
 }

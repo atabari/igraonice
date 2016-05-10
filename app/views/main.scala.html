@@ -166,21 +166,24 @@
                         <li>
                             <a href="@routes.Login.loginIndex()" id="saradnja" >Login</a>
                         </li>
-                    }else{
-                        @if(currentUser.userAccessLevel.equals(UserAccessLevel.ADMIN)){
+                    }else {
+                        @if(currentUser.userAccessLevel.equals(UserAccessLevel.ADMIN)) {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
                                 "dropdown" data-toggle="dropdown" href="#">ADMIN <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu ">
                                     <li>
-                                        <a href="@routes.Login.showAdminPanel(currentUser.email)"><i class="fa fa-bars fa-fw"></i>Admin panel</a>
+                                        <a href="@routes.Login.showAdminPanel(currentUser.email)"><i class="fa fa-bars fa-fw"></i>
+                                            Admin panel</a>
                                     </li>
                                     <li>
-                                        <a href="@routes.Login.apartmentsList()"><i class="fa fa-home fa-fw"></i>Igraonice</a>
+                                        <a href="@routes.Login.apartmentsList()"><i class="fa fa-home fa-fw"></i>
+                                            Igraonice</a>
                                     </li>
                                     <li>
-                                        <a href="@routes.AppUsers.listOfUsers()"><i class="fa fa-users fa-fw"></i>Korisnici</a>
+                                        <a href="@routes.AppUsers.listOfUsers()"><i class="fa fa-users fa-fw"></i>
+                                            Korisnici</a>
                                     </li>
                                     <li>
                                         <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
@@ -188,28 +191,57 @@
 
                                 </ul>
                             </li>
-                        }else{
-                            @if(currentUser.userAccessLevel.equals(UserAccessLevel.IGRAONICA)){
+                        } else {
+                            @if(currentUser.userAccessLevel.equals(UserAccessLevel.IGRAONICA)) {
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
                                     "dropdown" data-toggle="dropdown" href="#">Korisnik <i class="fa fa-angle-down"></i>
                                     </a>
                                     <ul class="dropdown-menu ">
                                         <li>
-                                            <a href="@routes.AppUsers.userPanelRender(currentUser.email)"><i class="fa fa-bars fa-fw"></i>Korisnički panel</a>
+                                            <a href="@routes.AppUsers.userPanelRender(currentUser.email)"><i class="fa fa-bars fa-fw"></i>
+                                                Korisnički panel</a>
                                         </li>
                                         <li>
-                                            <a href="@routes.AppUsers.userApartmentsRender(currentUser.id)"><i class="fa fa-home fa-fw"></i>Objekti</a>
+                                            <a href="@routes.AppUsers.userApartmentsRender(currentUser.id)"><i class="fa fa-home fa-fw"></i>
+                                                Objekti</a>
                                         </li>
                                         <li>
-                                            <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                                            <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>
+                                                Logout</a>
                                         </li>
 
                                     </ul>
                                 </li>
+                            } else {
+
+                                @if(currentUser.userAccessLevel.equals(UserAccessLevel.POKLONI)) {
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
+                                        "dropdown" data-toggle="dropdown" href="#">
+                                            Korisnik <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu ">
+                                            <li>
+                                                <a href="@routes.AppUsers.userPanelRender(currentUser.email)"><i class="fa fa-bars fa-fw"></i>
+                                                    Korisnički panel</a>
+                                            </li>
+                                            <li>
+                                                <a href="@routes.Stores.listOfUserStores(currentUser.id)"><i class="fa fa-home fa-fw"></i>
+                                                    Prodavnice</a>
+                                            </li>
+                                            <li>
+                                                <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>
+                                                    Logout</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                }
                             }
                         }
                     }
+
                 </ul>
             </div>
             </div>

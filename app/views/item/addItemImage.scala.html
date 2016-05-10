@@ -1,9 +1,9 @@
-@(apartmentId: Integer)
+@(itemId: Integer)
 @main {
     <div class="container">
         <div class="row">
             <div style="margin-top: 20%; margin-bottom: 20%">
-                <form method="POST" role="form" action="@routes.Images.imagesUpload(apartmentId)" enctype="multipart/form-data"  >
+                <form method="POST" role="form" action="@routes.Images.imagesItemUpload(itemId)" enctype="multipart/form-data"  >
 
                     <div col-md-6>
                         <div class="form-group">

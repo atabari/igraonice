@@ -96,3 +96,17 @@ POST          /updateprodavnice/:storeId                 @controllers.Stores.upd
 GET           /brisanjeprodavnice/:storeId               @controllers.Stores.deleteStore(storeId: Integer)
 DELETE        /brisanjeprodavnice/:storeId               @controllers.Stores.deleteStore(storeId: Integer)
 
+
+#ITEMS
+GET           /listaproizvoda/:storeId                   @controllers.Items.listOfStoreItems(storeId: Integer)
+GET           /kreirajproizvod/:storeId                  @controllers.Items.createItemRender(storeId: Integer)
+POST          /kreirajproizvod/:storeId                  @controllers.Items.createItem(storeId: Integer)
+GET           /updateproizvoda/:itemId                   @controllers.Items.updateItemRender(itemId: Integer)
+POST          /updateproizvoda/:itemId                   @controllers.Items.updateItem(itemId: Integer)
+GET           /brisanjeprioizvoda/:itemId                @controllers.Items.deleteItem(itemId: Integer)
+DELETE        /brisanjeprioizvoda/:itemId                @controllers.Items.deleteItem(itemId: Integer)
+
+GET           /poklonimain                               @controllers.Items.itemsPanel()
+GET           /slkeproizvoda/:itemId                     @controllers.Items.listOfItemImages(itemId: Integer)
+GET           /dodajslikuzaproizvod/:itemId              @controllers.Items.addItemImages(itemId: Integer)
+POST          /dodajslikuzaproizvod/:itemId              @controllers.Images.imagesItemUpload(itemId: Integer)

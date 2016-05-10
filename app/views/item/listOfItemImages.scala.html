@@ -1,4 +1,4 @@
-@(images: java.util.List[Image])(apartmentId: Integer)
+@(images: java.util.List[Image])(itemId: Integer)
 @main {
     <div class="container">
         <div class="row">
@@ -21,14 +21,14 @@
             }
         </div>
     </div>
-    <section class="main-container col2-right-layout wow bounceInUp animated">
+    <section class="main-container col2-right-layout ">
         <div class="main container">
             <div class="row">
                 <section class="col-md-12" id="tablemargins">
                     <table class="table table-striped table-bordered table-responsive" id="sort">
                         <thead>
                             <tr class="about">
-                                <th>Naziv slike</th>
+                                <th>Slika</th>
                                 <th class="text-center">Obriši</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
 
                 <section>
 
-                        <form  method="GET" role="form" action="@routes.Images.imagesUploadRender(apartmentId)" >
+                        <form  method="GET" role="form" action="@routes.Items.addItemImages(itemId)" >
                             <div class="col-md-6 col-md-offset-3 xs-text-center cbx-submit-area" id="login-button-padding">
                                 <button type="submit" name="save" class="btn btn-block lz-git-submit-btn cbx-submit" id="apcreatebutton">Dodaj sliku</button>
                             </div>

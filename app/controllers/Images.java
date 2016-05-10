@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.Authenticator;
 import models.Apartment;
+import models.Item;
 import play.mvc.Controller;
 
 import java.io.File;
@@ -58,5 +59,24 @@ public class Images extends Controller {
         Image image = Image.findImageById(image_public_id);
         Integer apartmentId =  Image.deleteImage(image);
         return redirect(routes.Images.listOfPicturesRender(apartmentId));
+    }
+
+        /* ------------------- add item image ------------------ */
+
+    public Result imagesItemUpload(Integer itemId) {
+        Item item = Item.findItemById(itemId);
+
+        Http.MultipartFormData body1 = request().body().asMultipartFormData();
+        List<Http.MultipartFormData.FilePart> fileParts = body1.getFiles();
+        if (fileParts != null) {
+            for (Http.MultipartFormData.FilePart filePart1 : fileParts) {
+                File file = filePart1.getFile();
+                Image image = Image.createItemImage(file, item.id);
+                item.images.add(image);
+            }
+        }
+
+        item.update();
+        return redirect(routes.Items.listOfItemImages(itemId));
     }
 }
