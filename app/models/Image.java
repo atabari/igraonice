@@ -36,6 +36,14 @@ public class Image extends Model {
     @JsonBackReference
     public Item item;
 
+    @ManyToOne
+    @JsonBackReference
+    public Cake cake;
+
+    @ManyToOne
+    @JsonBackReference
+    public Pastry pastry;
+
     public static Cloudinary cloudinary;
 
 
@@ -134,7 +142,7 @@ public class Image extends Model {
         return finder.where().eq("apartment_id", apartmentId).findList();
     }
 
-    /* ------------------- find images by news id ------------------ */
+    /* ------------------- find images by item id ------------------ */
 
     public static List<Image> findItemImages(Integer itemId){
         return finder.where().eq("item_id", itemId).findList();
@@ -181,4 +189,70 @@ public class Image extends Model {
         return image;
     }
 
+
+
+    /* ------------------- create image for cakes ------------------ */
+
+    public static Image createCakeImage(File image, Integer cakeId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createCakeImage(result, cakeId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createCakeImage(Map uploadResult, Integer cakeId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(cakeId != null) {
+            image.cake = Cake.findCakeById(cakeId);
+        }
+        image.save();
+        return image;
+    }
+
+
+    /* ------------------- create image for pastries ------------------ */
+
+    public static Image createPastryImage(File image, Integer pastryId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createPastryImage(result, pastryId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createPastryImage(Map uploadResult, Integer pastryId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(pastryId != null) {
+            image.pastry = Pastry.findPastryById(pastryId);
+        }
+        image.save();
+        return image;
+    }
 }

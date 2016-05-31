@@ -1,11 +1,10 @@
 package models;
 
 import com.avaje.ebean.Model;
+import helpers.ItemCategories;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +18,7 @@ public class Item extends Model {
     public Integer id;
     public String name;
     public Integer price;
+    @Column(columnDefinition = "TEXT")
     public String description;
     public String size;
     public Integer category;
@@ -84,5 +84,68 @@ public class Item extends Model {
         item.delete();
         return  item.store.id;
     }
-    
+
+
+       /* --------------- find all male items  ---------------*/
+
+    public static List<Item> findMaleItems() {
+        return finder.where().eq("category", ItemCategories.DJECACI).findList();
+    }
+
+
+    /* --------------- find all female items  ---------------*/
+
+    public static List<Item> findFemaleItems() {
+        return finder.where().eq("category", ItemCategories.DJEVOJCICE).findList();
+    }
+
+    /* --------------- find all other items  ---------------*/
+
+    public static List<Item> findOtherItems() {
+        return finder.where().eq("category", ItemCategories.OSTALO).findList();
+    }
+
+
+    /* ------------------- get first image if item has images, else return default image ------------------ */
+
+    public static Image getFirstItemImage(Integer itemId) {
+        Item item = findItemById(itemId);
+        if (item.images.size() > 0) {
+            return item.images.get(0);
+        } else {
+            return null;
+        }
+    }
+
+
+           /* --------------- Items to recommend ---------------*/
+
+    public static List<Item> itemsToRecommend(Integer itemId){
+
+        List<Item> recommendedApartments = new ArrayList<>();
+
+        Item item = finder.where().eq("id", itemId).findUnique();
+
+        Integer price = item.price;
+
+//        List<Item> items = finder.where().eq("location", item.store.location).findList();
+        List<Item> items = finder.all();
+        List<Integer> prices = new ArrayList<>();
+
+        for(int k = 0; k < items.size(); k++) {
+            prices.add(items.get(k).price);
+        }
+
+        for(int i=0; i < prices.size(); i++) {
+            for (int j = price - 10; j <= price + 10; j++) {
+
+                if (items.size() != 0 && items.get(i).price == j) {
+                    recommendedApartments.add(items.get(i));
+                }
+
+            }
+        }
+        return recommendedApartments;
+    }
+
 }

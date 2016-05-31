@@ -37,4 +37,18 @@ public class Emails extends Controller {
     }
 
 
+
+    public Result sendMailItem(Integer itemId) {
+        //taking values from input fields
+        DynamicForm form = Form.form().bindFromRequest();
+        String name = form.field("name").value();
+        String mail = form.field("mail").value();
+        String phone = form.field("phone").value();
+        String checkIndate = form.field("checkIndate").value();
+        String comment = form.field("comment").value();
+
+        Email.itemReservation(name, mail, phone, checkIndate, comment, itemId);
+        flash("success", "Vaša poruka je poslana. Potrudit ćemo se da odgovorimo u najkraćem mogućem roku. Zahvaljujemo!");
+        return redirect(routes.Items.item(itemId));
+    }
 }

@@ -64,6 +64,7 @@ public class Store extends Model {
         store.save();
 
     }
+        /* --------------- update store ---------------*/
 
     public static Integer updateStore(String name, String location, String address, String workingHours, String lat, String lng, Integer storeId) {
         Store store = findStoreById(storeId);
@@ -76,6 +77,8 @@ public class Store extends Model {
         store.update();
         return store.userId;
     }
+
+            /* --------------- delete store ---------------*/
 
     public static Integer deleteStore(Integer storeId) {
         Store store = findStoreById(storeId);

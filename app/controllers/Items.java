@@ -2,6 +2,8 @@ package controllers;
 
 import com.sun.org.apache.regexp.internal.REDebugCompiler;
 import helpers.Authenticator;
+import helpers.UserAccessLevel;
+import models.AppUser;
 import models.Image;
 import models.Item;
 import models.Store;
@@ -20,7 +22,18 @@ import java.util.List;
  */
 public class Items extends Controller {
 
-        /* --------------- list of items ---------------*/
+
+
+          /* --------------- item render  ---------------*/
+
+    public Result item(Integer itemId) {
+        Item item = Item.findItemById(itemId);
+        AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
+        List<Item> items = Item.itemsToRecommend(itemId);
+        return ok(views.html.item.item.render(item,currentUser,items));
+    }
+
+    /* --------------- list of items ---------------*/
         @Security.Authenticated(Authenticator.PokloniFilter.class)
 
         public Result listOfStoreItems(Integer storeId) {
@@ -116,4 +129,29 @@ public class Items extends Controller {
     public Result addItemImages(Integer itemId) {
         return ok(views.html.item.addItemImage.render(itemId));
     }
+
+
+       /* --------------- find all male items  ---------------*/
+
+    public Result findMaleItems() {
+        List<Item> items = Item.findMaleItems();
+        return ok(views.html.item.categoryItem.render(items));
+    }
+
+      /* --------------- find all female items  ---------------*/
+
+    public Result findFemaleItems() {
+        List<Item> items = Item.findFemaleItems();
+        return ok(views.html.item.categoryItem.render(items));
+    }
+
+      /* --------------- find all other items  ---------------*/
+
+    public Result findOtherItems() {
+        List<Item> items = Item.findOtherItems();
+        return ok(views.html.item.categoryItem.render(items));
+    }
+
+
+
 }

@@ -19,16 +19,17 @@ public class Stores extends Controller {
 
 
     /* --------------- users stores list render ---------------*/
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result listOfUserStores(Integer userId) {
         List<Store> stores = Store.userStores(userId);
-        return ok(views.html.store.listOfStores.render(stores, userId));
+        AppUser user = AppUser.findUserById(userId);
+        return ok(views.html.store.listOfStores.render(stores, user));
     }
 
 
     /* --------------- create store render ---------------*/
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result createStoreRender(Integer userId) {
         return ok(views.html.store.createStore.render(userId));
@@ -37,7 +38,7 @@ public class Stores extends Controller {
 
     /* --------------- create store  ---------------*/
 
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result createStore(Integer userId) {
         DynamicForm form  = Form.form().bindFromRequest();
@@ -55,7 +56,7 @@ public class Stores extends Controller {
 
 
     /* --------------- update store render ---------------*/
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result updateStoreRender(Integer storeId) {
         Store store = Store.findStoreById(storeId);
@@ -64,7 +65,7 @@ public class Stores extends Controller {
 
 
     /* --------------- update store  ---------------*/
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result updateStore(Integer storeId) {
         DynamicForm form  = Form.form().bindFromRequest();
@@ -81,7 +82,7 @@ public class Stores extends Controller {
     }
 
      /* --------------- delete store  ---------------*/
-    @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
 
     public Result deleteStore(Integer storeId) {
         Integer userId = Store.deleteStore(storeId);

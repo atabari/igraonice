@@ -58,7 +58,7 @@ public class Email extends Model {
             multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
             multiPartEmail.setStartTLSEnabled(true);
             multiPartEmail.addBcc(userMail);
-            multiPartEmail.addBcc(mail );
+            multiPartEmail.addBcc(mail);
             multiPartEmail.setSubject("Rezervacija");
             multiPartEmail.setMsg("Ime i prezime:  " + name + "\n" +
                     "Email:  " + mail + "\n" +
@@ -67,11 +67,49 @@ public class Email extends Model {
                     "Od:  " + timeFrom + " sati " + " do " + timeTo + " sati" + "\n" +
                     "Komentar:  " + comment);
 
-            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate,timeFrom,timeTo, comment, paketId);
+            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate, timeFrom, timeTo, comment, paketId);
             multiPartEmail.send();
         } catch (EmailException e) {
             e.printStackTrace();
         }
     }
 
+
+
+         /* ------------------- item reservation ------------------ */
+
+    public static void itemReservation(String name, String mail, String phone, String checkInDate,String comment, Integer itemId){
+
+
+        Item item = Item.findItemById(itemId);
+        AppUser user = AppUser.findUserById(item.store.userId);
+        String userMail = user.email;
+
+        /* sending an email*/
+        MultiPartEmail multiPartEmail = new MultiPartEmail();
+        multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
+        multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+        try {
+                /*Configuring mail*/
+            multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+            multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
+            multiPartEmail.setStartTLSEnabled(true);
+            multiPartEmail.addBcc(userMail);
+            multiPartEmail.addBcc(mail);
+            multiPartEmail.setSubject("Rezervacija");
+            multiPartEmail.setMsg("Ime i prezime:  " + name + "\n" +
+                    "Email:  " + mail + "\n" +
+                    "Telefon:  " + phone + "\n" +
+                    "Proizvod:  " + item.name + "\n" +
+                    "Cijena:  " + item.price + "\n" +
+                    "Datum rezervacije proizvoda:  " + checkInDate + "\n" +
+                    "Komentar:  " + comment);
+
+
+            ItemReservation.itemReservation(checkInDate, name,phone, mail, comment, item.price, itemId );
+            multiPartEmail.send();
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
+    }
 }
