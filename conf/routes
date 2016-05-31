@@ -127,12 +127,12 @@ GET           /pretragaostalo                                @controllers.Items.
 POST          /rezervacijaproizvoda/:itemId                  @controllers.Emails.sendMailItem(itemId: Integer)
 
 #CAKE
-GET           /dodajtortu/:storeId                           @controllers.Cakes.createCakeRender(storeId: Integer)
+GET           /dodajtortu/:pastryId                           @controllers.Cakes.createCakeRender(pastryId: Integer)
 POST          /dodajtortu/:storeId                           @controllers.Cakes.createCake(storeId: Integer)
 GET           /listatorti/:storeId                           @controllers.Cakes.listOfStoreCakes(storeId: Integer)
 GET           /updatetorte/:cakeId                           @controllers.Cakes.updateCakeRender(cakeId: Integer)
 POST          /updatetorte/:cakeId                           @controllers.Cakes.updateCake(cakeId: Integer)
-GET        /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
+GET           /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
 DELETE        /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
 
 #PASTRY
