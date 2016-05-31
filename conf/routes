@@ -47,6 +47,9 @@ POST          /updateigraonice/:apartmentId                  @controllers.Apartm
 GET           /adminsnd/adminpanel/:email                    @controllers.Login.showAdminPanel(email: String)
 POST          /adminsnd/adminpanel/:email                    @controllers.Login.updateUser(email: String)
 
+GET           /listaprodavnica                               @controllers.Login.storeList()
+GET           /listaslasticarni                              @controllers.Login.pastryList()
+
 #AppUser
 
 GET           /admin/kreirajkorisnika                        @controllers.AppUsers.createUserRender()
@@ -97,6 +100,7 @@ GET           /brisanjeprodavnice/:storeId                   @controllers.Stores
 DELETE        /brisanjeprodavnice/:storeId                   @controllers.Stores.deleteStore(storeId: Integer)
 GET           /rezervacijezaprodavnicu/:storeId              @controllers.ItemReservations.storeReservationsRender(storeId: Integer)
 GET           /brisanjerezervacije/:itemreservationId        @controllers.ItemReservations.deleteItemReservation(itemreservationId: Integer)
+GET           /prikazatinapocetnoj/:pastryId                 @controllers.Stores.showOnHomePage(pastryId: Integer)
 
 #ITEMS
 GET           /proizvod/:itemId                              @controllers.Items.item(itemId: Integer)
@@ -139,3 +143,4 @@ GET           /updateslasticarne/:pastryId                   @controllers.Pastri
 POST          /updateslasticarne/:pastryId                   @controllers.Pastries.updatePastry(pastryId: Integer)
 GET           /brisanjelsasticarne/:pastryId                 @controllers.Pastries.deletePastry(pastryId: Integer)
 DELETE        /brisanjelsasticarne/:pastryId                 @controllers.Pastries.deletePastry(pastryId: Integer)
+GET           /prikazatislasticarnu/:pastryId                @controllers.Pastries.showPastryOnHomePage(pastryId: Integer)

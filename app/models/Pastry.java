@@ -78,6 +78,9 @@ public class Pastry extends Model {
 
     public static Integer deletePastry(Integer pastryId) {
         Pastry pastry = findPastryById(pastryId);
+        for(int i =0; i < pastry.images.size(); i ++) {
+            Image.deletePastryImage(pastry.images.get(i));
+        }
         pastry.delete();
         return pastry.userId;
     }
@@ -90,4 +93,33 @@ public class Pastry extends Model {
 
         return pastries;
     }
+
+
+         /* --------------- Finds all  pastries ---------------*/
+
+    public static List<Pastry> getAllPastries() {
+        return finder.all();
+    }
+
+
+     /* --------------- Pastry visibility on homepage ---------------*/
+
+    public static void isVisible(Integer pastryId){
+        Pastry pastry = findPastryById(pastryId);
+        if(pastry.isVisible == false) {
+            pastry.isVisible = true;
+        }else if(pastry.isVisible == true){
+            pastry.isVisible = false;
+        }
+        pastry.update();
+    }
+
+
+    /* --------------- retrieves first picture name for the current apartment ---------------*/
+    public static String getFirstPasteryImageSmall(Pastry pastry) {
+
+        return (pastry.images.size() > 0) ? pastry.images.get(0).public_id : "/assets/images/pocetna-mala.jpg";
+    }
+
+
 }

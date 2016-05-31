@@ -96,4 +96,25 @@ public class Store extends Model {
         return stores;
     }
 
+
+            /* --------------- Finds all stores ---------------*/
+
+    public static List<Store> getAllStores() {
+        return finder.all();
+    }
+
+
+
+       /* --------------- Store visibility on homepage ---------------*/
+
+    public static void isVisible(Integer storeId){
+        Store store = findStoreById(storeId);
+        if(store.isVisible == false) {
+            store.isVisible = true;
+        }else if(store.isVisible == true){
+            store.isVisible = false;
+        }
+        store.update();
+    }
+
 }

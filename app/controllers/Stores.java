@@ -8,6 +8,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.adminStores;
 
 import java.util.List;
 
@@ -82,11 +83,19 @@ public class Stores extends Controller {
     }
 
      /* --------------- delete store  ---------------*/
-    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
+    @Security.Authenticated(Authenticator.AdminUserFilter.class)
 
     public Result deleteStore(Integer storeId) {
         Integer userId = Store.deleteStore(storeId);
         return redirect(routes.Stores.listOfUserStores(userId));
     }
 
+
+        /* --------------- show store  on home page---------------*/
+
+    public Result showOnHomePage(Integer storeId) {
+        Store.isVisible(storeId);
+        List<Store> stores = Store.getAllStores();
+        return ok(adminStores.render(stores));
+    }
 }

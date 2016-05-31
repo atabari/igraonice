@@ -282,4 +282,19 @@ public class Image extends Model {
         image.save();
         return image;
     }
+
+
+    /* ------------------- delete image ------------------ */
+
+    public static void deletePastryImage(Image image) {
+        try {
+            cloudinary.uploader().destroy(image.public_id, null);
+        } catch (IOException e) {
+            Logger.debug("Failed to delete image.", e.getMessage());
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        image.delete();
+
+    }
 }

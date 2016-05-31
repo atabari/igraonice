@@ -10,6 +10,7 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.adminPastries;
 
 import java.io.File;
 import java.util.List;
@@ -92,5 +93,14 @@ public class Pastries extends Controller {
     public Result deletePastry(Integer pastryId) {
         Integer userId = Pastry.deletePastry(pastryId);
         return redirect(routes.Pastries.listOfUserPastries(userId));
+    }
+
+
+    /* --------------- Pastry visibility on homepage ---------------*/
+
+    public Result showPastryOnHomePage(Integer pastryId) {
+        Pastry.isVisible(pastryId);
+        List<Pastry> pastries = Pastry.getAllPastries();
+        return ok(adminPastries.render(pastries));
     }
 }

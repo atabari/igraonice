@@ -65,6 +65,11 @@
     margin-top: 100px;
     vertical-align: middle;
 }
+
+.login2{
+    margin-top: 20px;
+    vertical-align: middle;
+}
 #login-button-padding{
     padding:0px 50px 0px 50px;
 }
