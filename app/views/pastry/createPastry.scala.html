@@ -5,9 +5,9 @@
           <div class="row">
               <div class="col-sm-12">
                   <div class="cbx-heading2 text-center">
-                      <h2 class="uppercase wow fadeInUp">DODAJ NOVU PRODAVNICU</h2>
+                      <h2 class="uppercase wow fadeInUp">DODAJ NOVU SLASTIČARNU</h2>
                       <hr noshade size="" width="" color="">
-                      <p class=" wow flipInY">Molimo unesite sve informacije kako bi prodavnica bila uspješno unesena u bazu</p>
+                      <p class=" wow flipInY">Molimo unesite sve informacije kako bi slastičarna bila uspješno unesena u bazu</p>
                   </div>
               </div>
           </div>
@@ -22,7 +22,7 @@
                       @flash.get("error")
                   </div>
               }
-              <form method="POST" class="form-horizontal lz-contact-form cbx-contactform" role="form" action=""   enctype="multipart/form-data">
+              <form method="POST" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Pastries.createPastry(userId)"   enctype="multipart/form-data">
                   <div class="col-md-6">
                       <div class="form-group">
                           <div class="col-sm-10 col-sm-offset-1">

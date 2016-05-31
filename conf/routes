@@ -128,6 +128,8 @@ POST          /dodajtortu/:storeId                           @controllers.Cakes.
 GET           /listatorti/:storeId                           @controllers.Cakes.listOfStoreCakes(storeId: Integer)
 GET           /updatetorte/:cakeId                           @controllers.Cakes.updateCakeRender(cakeId: Integer)
 POST          /updatetorte/:cakeId                           @controllers.Cakes.updateCake(cakeId: Integer)
+GET        /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
+DELETE        /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
 
 #PASTRY
 GET           /kreirajslasticarnu/:userId                    @controllers.Pastries.createPastryRender(userId: Integer)

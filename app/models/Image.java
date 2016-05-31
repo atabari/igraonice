@@ -123,7 +123,24 @@ public class Image extends Model {
     /* ------------------- delete image ------------------ */
 
     public static Integer deleteImage(Image image) {
-        Integer apartmentId = image.apartment.id;
+
+        deleteImgFromCloudinary(image);
+
+        if (image.apartment.id != null) {
+            return image.apartment.id;
+        }
+        if (image.item.id != null) {
+            return image.item.id;
+        }
+        if (image.cake.id != null) {
+            return image.cake.id;
+        }
+        else {
+            return image.pastry.id;
+        }
+    }
+
+    private static void deleteImgFromCloudinary(Image image) {
         try {
             cloudinary.uploader().destroy(image.public_id, null);
         } catch (IOException e) {
@@ -132,20 +149,30 @@ public class Image extends Model {
             e.printStackTrace();
         }
         image.delete();
-        return apartmentId;
-
     }
 
-    /* ------------------- find images by item id ------------------ */
+    /* ------------------- find images by apartment id ------------------ */
 
-    public static List<Image> findImagesByItemId(Integer apartmentId){
+    public static List<Image> findApartmentImages(Integer apartmentId) {
         return finder.where().eq("apartment_id", apartmentId).findList();
     }
 
     /* ------------------- find images by item id ------------------ */
 
-    public static List<Image> findItemImages(Integer itemId){
+    public static List<Image> findItemImages(Integer itemId) {
         return finder.where().eq("item_id", itemId).findList();
+    }
+
+        /* ------------------- find images by item id ------------------ */
+
+    public static List<Image> findPastryImages(Integer itemId) {
+        return finder.where().eq("pastry_id", itemId).findList();
+    }
+
+        /* ------------------- find images by item id ------------------ */
+
+    public static List<Image> findCakeImages(Integer itemId) {
+        return finder.where().eq("cake_id", itemId).findList();
     }
 
 

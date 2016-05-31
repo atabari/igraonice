@@ -155,7 +155,7 @@ public class Apartment extends Model {
             p.delete();
         }
 
-        List<Image> itemImages = Image.findImagesByItemId(apartmentId);
+        List<Image> itemImages = Image.findApartmentImages(apartmentId);
 
         for(int i = 0; i < itemImages.size(); i ++){
             Image.deleteImage(itemImages.get(i));

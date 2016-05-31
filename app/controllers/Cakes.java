@@ -8,6 +8,8 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
+import controllers.Images;
+
 import java.io.File;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class Cakes extends Controller {
 
     /* --------------- create cake  ---------------*/
 
-    public Result createCake(Integer storeId) {
+    public Result createCake(Integer pastryId) {
         DynamicForm form = Form.form().bindFromRequest();
         String name = form.field("name").value();
         Integer price  = Integer.parseInt(form.field("price").value());
@@ -33,7 +35,7 @@ public class Cakes extends Controller {
         Integer numberOfPersons = Integer.parseInt(form.field("numberOfPersons").value());
         String description = form.field("description").value();
 
-        Cake cake = Cake.createCake(name, ingredients,price,description,numberOfPersons,storeId);
+        Cake cake = Cake.createCake(name, ingredients, price, description, numberOfPersons, pastryId);
 
         Http.MultipartFormData body1 = request().body().asMultipartFormData();
         List<Http.MultipartFormData.FilePart> fileParts = body1.getFiles();
@@ -47,7 +49,7 @@ public class Cakes extends Controller {
         cake.update();
 
 
-        return redirect(routes.Cakes.listOfStoreCakes(storeId));
+        return redirect(routes.Cakes.listOfStoreCakes(pastryId));
     }
 
 
@@ -76,7 +78,23 @@ public class Cakes extends Controller {
         Integer numberOfPersons = Integer.parseInt(form.field("numberOfPersons").value());
         String description = form.field("description").value();
 
-        Integer storeId = Cake.updateCake(name, ingredients,price,description,numberOfPersons,cakeId);
+        Integer pastryId = Cake.updateCake(name, ingredients,price,description,numberOfPersons,cakeId);
+        return redirect(routes.Cakes.listOfStoreCakes(pastryId));
+    }
+
+     /* --------------- delete cake  ---------------*/
+
+    public Result deleteCake(Integer cakeId) {
+        List<Image> images = Image.findCakeImages(cakeId);
+        for (int i = 0; i < images.size(); i++) {
+            images.get(i).delete();
+        }
+
+        Cake cake = Cake.findCakeById(cakeId);
+
+        Integer storeId = cake.pastry.id;
+        cake.delete();
+
         return redirect(routes.Cakes.listOfStoreCakes(storeId));
     }
 

@@ -1,6 +1,5 @@
 package controllers;
 
-import helpers.Authenticator;
 import models.Apartment;
 import models.Item;
 import play.mvc.Controller;
@@ -8,14 +7,10 @@ import play.mvc.Controller;
 import java.io.File;
 import java.util.List;
 
-import helpers.Authenticator;
 import models.Image;
 import play.Logger;
 import play.mvc.*;
 import views.html.imagesUpload;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * Created by Ajla on 5.5.2016.
@@ -50,15 +45,26 @@ public class Images extends Controller {
 
     /* ------------------- list of images render ------------------ */
     public Result listOfPicturesRender(Integer apartmentId) {
-        List<Image> images = Image.findImagesByItemId(apartmentId);
+        List<Image> images = Image.findApartmentImages(apartmentId);
         return ok(views.html.Apartments.listOfImages.render(images, apartmentId));
     }
 
     /* ------------------- delete image ------------------ */
     public Result deleteImage(String image_public_id) {
         Image image = Image.findImageById(image_public_id);
-        Integer apartmentId =  Image.deleteImage(image);
-        return redirect(routes.Images.listOfPicturesRender(apartmentId));
+
+        if (image.apartment.id != null) {
+            return redirect(routes.Images.listOfPicturesRender(image.apartment.id));
+        }
+        if (image.item.id != null) {
+            return redirect(routes.Images.listOfPicturesRender(image.item.id));
+        }
+        if (image.cake.id != null) {
+            return redirect(routes.Images.listOfPicturesRender(image.cake.id));
+        }
+        else {
+            return redirect(routes.Images.listOfPicturesRender(image.pastry.id));
+        }
     }
 
         /* ------------------- add item image ------------------ */

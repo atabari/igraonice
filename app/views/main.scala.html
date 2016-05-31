@@ -166,7 +166,7 @@
                         <li>
                             <a href="@routes.Login.loginIndex()" id="saradnja" >Login</a>
                         </li>
-                    }else {
+                    } else {
                         @if(currentUser.userAccessLevel.equals(UserAccessLevel.ADMIN)) {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
@@ -250,8 +250,8 @@
                                                         Korisnički panel</a>
                                                 </li>
                                                 <li>
-                                                    <a href="@routes.Stores.listOfUserStores(currentUser.id)"><i class="fa fa-home fa-fw"></i>
-                                                        Prodavnice</a>
+                                                    <a href="@routes.Pastries.listOfUserPastries(currentUser.id)"><i class="fa fa-home fa-fw"></i>
+                                                        Slastičarne</a>
                                                 </li>
                                                 <li>
                                                     <a href="@routes.AppUsers.logout()"><i class="fa fa-sign-out fa-fw"></i>
