@@ -126,13 +126,13 @@ public class Image extends Model {
 
         deleteImgFromCloudinary(image);
 
-        if (image.apartment.id != null) {
+        if (image.apartment != null) {
             return image.apartment.id;
         }
-        if (image.item.id != null) {
+        if (image.item != null) {
             return image.item.id;
         }
-        if (image.cake.id != null) {
+        if (image.cake != null) {
             return image.cake.id;
         }
         else {

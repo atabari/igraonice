@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,26 +54,42 @@ public class ItemReservation extends Model {
     }
 
 
-    /* --------------- find item reservations by item id ---------------*/
+    /* --------------- find item reservations by store id ---------------*/
 
     public static List<ItemReservation> findItemReservationsByStoreId(Integer storeId) {
         return finder.where().eq("store_id", storeId).findList();
     }
 
 
-    /* --------------- find item reservations by item id ---------------*/
+    /* --------------- find item reservation by reservation id ---------------*/
 
     public static ItemReservation findItemReservationById(Integer reservationId) {
         return finder.where().eq("id", reservationId).findUnique();
     }
 
-    /* --------------- find item reservations by item id ---------------*/
+        /* --------------- find item reservations by item id ---------------*/
+
+    public static List<ItemReservation> findItemReservationsByItemId(Integer itemId) {
+        return finder.where().eq("item_id", itemId).findList();
+    }
+
+    /* --------------- delete item reservations by reservation id ---------------*/
 
     public static Integer deleteItemReservation(Integer reservationId) {
         ItemReservation reservation = findItemReservationById(reservationId);
         Integer storeId = reservation.store.id;
         reservation.delete();
         return storeId;
+    }
+
+    /* --------------- delete reservations by item id ---------------*/
+
+    public static Integer deleteItemReservations(Integer itemId) {
+        List<ItemReservation> itemReservations = findItemReservationsByItemId(itemId);
+        for (ItemReservation ir : itemReservations) {
+            ir.delete();
+        }
+        return itemId;
     }
 
 

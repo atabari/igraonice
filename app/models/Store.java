@@ -82,6 +82,16 @@ public class Store extends Model {
 
     public static Integer deleteStore(Integer storeId) {
         Store store = findStoreById(storeId);
+        for (int j = 0; j < store.items.size(); j++) {
+           for(int i = 0; i < store.items.get(j).images.size(); i++) {
+               Image.deleteImage(store.items.get(j).images.get(i));
+           }
+           List<ItemReservation> itemReservations = ItemReservation.findItemReservationsByItemId(store.items.get(j).id);
+           for (int k = 0; k < itemReservations.size(); k++) {
+               itemReservations.get(k).delete();
+           }
+            store.items.get(j).delete();
+        }
         store.delete();
         return store.userId;
     }
@@ -109,15 +119,15 @@ public class Store extends Model {
 
     public static void isVisible(Integer storeId){
         Store store = findStoreById(storeId);
-        if(store.isVisible == false) {
+        if (store.isVisible == false) {
             store.isVisible = true;
-            for(int i=0; i < store.items.size(); i ++) {
+            for (int i = 0; i < store.items.size(); i ++) {
                 store.items.get(i).isVisible = true;
                 store.items.get(i).update();
             }
-        }else if(store.isVisible == true){
+        }else if (store.isVisible == true){
             store.isVisible = false;
-            for(int i=0; i < store.items.size(); i ++) {
+            for (int i = 0; i < store.items.size(); i ++) {
                 store.items.get(i).isVisible = false;
                 store.items.get(i).update();
             }

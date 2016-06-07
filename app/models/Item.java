@@ -83,6 +83,14 @@ public class Item extends Model {
 
     public static Integer deleteItem(Integer itemId) {
         Item item = findItemById(itemId);
+        for(Image image: item.images) {
+            Image.deleteImage(image);
+        }
+        List<ItemReservation> itemReservations = ItemReservation.findItemReservationsByItemId(itemId);
+        for (int k = 0; k < itemReservations.size(); k++) {
+            itemReservations.get(k).delete();
+        }
+
         item.delete();
         return  item.store.id;
     }
