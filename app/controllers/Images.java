@@ -52,19 +52,19 @@ public class Images extends Controller {
     /* ------------------- delete image ------------------ */
     public Result deleteImage(String image_public_id) {
         Image image = Image.findImageById(image_public_id);
+        Integer parentId;
+        if (image.apartment != null) {
+            parentId = image.apartment.id;
+        } else if (image.item != null) {
+            parentId = image.item.id;
+        } else if (image.cake != null) {
+            parentId = image.cake.id;
+        } else {
+            parentId = image.pastry.id;
+        }
 
-        if (image.apartment.id != null) {
-            return redirect(routes.Images.listOfPicturesRender(image.apartment.id));
-        }
-        if (image.item.id != null) {
-            return redirect(routes.Images.listOfPicturesRender(image.item.id));
-        }
-        if (image.cake.id != null) {
-            return redirect(routes.Images.listOfPicturesRender(image.cake.id));
-        }
-        else {
-            return redirect(routes.Images.listOfPicturesRender(image.pastry.id));
-        }
+        image.delete();
+        return redirect(routes.Images.listOfPicturesRender(parentId));
     }
 
         /* ------------------- add item image ------------------ */
