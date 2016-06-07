@@ -20,7 +20,7 @@ public class Stores extends Controller {
 
 
     /* --------------- users stores list render ---------------*/
-    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
+    @Security.Authenticated(Authenticator.PokloniFilter.class)
 
     public Result listOfUserStores(Integer userId) {
         List<Store> stores = Store.userStores(userId);
@@ -30,7 +30,7 @@ public class Stores extends Controller {
 
 
     /* --------------- create store render ---------------*/
-    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
+    @Security.Authenticated(Authenticator.PokloniFilter.class)
 
     public Result createStoreRender(Integer userId) {
         return ok(views.html.store.createStore.render(userId));
@@ -39,7 +39,7 @@ public class Stores extends Controller {
 
     /* --------------- create store  ---------------*/
 
-    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
+    @Security.Authenticated(Authenticator.PokloniFilter.class)
 
     public Result createStore(Integer userId) {
         DynamicForm form  = Form.form().bindFromRequest();
@@ -66,7 +66,7 @@ public class Stores extends Controller {
 
 
     /* --------------- update store  ---------------*/
-    @Security.Authenticated(Authenticator.TortePokloniFilter.class)
+    @Security.Authenticated(Authenticator.PokloniFilter.class)
 
     public Result updateStore(Integer storeId) {
         DynamicForm form  = Form.form().bindFromRequest();

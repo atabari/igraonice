@@ -22,6 +22,7 @@ public class Item extends Model {
     public String description;
     public String size;
     public Integer category;
+    public Boolean isVisible;
 
     @ManyToOne
     public Store store;
@@ -58,6 +59,7 @@ public class Item extends Model {
         item.size = size;
         item.store = store;
         item.category = category;
+        item.isVisible = true;
         item.save();
         return  item;
     }
@@ -89,20 +91,20 @@ public class Item extends Model {
        /* --------------- find all male items  ---------------*/
 
     public static List<Item> findMaleItems() {
-        return finder.where().eq("category", ItemCategories.DJECACI).findList();
+        return finder.where().eq("category", ItemCategories.DJECACI).eq("is_visible", 1).findList();
     }
 
 
     /* --------------- find all female items  ---------------*/
 
     public static List<Item> findFemaleItems() {
-        return finder.where().eq("category", ItemCategories.DJEVOJCICE).findList();
+        return finder.where().eq("category", ItemCategories.DJEVOJCICE).eq("is_visible",1).findList();
     }
 
     /* --------------- find all other items  ---------------*/
 
     public static List<Item> findOtherItems() {
-        return finder.where().eq("category", ItemCategories.OSTALO).findList();
+        return finder.where().eq("category", ItemCategories.OSTALO).eq("is_visible",1).findList();
     }
 
 

@@ -106,6 +106,7 @@ $('body').on('click', 'a[data-role="delete-pastry"]', function (e) {
                 method: "delete"
             }).success(function (response) {
                 $toDelete.parents($toDelete.attr("data-delete-parent")).remove();
+                location.reload();
                 swal({
                     title: 'Obrisana!',
                     text: 'Slastičarna uspješno obrisana.',

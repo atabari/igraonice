@@ -111,8 +111,16 @@ public class Store extends Model {
         Store store = findStoreById(storeId);
         if(store.isVisible == false) {
             store.isVisible = true;
+            for(int i=0; i < store.items.size(); i ++) {
+                store.items.get(i).isVisible = true;
+                store.items.get(i).update();
+            }
         }else if(store.isVisible == true){
             store.isVisible = false;
+            for(int i=0; i < store.items.size(); i ++) {
+                store.items.get(i).isVisible = false;
+                store.items.get(i).update();
+            }
         }
         store.update();
     }
