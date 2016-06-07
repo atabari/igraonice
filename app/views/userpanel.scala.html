@@ -1,3 +1,4 @@
+@import helpers.UserAccessLevel
 @(user: AppUser)
 @main{
     <div class="container margin-bottom-180">
@@ -47,7 +48,7 @@
                 </form>
             </div>
 
-            @if(user.userAccessLevel == 2) {
+            @if(user.userAccessLevel.equals(UserAccessLevel.IGRAONICA)) {
                 <div class="col-md-6 login">
                     <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.AppUsers.userApartmentsRender(user.id)" >
 
@@ -59,7 +60,7 @@
 
                 </div>
             }
-            @if(user.userAccessLevel == 3) {
+            @if(user.userAccessLevel.equals(UserAccessLevel.POKLONI)) {
                 <div class="col-md-6 login">
                     <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Stores.listOfUserStores(user.id)" >
 
@@ -71,13 +72,13 @@
 
                 </div>
             }
-            @if(user.userAccessLevel == 4) {
+            @if(user.userAccessLevel.equals(UserAccessLevel.TORTE)) {
                 <div class="col-md-6 login">
                     <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Pastries.listOfUserPastries(user.id)" >
 
                         <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
                             <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">
-                                Prodavnice</button>
+                                Slastičarne</button>
                         </div>
                     </form>
 

@@ -103,4 +103,14 @@ public class Pastries extends Controller {
         List<Pastry> pastries = Pastry.getAllPastries();
         return ok(adminPastries.render(pastries));
     }
+
+
+    /* --------------- pastry main render ---------------*/
+
+    public Result pastryMainRender() {
+        List<Pastry> pastries = Pastry.getAllPastries();
+        return ok(views.html.pastry.pastryPanel.render(pastries));
+    }
+
+
 }

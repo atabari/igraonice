@@ -144,3 +144,4 @@ POST          /updateslasticarne/:pastryId                   @controllers.Pastri
 GET           /brisanjelsasticarne/:pastryId                 @controllers.Pastries.deletePastry(pastryId: Integer)
 DELETE        /brisanjelsasticarne/:pastryId                 @controllers.Pastries.deletePastry(pastryId: Integer)
 GET           /prikazatislasticarnu/:pastryId                @controllers.Pastries.showPastryOnHomePage(pastryId: Integer)
+GET           /slasticarne                                   @controllers.Pastries.pastryMainRender()

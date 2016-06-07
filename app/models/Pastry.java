@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.Logger;
 
 import javax.persistence.*;
 import java.util.List;
@@ -79,7 +80,7 @@ public class Pastry extends Model {
     public static Integer deletePastry(Integer pastryId) {
         Pastry pastry = findPastryById(pastryId);
         for(int i =0; i < pastry.images.size(); i ++) {
-            Image.deletePastryImage(pastry.images.get(i));
+            Image.deleteImage(pastry.images.get(i));
         }
         pastry.delete();
         return pastry.userId;
@@ -108,7 +109,7 @@ public class Pastry extends Model {
         Pastry pastry = findPastryById(pastryId);
         if(pastry.isVisible == false) {
             pastry.isVisible = true;
-        }else if(pastry.isVisible == true){
+        }else if(pastry.isVisible == true) {
             pastry.isVisible = false;
         }
         pastry.update();
@@ -116,9 +117,9 @@ public class Pastry extends Model {
 
 
     /* --------------- retrieves first picture name for the current apartment ---------------*/
-    public static String getFirstPasteryImageSmall(Pastry pastry) {
-
-        return (pastry.images.size() > 0) ? pastry.images.get(0).public_id : "/assets/images/pocetna-mala.jpg";
+    public static String getFirstPastryImageSmall(Pastry pastry) {
+        Logger.debug("IMAGES SIZE " + pastry.images.get(0));
+        return (pastry.images.size() > 0) ? pastry.images.get(0).image_url : "/assets/images/pocetna-mala.jpg";
     }
 
 
