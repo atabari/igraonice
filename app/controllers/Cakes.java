@@ -2,6 +2,7 @@ package controllers;
 
 import models.Cake;
 import models.Image;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -96,6 +97,25 @@ public class Cakes extends Controller {
         cake.delete();
 
         return redirect(routes.Cakes.listOfStoreCakes(storeId));
+    }
+
+    /* --------------- add cake images ---------------*/
+    public Result addCakeImages(Integer cakeId) {
+        return ok(views.html.cake.addCakeImage.render(cakeId));
+    }
+
+
+     /* --------------- list of cakes images  ---------------*/
+    public Result listOfCakeImages(Integer cakeId) {
+        List<Image> images = Image.findCakeImages(cakeId);
+        return ok(views.html.cake.listOfCakeImages.render(images, cakeId));
+    }
+
+
+
+    public Result cakeReservation(Integer cakeId) {
+        Cake cake = Cake.findCakeById(cakeId);
+        return ok(views.html.cake.quickViewCake.render(cake));
     }
 
 }

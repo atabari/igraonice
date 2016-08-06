@@ -123,17 +123,25 @@ GET           /pretragadjecaci                               @controllers.Items.
 GET           /pretragadjevojcice                            @controllers.Items.findFemaleItems()
 GET           /pretragaostalo                                @controllers.Items.findOtherItems()
 
-#ITEM EMAIL
+#ITEM EMAIL AND RESERVATION
 POST          /rezervacijaproizvoda/:itemId                  @controllers.Emails.sendMailItem(itemId: Integer)
 
 #CAKE
-GET           /dodajtortu/:pastryId                           @controllers.Cakes.createCakeRender(pastryId: Integer)
+GET           /dodajtortu/:pastryId                          @controllers.Cakes.createCakeRender(pastryId: Integer)
 POST          /dodajtortu/:storeId                           @controllers.Cakes.createCake(storeId: Integer)
 GET           /listatorti/:storeId                           @controllers.Cakes.listOfStoreCakes(storeId: Integer)
 GET           /updatetorte/:cakeId                           @controllers.Cakes.updateCakeRender(cakeId: Integer)
 POST          /updatetorte/:cakeId                           @controllers.Cakes.updateCake(cakeId: Integer)
 GET           /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
 DELETE        /brisanjetorte/:cakeId                         @controllers.Cakes.deleteCake(cakeId: Integer)
+GET           /dodajslikuzatortu/:cakeId                     @controllers.Cakes.addCakeImages(cakeId: Integer)
+POST          /dodajslikuzatortu/:cakeId                     @controllers.Images.imagesCakeUpload(cakeId: Integer)
+GET           /sliketorte/:cakeId                            @controllers.Cakes.listOfCakeImages(cakeId: Integer)
+GET           /torta_rezervacija/:cakeId                     @controllers.Cakes.cakeReservation(cakeId: Integer)
+
+#CAKE EMAIL AND RESERVATION
+POST          /rezervacijatorte/:cakeId                      @controllers.Emails.sendMailCake(cakeId: Integer)
+
 
 #PASTRY
 GET           /kreirajslasticarnu/:userId                    @controllers.Pastries.createPastryRender(userId: Integer)
@@ -145,3 +153,7 @@ GET           /brisanjelsasticarne/:pastryId                 @controllers.Pastri
 DELETE        /brisanjelsasticarne/:pastryId                 @controllers.Pastries.deletePastry(pastryId: Integer)
 GET           /prikazatislasticarnu/:pastryId                @controllers.Pastries.showPastryOnHomePage(pastryId: Integer)
 GET           /slasticarne                                   @controllers.Pastries.pastryMainRender()
+GET           /slastricarna/:pastryId                        @controllers.Pastries.pastry(pastryId: Integer)
+GET           /rezervacijezaslasticarnu/:pastryId            @controllers.CakeReservations.pastryReservationsRender(pastryId: Integer)
+GET           /brisanjerezervacijezasl/:reservationId        @controllers.CakeReservations.deleteCakeReservation(reservationId: Integer)
+DELETE        /brisanjerezervacijezasl/:reservationId        @controllers.CakeReservations.deleteCakeReservation(reservationId: Integer)

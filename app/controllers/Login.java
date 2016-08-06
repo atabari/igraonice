@@ -70,22 +70,13 @@ public class Login extends Controller {
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(adminpanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA){
+        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA
+                || user.userAccessLevel == UserAccessLevel.POKLONI
+                || user.userAccessLevel == UserAccessLevel.TORTE
+                || user.userAccessLevel == UserAccessLevel.ANIMATORI){
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(userpanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.POKLONI) {
-            Cookies.setUserCookies(user);
-            Session.setUserSessionData(user);
-            return ok(storePanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.TORTE) {
-            Cookies.setUserCookies(user);
-            Session.setUserSessionData(user);
-            return ok(storePanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.ANIMATORI) {
-            Cookies.setUserCookies(user);
-            Session.setUserSessionData(user);
-            return ok(storePanel.render(user));
         }
         flash("login-error", "Incorrect email or password! Please, try again.");
         return redirect(routes.Login.loginIndex());

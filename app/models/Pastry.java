@@ -82,6 +82,13 @@ public class Pastry extends Model {
         for(int i =0; i < pastry.images.size(); i ++) {
             Image.deleteImage(pastry.images.get(i));
         }
+
+        CakeReservation.deleteAllPastryReservations(pastryId);
+
+        for(int j = 0; j < pastry.cakes.size(); j++) {
+            Cake.deleteCake(pastry.cakes.get(j).id);
+        }
+
         pastry.delete();
         return pastry.userId;
     }
@@ -118,7 +125,6 @@ public class Pastry extends Model {
 
     /* --------------- retrieves first picture name for the current apartment ---------------*/
     public static String getFirstPastryImageSmall(Pastry pastry) {
-        Logger.debug("IMAGES SIZE " + pastry.images.get(0));
         return (pastry.images.size() > 0) ? pastry.images.get(0).image_url : "/assets/images/pocetna-mala.jpg";
     }
 

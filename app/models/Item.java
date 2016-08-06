@@ -97,27 +97,23 @@ public class Item extends Model {
 
 
        /* --------------- find all male items  ---------------*/
-
     public static List<Item> findMaleItems() {
         return finder.where().eq("category", ItemCategories.DJECACI).eq("is_visible", 1).findList();
     }
 
 
     /* --------------- find all female items  ---------------*/
-
     public static List<Item> findFemaleItems() {
         return finder.where().eq("category", ItemCategories.DJEVOJCICE).eq("is_visible",1).findList();
     }
 
     /* --------------- find all other items  ---------------*/
-
     public static List<Item> findOtherItems() {
         return finder.where().eq("category", ItemCategories.OSTALO).eq("is_visible",1).findList();
     }
 
 
     /* ------------------- get first image if item has images, else return default image ------------------ */
-
     public static Image getFirstItemImage(Integer itemId) {
         Item item = findItemById(itemId);
         if (item.images.size() > 0) {

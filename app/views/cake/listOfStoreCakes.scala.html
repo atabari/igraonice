@@ -23,7 +23,6 @@
                                 <th class="text-center">Broj osoba</th>
                                 <th class="text-center">Slike</th>
                                 <th class="text-center">Uredi</th>
-                                <th class="text-center">Pogledaj</th>
                                 <th class="text-center">Obriši</th>
 
 
@@ -39,16 +38,12 @@
                                 <td class="text-center">@cake.numberOfPersons</td>
 
                                 <td class="text-center">
-                                    <a data-role="post" data-delete-parent="tr" href="" role="button">
+                                    <a data-role="GET" data-delete-parent="tr" href="@routes.Cakes.listOfCakeImages(cake.id)" role="button">
                                         <i class=" fa fa-image fa-lg"></i></a>
                                 </td>
                                 <td class="text-center">
                                     <a data-role="post" data-delete-parent="tr" href="@routes.Cakes.updateCake(cake.id)" role="button">
                                         <i class=" fa fa-pencil fa-lg"></i></a>
-                                </td>
-                                <td class="text-center">
-                                    <a data-role="post" data-delete-parent="tr" href="" role="button">
-                                        <i class=" fa fa-eye fa-lg"></i></a>
                                 </td>
                                 <td class="text-center">
                                     <a data-role="post" data-delete-parent="tr" href="@routes.Cakes.deleteCake(cake.id)" role="button">

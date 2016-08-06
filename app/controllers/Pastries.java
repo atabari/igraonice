@@ -1,7 +1,9 @@
 package controllers;
 
 import helpers.Authenticator;
+import helpers.UserAccessLevel;
 import models.AppUser;
+import models.Cake;
 import models.Image;
 import models.Pastry;
 import play.data.DynamicForm;
@@ -112,5 +114,16 @@ public class Pastries extends Controller {
         return ok(views.html.pastry.pastryPanel.render(pastries));
     }
 
+
+
+        /* --------------- pastry  render ---------------*/
+
+    public Result pastry(Integer pastryId) {
+        Pastry pastry = Pastry.findPastryById(pastryId);
+        AppUser currentUser = UserAccessLevel.getCurrentUser(ctx());
+        List<Cake> cakes = Cake.findAllCakesByPastryId(pastryId);
+        return ok(views.html.pastry.pastry.render(pastry,currentUser,cakes));
+
+    }
 
 }

@@ -169,23 +169,20 @@ public class Image extends Model {
         return finder.where().eq("pastry_id", itemId).findList();
     }
 
-        /* ------------------- find images by item id ------------------ */
-
-    public static List<Image> findCakeImages(Integer itemId) {
-        return finder.where().eq("cake_id", itemId).findList();
+        /* ------------------- find cake images ------------------ */
+    public static List<Image> findCakeImages(Integer cakeId) {
+        return finder.where().eq("cake_id", cakeId).findList();
     }
 
 
 
     /* ------------------- find images by id ------------------ */
-
     public static Image findImageById(String public_id){
         return finder.where().eq("public_id", public_id).findUnique();
     }
 
 
     /* ------------------- create image for items ------------------ */
-
     public static Image createItemImage(File image, Integer itemId) {
         Map result;
 

@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Apartment;
+import models.Cake;
 import models.Item;
 import play.mvc.Controller;
 
@@ -68,7 +69,6 @@ public class Images extends Controller {
     }
 
         /* ------------------- add item image ------------------ */
-
     public Result imagesItemUpload(Integer itemId) {
         Item item = Item.findItemById(itemId);
 
@@ -84,5 +84,26 @@ public class Images extends Controller {
 
         item.update();
         return redirect(routes.Items.listOfItemImages(itemId));
+    }
+
+
+
+
+       /* ------------------- add cake image ------------------ */
+    public Result imagesCakeUpload(Integer cakeId) {
+        Cake  cake = Cake.findCakeById(cakeId);
+
+        Http.MultipartFormData body1 = request().body().asMultipartFormData();
+        List<Http.MultipartFormData.FilePart> fileParts = body1.getFiles();
+        if (fileParts != null) {
+            for (Http.MultipartFormData.FilePart filePart1 : fileParts) {
+                File file = filePart1.getFile();
+                Image image = Image.createCakeImage(file, cake.id);
+                cake.images.add(image);
+            }
+        }
+
+        cake.update();
+        return redirect(routes.Cakes.listOfCakeImages(cakeId));
     }
 }

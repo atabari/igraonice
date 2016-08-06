@@ -79,9 +79,23 @@ public class Cake extends Model {
 
 
     /* --------------- delete cake  ---------------*/
-
     public static void deleteCake(Integer cakeId) {
         Cake cake = findCakeById(cakeId);
+        for(int i = 0; i < cake.images.size(); i ++) {
+            Image.deleteImage(cake.images.get(i));
+        }
         cake.delete();
     }
+
+
+    /* ------------------- get first image if cake has images, else return default image ------------------ */
+    public static Image getFirstCakeImage(Integer cakeId) {
+        Cake cake = findCakeById(cakeId);
+        if (cake.images.size() > 0) {
+            return cake.images.get(0);
+        } else {
+            return null;
+        }
+    }
+
 }
