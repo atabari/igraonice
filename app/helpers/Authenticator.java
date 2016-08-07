@@ -97,4 +97,19 @@ public class Authenticator {
             return null;
         }
     }
+
+    public static class TortePokloniFilter extends Security.Authenticator {
+
+        @Override
+        public String getUsername(Http.Context ctx) {
+            if (!ctx.session().containsKey("email"))
+                return null;
+            String email = ctx.session().get("email");
+            AppUser user = AppUser.findUserByEmail(email);
+            if (user != null && user.userAccessLevel == UserAccessLevel.TORTE
+                    || user.userAccessLevel == UserAccessLevel.POKLONI)
+                return user.email;
+            return null;
+        }
+    }
 }

@@ -6,15 +6,15 @@ import helpers.Session;
 import helpers.UserAccessLevel;
 import models.Apartment;
 import models.AppUser;
+import models.Pastry;
+import models.Store;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.adminpage;
-import views.html.adminpanel;
-import views.html.login;
-import views.html.userpanel;
+import views.html.*;
+import views.html.store.storePanel;
 
 import java.util.List;
 
@@ -34,6 +34,19 @@ public class Login extends Controller {
         return ok(adminpage.render(apartments));
     }
 
+    /* ---------------  admin page list of stores render ---------------*/
+    @Security.Authenticated(Authenticator.AdminFilter.class)
+    public Result storeList() {
+        List<Store> stores = Store.getAllStores();
+        return ok(adminStores.render(stores));
+    }
+
+    /* ---------------  admin page list of pastries render ---------------*/
+    @Security.Authenticated(Authenticator.AdminFilter.class)
+    public Result pastryList() {
+        List<Pastry> pastries = Pastry.getAllPastries();
+        return ok(adminPastries.render(pastries));
+    }
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result showAdminPanel(String email){
         AppUser user = AppUser.findUserByEmail(email);
@@ -57,7 +70,10 @@ public class Login extends Controller {
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(adminpanel.render(user));
-        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA){
+        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA
+                || user.userAccessLevel == UserAccessLevel.POKLONI
+                || user.userAccessLevel == UserAccessLevel.TORTE
+                || user.userAccessLevel == UserAccessLevel.ANIMATORI){
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
             return ok(userpanel.render(user));

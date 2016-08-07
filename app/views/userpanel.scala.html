@@ -1,3 +1,4 @@
+@import helpers.UserAccessLevel
 @(user: AppUser)
 @main{
     <div class="container margin-bottom-180">
@@ -47,16 +48,42 @@
                 </form>
             </div>
 
-            <div class="col-md-6 login">
-                <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.AppUsers.userApartmentsRender(user.id)" >
+            @if(user.userAccessLevel.equals(UserAccessLevel.IGRAONICA)) {
+                <div class="col-md-6 login">
+                    <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.AppUsers.userApartmentsRender(user.id)" >
 
-                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
-                        <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Objekti</button>
-                    </div>
-                </form>
+                        <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
+                            <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">
+                                Objekti</button>
+                        </div>
+                    </form>
 
-            </div>
+                </div>
+            }
+            @if(user.userAccessLevel.equals(UserAccessLevel.POKLONI)) {
+                <div class="col-md-6 login">
+                    <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Stores.listOfUserStores(user.id)" >
 
+                        <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
+                            <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">
+                                Prodavnice</button>
+                        </div>
+                    </form>
+
+                </div>
+            }
+            @if(user.userAccessLevel.equals(UserAccessLevel.TORTE)) {
+                <div class="col-md-6 login">
+                    <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Pastries.listOfUserPastries(user.id)" >
+
+                        <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
+                            <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">
+                                Slastičarne</button>
+                        </div>
+                    </form>
+
+                </div>
+            }
         </div>
     </div>
 

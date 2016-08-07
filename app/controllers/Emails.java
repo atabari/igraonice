@@ -37,4 +37,36 @@ public class Emails extends Controller {
     }
 
 
+     /* ---------------  item reservation and sending mail to user  ---------------*/
+    public Result sendMailItem(Integer itemId) {
+        //taking values from input fields
+        DynamicForm form = Form.form().bindFromRequest();
+        String name = form.field("name").value();
+        String mail = form.field("mail").value();
+        String phone = form.field("phone").value();
+        String checkIndate = form.field("checkIndate").value();
+        String comment = form.field("comment").value();
+
+        Email.itemReservation(name, mail, phone, checkIndate, comment, itemId);
+        flash("success", "Vaša poruka je poslana. Potrudit ćemo se da odgovorimo u najkraćem mogućem roku. Zahvaljujemo!");
+        return redirect(routes.Items.item(itemId));
+    }
+
+
+
+    /* ---------------  cake reservation and sending mail to user  ---------------*/
+    public Result sendMailCake(Integer cakeId) {
+
+        //taking values from input fields
+        DynamicForm form = Form.form().bindFromRequest();
+        String name = form.field("name").value();
+        String mail = form.field("mail").value();
+        String phone = form.field("phone").value();
+        String checkIndate = form.field("checkIndate").value();
+        String comment = form.field("comment").value();
+
+        Integer pastryId = Email.cakeReservation(name, mail, phone, checkIndate, comment, cakeId);
+        flash("success", "Vaša poruka je poslana. Potrudit ćemo se da odgovorimo u najkraćem mogućem roku. Zahvaljujemo!");
+        return redirect(routes.Pastries.pastry(pastryId));
+    }
 }

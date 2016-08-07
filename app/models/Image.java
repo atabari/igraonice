@@ -32,6 +32,18 @@ public class Image extends Model {
     @JsonBackReference
     public Apartment apartment;
 
+    @ManyToOne
+    @JsonBackReference
+    public Item item;
+
+    @ManyToOne
+    @JsonBackReference
+    public Cake cake;
+
+    @ManyToOne
+    @JsonBackReference
+    public Pastry pastry;
+
     public static Cloudinary cloudinary;
 
 
@@ -111,7 +123,24 @@ public class Image extends Model {
     /* ------------------- delete image ------------------ */
 
     public static Integer deleteImage(Image image) {
-        Integer apartmentId = image.apartment.id;
+
+        deleteImgFromCloudinary(image);
+
+        if (image.apartment != null) {
+            return image.apartment.id;
+        }
+        if (image.item != null) {
+            return image.item.id;
+        }
+        if (image.cake != null) {
+            return image.cake.id;
+        }
+        else {
+            return image.pastry.id;
+        }
+    }
+
+    private static void deleteImgFromCloudinary(Image image) {
         try {
             cloudinary.uploader().destroy(image.public_id, null);
         } catch (IOException e) {
@@ -120,27 +149,134 @@ public class Image extends Model {
             e.printStackTrace();
         }
         image.delete();
-        return apartmentId;
+    }
 
+    /* ------------------- find images by apartment id ------------------ */
+
+    public static List<Image> findApartmentImages(Integer apartmentId) {
+        return finder.where().eq("apartment_id", apartmentId).findList();
     }
 
     /* ------------------- find images by item id ------------------ */
 
-    public static List<Image> findImagesByItemId(Integer apartmentId){
-        return finder.where().eq("apartment_id", apartmentId).findList();
+    public static List<Image> findItemImages(Integer itemId) {
+        return finder.where().eq("item_id", itemId).findList();
     }
 
-    /* ------------------- find images by news id ------------------ */
+        /* ------------------- find images by item id ------------------ */
 
-    public static List<Image> findImagesByNewsId(Integer newsId){
-        return finder.where().eq("news_id", newsId).findList();
+    public static List<Image> findPastryImages(Integer itemId) {
+        return finder.where().eq("pastry_id", itemId).findList();
+    }
+
+        /* ------------------- find cake images ------------------ */
+    public static List<Image> findCakeImages(Integer cakeId) {
+        return finder.where().eq("cake_id", cakeId).findList();
     }
 
 
 
     /* ------------------- find images by id ------------------ */
-
     public static Image findImageById(String public_id){
         return finder.where().eq("public_id", public_id).findUnique();
+    }
+
+
+    /* ------------------- create image for items ------------------ */
+    public static Image createItemImage(File image, Integer itemId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createItemImage(result, itemId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createItemImage(Map uploadResult, Integer itemId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(itemId != null) {
+            image.item = Item.findItemById(itemId);
+        }
+        image.save();
+        return image;
+    }
+
+
+
+    /* ------------------- create image for cakes ------------------ */
+
+    public static Image createCakeImage(File image, Integer cakeId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createCakeImage(result, cakeId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createCakeImage(Map uploadResult, Integer cakeId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(cakeId != null) {
+            image.cake = Cake.findCakeById(cakeId);
+        }
+        image.save();
+        return image;
+    }
+
+
+    /* ------------------- create image for pastries ------------------ */
+
+    public static Image createPastryImage(File image, Integer pastryId) {
+        Map result;
+
+        try {
+            result = cloudinary.uploader().upload(image, null);
+            return createPastryImage(result, pastryId);
+
+        } catch (IOException e) {
+            Logger.debug("Failed to save image.", e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image createPastryImage(Map uploadResult, Integer pastryId) {
+        Image image = new Image();
+
+        image.public_id = (String) uploadResult.get("public_id");
+        Logger.debug(image.public_id);
+        image.image_url = (String) uploadResult.get("url");
+        Logger.debug(image.image_url);
+        image.secret_image_url = (String) uploadResult.get("secure_url");
+        Logger.debug(image.secret_image_url);
+        if(pastryId != null) {
+            image.pastry = Pastry.findPastryById(pastryId);
+        }
+        image.save();
+        return image;
     }
 }

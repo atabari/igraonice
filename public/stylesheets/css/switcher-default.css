@@ -280,6 +280,15 @@ div.lz-kkcountdown .kkc-hours-text {
 #cbx-team .cbx-back-side1 {
     background: #5b5b5b;
 }
+
+#cbx-team .cbx-back-side4 {
+    background: #2293F5;
+}
+
+#cbx-team .cbx-back-side3 {
+    background: #FA3963;
+}
+
 #cbx-team .cbx-member-social i {
     color: #ba5808;
 }

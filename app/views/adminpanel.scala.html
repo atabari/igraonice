@@ -13,7 +13,8 @@
                     @if(flash.containsKey("success")) {
                         <div class="alert alert-success" role="alert">
                             <i class="fa fa-check-square-o" style="font-size:30px"></i>
-                            <span  aria-hidden="true" class="flash-font">@flash.get("success")</span>
+                            <span  aria-hidden="true" class="flash-font">
+                            @flash.get("success")</span>
 
                         </div>
                     }
@@ -52,23 +53,38 @@
             <div class="col-md-6 login">
                 <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Login.apartmentsList()" >
 
-                        <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
-                            <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Igraonice</button>
-                        </div>
+                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area margin-btm-30" >
+                        <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Igraonice</button>
+                    </div>
                 </form>
-
             </div>
 
-            <div class="col-md-6 login">
+            <div class="col-md-6 login2">
+                <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Login.storeList()" >
+
+                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area margin-btm-30" >
+                        <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Prodavnice</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6 login2">
+                <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Login.pastryList()" >
+
+                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area margin-btm-30" >
+                        <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Slastičarne</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6 login2">
                 <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.AppUsers.listOfUsers()" >
 
-                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area" >
+                    <div class="col-sm-8 col-md-offset-1 xs-text-center cbx-submit-area margin-btm-30" >
                         <button type="submit" class="btn btn-block lz-git-submit-btn cbx-submit" id="loginbutton">Korisnici</button>
                     </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 }

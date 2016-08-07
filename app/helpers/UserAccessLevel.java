@@ -22,3 +22,4 @@ public class UserAccessLevel {
         return AppUser.findUserByEmail(email);
     }
 }
+

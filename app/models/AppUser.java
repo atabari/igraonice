@@ -40,13 +40,14 @@ public class AppUser extends Model {
         DynamicForm form = Form.form().bindFromRequest();
         String email = form.field("email").value();
         String password = form.field("password").value();
+        Integer userType  = Integer.parseInt(form.field("userType").value());
 
         try {
             AppUser user = new AppUser();
             user.email = email;
             user.password = password;
             user.hashPass();
-            user.userAccessLevel = 2;
+            user.userAccessLevel = userType;
             user.save();
             Email.sendMail(email, password);
         }catch (IllegalArgumentException e) {
