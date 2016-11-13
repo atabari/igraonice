@@ -17,6 +17,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static models.Image.findApartmentImages;
+
 /**
  * Created by ajla on 22-Dec-15.
  */
@@ -155,7 +157,7 @@ public class Apartment extends Model {
             p.delete();
         }
 
-        List<Image> itemImages = Image.findApartmentImages(apartmentId);
+        List<Image> itemImages = findApartmentImages(apartmentId);
 
         for(int i = 0; i < itemImages.size(); i ++){
             Image.deleteImage(itemImages.get(i));
@@ -268,9 +270,8 @@ public class Apartment extends Model {
 
     /* --------------- retrieves first picture name for the current apartment ---------------*/
     public static String getFirstImageSmall(Apartment apartment) {
-        List<String> images = getListOfApartmentImages(apartment);
-
-        return (images.size() > 0) ? images.get(0) : "/assets/images/pocetna-mala.jpg";
+        List<Image> images = findApartmentImages(apartment.id);
+        return (images.size() > 0) ? images.get(0).image_url : "/assets/images/pocetna-mala.jpg";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/
