@@ -28,14 +28,14 @@
                                     <div class="product-image">
                                     @if(item.images.size() > 0) {
                                         <div class="large-image">
-                                            <a href='@item.images.get(0).getSize(800, 600)' class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20" >
-                                                <img src='@item.images.get(0).getSize(500, 300)' alt="">
+                                            <a href='@item.images.get(0).getItemImageZoom()' class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20" >
+                                                <img src='@item.images.get(0).getItemImage()' alt="">
                                             </a>
                                         </div>
                                         <div class="flexslider flexslider-thumb">
                                             <ul class="previews-list slides">
                                             @for(image <- item.images) {
-                                                <li><a href='@image.getSize(800, 600)' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '@image.getSize(500, 300)' "><img src='@image.getSize(75, 90)' alt = "Thumbnail 1"/></a></li>
+                                                <li><a href='@image.getItemImageZoom()' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '@image.getItemImage()' "><img src='@image.getApartmentImageProfileThumbnail()' alt = "Thumbnail 1"/></a></li>
                                             }
                                             </ul>
                                         </div>

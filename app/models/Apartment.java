@@ -271,7 +271,7 @@ public class Apartment extends Model {
     /* --------------- retrieves first picture name for the current apartment ---------------*/
     public static String getFirstImageSmall(Apartment apartment) {
         List<Image> images = findApartmentImages(apartment.id);
-        return (images.size() > 0) ? images.get(0).image_url : "/assets/images/pocetna-mala.jpg";
+        return (images.size() > 0) ? images.get(0).getImageForPreview() : "/assets/images/pocetna-mala.jpg";
     }
 
     /* --------------- Checks if images list for the current apartement is empty ---------------*/

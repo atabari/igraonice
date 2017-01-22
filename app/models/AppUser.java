@@ -117,7 +117,6 @@ public class AppUser extends Model {
     public static void deleteUser(Integer userId) {
         AppUser user = finder.where().eq("id", userId).findUnique();
         List<Apartment> userApartments = Apartment.userApartments(userId);
-        List<Paket> paketi = new ArrayList<>();
         if(user != null) {
             for(int i = 0; i < userApartments.size(); i ++){
                 for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)) {
@@ -125,6 +124,9 @@ public class AppUser extends Model {
                 }
                 for(Reservation r: Reservation.getApartmentReservations(userApartments.get(i).id)){
                     r.delete();
+                }
+                for(Store s: Store.userStores(userId)) {
+                    s.delete();
                 }
             }
 

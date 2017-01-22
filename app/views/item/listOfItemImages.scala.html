@@ -35,7 +35,7 @@
                         <tbody>
                         @for(image <- images) {
                             <tr class="about">
-                                <td><img src="@image.getSize(100,100)"></td>
+                                <td><img src="@image.getListImagesThumbnail()"></td>
                                 <td class="text-center">
                                     <a class="fa-buttons" title="Obriši proizvod" href="@routes.Images.deleteImage(image.public_id)" role="button">
                                         <i class=" fa fa-trash-o fa-lg"></i>

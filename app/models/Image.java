@@ -70,7 +70,6 @@ public class Image extends Model {
 
     public static Image create(File image, Integer itemId) {
         Map result;
-
         try {
             result = cloudinary.uploader().upload(image, null);
             return create(result, itemId);
@@ -86,11 +85,8 @@ public class Image extends Model {
         Image image = new Image();
 
         image.public_id = (String) uploadResult.get("public_id");
-        Logger.debug(image.public_id);
         image.image_url = (String) uploadResult.get("url");
-        Logger.debug(image.image_url);
         image.secret_image_url = (String) uploadResult.get("secure_url");
-        Logger.debug(image.secret_image_url);
         if(apartmentId != null) {
             image.apartment = Apartment.getApartmentById(apartmentId);
         }
@@ -109,16 +105,87 @@ public class Image extends Model {
     public String getSize(int width, int height) {
         try {
             String url;
-
             url = cloudinary.url().format("jpg")
                     .transformation(new Transformation().width(width).height(height)).generate(public_id);
-
             return url;
         }catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
     }
+
+    public String getApartmentImageProfile() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(450).height(250).crop("limit")).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
+    public String getApartmentImageProfileThumbnail() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(80).height(80).crop("thumb")).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
+    public String getImageForPreview() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(253).height(253).crop("fill")).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
+    public String getListImagesThumbnail() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(100).height(100).crop("fill")).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
+    public String getItemImage() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(500).height(300).crop("fill")).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
+    public String getItemImageZoom() {
+        try {
+            String url;
+            url = cloudinary.url()
+                    .transformation(new Transformation().width(800).height(600)).generate(public_id);
+            return url;
+        }catch (NullPointerException e){
+            Logger.debug("Failed to receive image url.", e.getMessage());
+            return "null";
+        }
+    }
+
 
     /* ------------------- delete image ------------------ */
 

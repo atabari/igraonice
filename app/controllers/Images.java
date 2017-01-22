@@ -33,9 +33,7 @@ public class Images extends Controller {
         if (fileParts != null) {
             for (Http.MultipartFormData.FilePart filePart1 : fileParts) {
                 File file = filePart1.getFile();
-                Logger.debug("File: " + file.getName());
                 Image image = Image.create(file, apartment.id);
-                Logger.debug("Image: " + image.image_url);
                 apartment.images.add(image);
             }
         }
