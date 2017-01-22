@@ -119,11 +119,11 @@ public class AppUser extends Model {
         List<Apartment> userApartments = Apartment.userApartments(userId);
         if(user != null) {
             for(int i = 0; i < userApartments.size(); i ++){
-                for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)) {
-                    p.delete();
-                }
                 for(Reservation r: Reservation.getApartmentReservations(userApartments.get(i).id)){
                     r.delete();
+                }
+                for(Paket p: Paket.getPackageByApartmentId(userApartments.get(i).id)) {
+                    p.delete();
                 }
                 for(Store s: Store.userStores(userId)) {
                     s.delete();
