@@ -1,5 +1,17 @@
 @(userId: Integer)
 @main{
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<ul>
+					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Korisnički Panel" href="@routes.Login.renderPanelForAppropriateUser(userId)">Korisnički Panel</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Slastičarne" href="@routes.Pastries.listOfUserPastries(userId)">Slastičarne</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>Dodaj Slastičarnu</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
   <section>
       <div class="container">
           <div class="row">

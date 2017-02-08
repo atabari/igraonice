@@ -1,7 +1,9 @@
 package controllers;
 
+import helpers.UserAccessLevel;
 import models.Cake;
 import models.Image;
+import models.Pastry;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -18,11 +20,12 @@ import java.util.List;
  * Created by User on 5/24/2016.
  */
 public class Cakes extends Controller {
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
     /* --------------- create cake render ---------------*/
 
     public Result createCakeRender(Integer storeId) {
-        return ok(views.html.cake.createCake.render(storeId));
+        return ok(views.html.cake.createCake.render(storeId, userId));
     }
 
 
@@ -57,7 +60,7 @@ public class Cakes extends Controller {
     /* --------------- list of store cakes  ---------------*/
     public Result listOfStoreCakes(Integer storeId) {
         List<Cake> cakes = Cake.findAllCakesByPastryId(storeId);
-        return ok(views.html.cake.listOfStoreCakes.render(cakes, storeId));
+        return ok(views.html.cake.listOfStoreCakes.render(cakes, storeId, userId));
     }
 
 
@@ -65,7 +68,7 @@ public class Cakes extends Controller {
 
     public Result updateCakeRender(Integer cakeId) {
         Cake cake = Cake.findCakeById(cakeId);
-        return ok(views.html.cake.updateCake.render(cake));
+        return ok(views.html.cake.updateCake.render(cake, userId));
     }
 
 
@@ -101,14 +104,16 @@ public class Cakes extends Controller {
 
     /* --------------- add cake images ---------------*/
     public Result addCakeImages(Integer cakeId) {
-        return ok(views.html.cake.addCakeImage.render(cakeId));
+        Integer pastryId = Cake.findCakeById(cakeId).pastry.id;
+        return ok(views.html.cake.addCakeImage.render(cakeId, userId, pastryId));
     }
 
 
      /* --------------- list of cakes images  ---------------*/
     public Result listOfCakeImages(Integer cakeId) {
         List<Image> images = Image.findCakeImages(cakeId);
-        return ok(views.html.cake.listOfCakeImages.render(images, cakeId));
+        Integer pastryId = Cake.findCakeById(cakeId).pastry.id;
+        return ok(views.html.cake.listOfCakeImages.render(images, cakeId, userId, pastryId));
     }
 
 

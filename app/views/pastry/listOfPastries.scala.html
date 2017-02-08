@@ -1,5 +1,16 @@
 @(pastries: java.util.List[Pastry])(user: AppUser)
 @main{
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<ul>
+					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Korisnički Panel" href="@routes.Login.renderPanelForAppropriateUser(user.id)">Korisnički Panel</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>Slastičarne</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <section class="margin-bottom-135">
         <div class="container">
             <div class="row">

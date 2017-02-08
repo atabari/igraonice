@@ -22,7 +22,8 @@ import java.util.List;
  * Created by User on 1/5/2016.
  */
 public class Login extends Controller {
-        /* --------------- login page render ---------------*/
+
+    /* --------------- login page render ---------------*/
 
     public Result loginIndex(){
         return ok(login.render());
@@ -31,21 +32,24 @@ public class Login extends Controller {
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result apartmentsList() {
         List<Apartment> apartments = Apartment.getAllApartments();
-        return ok(adminpage.render(apartments));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(adminpage.render(apartments, userId));
     }
 
     /* ---------------  admin page list of stores render ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result storeList() {
         List<Store> stores = Store.getAllStores();
-        return ok(adminStores.render(stores));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(adminStores.render(stores, userId));
     }
 
     /* ---------------  admin page list of pastries render ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result pastryList() {
         List<Pastry> pastries = Pastry.getAllPastries();
-        return ok(adminPastries.render(pastries));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(adminPastries.render(pastries, userId));
     }
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result showAdminPanel(String email){
@@ -55,7 +59,7 @@ public class Login extends Controller {
     }
 
     /* --------------- admin panel ---------------*/
-    //@Security.Authenticated(Authenticator.AdminFilter.class)
+//    @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result renderAdminPanel(){
         DynamicForm form = Form.form().bindFromRequest();
 
@@ -65,7 +69,7 @@ public class Login extends Controller {
         AppUser user = AppUser.authenticate(email, password);
 
         if (user == null) {
-            flash("login-error", "Incorrect email or password! Try again.");
+            flash("login-error", "Netačan email ili password! Molimo pokušajte ponovo..");
         }else if(user.userAccessLevel == UserAccessLevel.ADMIN){
             Cookies.setUserCookies(user);
             Session.setUserSessionData(user);
@@ -78,8 +82,29 @@ public class Login extends Controller {
             Session.setUserSessionData(user);
             return ok(userpanel.render(user));
         }
-        flash("login-error", "Incorrect email or password! Please, try again.");
+        flash("login-error", "Netačan email ili password! Molimo pokušajte ponovo.");
         return redirect(routes.Login.loginIndex());
+    }
+
+    /* --------------- render panel for user depending on his user id (user access level)  ---------------*/
+    public Result renderPanelForAppropriateUser(Integer userId){
+
+        AppUser user = AppUser.findUserById(userId);
+
+        if (user == null) {
+            flash("login-error", "Došlo je do greške molimo pokušajte ponovo.");
+        }else if(user.userAccessLevel == UserAccessLevel.ADMIN){
+            Cookies.setUserCookies(user);
+            Session.setUserSessionData(user);
+            return ok(adminpanel.render(user));
+        }else if(user.userAccessLevel == UserAccessLevel.IGRAONICA
+                || user.userAccessLevel == UserAccessLevel.POKLONI
+                || user.userAccessLevel == UserAccessLevel.TORTE
+                || user.userAccessLevel == UserAccessLevel.ANIMATORI){
+            return ok(userpanel.render(user));
+        }
+        flash("login-error", "Došlo je do greške molimo pokušajte ponovo.");
+        return redirect(routes.Application.index());
     }
 
     /* --------------- admin page update password ---------------*/

@@ -1,5 +1,17 @@
-@(paketi: java.util.List[Paket])(apartmentId: Integer)
+@(paketi: java.util.List[Paket])(apartmentId: Integer)(userId: Integer)
 @main{
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<ul>
+					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Korisnički Panel" href="@routes.Login.renderPanelForAppropriateUser(userId)">Korisnički Panel</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Igraonice" href="@routes.AppUsers.userApartmentsRender(userId)">Igraonice</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>Paketi</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <section class="margin-bottom-135">
         <div class="container">
             <div class="row">

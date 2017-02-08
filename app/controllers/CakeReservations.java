@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.UserAccessLevel;
 import models.CakeReservation;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -13,7 +14,8 @@ public class CakeReservations extends Controller {
 
     public Result pastryReservationsRender(Integer pastryId) {
         List<CakeReservation> reservations = CakeReservation.findCakeReservationByPastryId(pastryId);
-        return ok(views.html.pastry.pastryReservations.render(reservations));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(views.html.pastry.pastryReservations.render(reservations, userId));
     }
 
     public Result deleteCakeReservation(Integer reservationId) {

@@ -3,6 +3,7 @@ package controllers;
 import helpers.Authenticator;
 import helpers.Cookies;
 import helpers.Session;
+import helpers.UserAccessLevel;
 import models.Apartment;
 import models.AppUser;
 import play.mvc.Controller;
@@ -19,11 +20,13 @@ import java.util.List;
  * Created by User on 1/29/2016.
  */
 public class AppUsers extends Controller {
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+
             /* --------------- create user page render ---------------*/
 
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result createUserRender(){
-        return ok(createuser.render());
+        return ok(createuser.render(userId));
     }
 
             /* --------------- create user ---------------*/
@@ -38,7 +41,7 @@ public class AppUsers extends Controller {
     @Security.Authenticated(Authenticator.AdminFilter.class)
     public Result listOfUsers(){
         List<AppUser> users = AppUser.getAllAppUsers();
-        return ok(allusers.render(users));
+        return ok(allusers.render(users, userId));
     }
             /* --------------- delete user ---------------*/
 
@@ -47,7 +50,7 @@ public class AppUsers extends Controller {
         AppUser.deleteUser(userId);
         List<AppUser> users = AppUser.getAllAppUsers();
 
-        return status(200, allusers.render(users));
+        return status(200, allusers.render(users, userId));
     }
             /* --------------- logout user ---------------*/
 
@@ -58,11 +61,11 @@ public class AppUsers extends Controller {
     }
 
                 /* --------------- user panel render ---------------*/
-
-    public Result userPanelRender(String email){
-        AppUser user = AppUser.findUserByEmail(email);
-        return ok(userpanel.render(user));
-    }
+//
+//    public Result userPanelRender(String email){
+//        AppUser user = AppUser.findUserByEmail(email);
+//        return ok(userpanel.render(user));
+//    }
     /* --------------- user apartments ---------------*/
     public Result userApartmentsRender(Integer userId){
 

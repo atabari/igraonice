@@ -50,6 +50,9 @@ POST          /adminsnd/adminpanel/:email                    @controllers.Login.
 GET           /listaprodavnica                               @controllers.Login.storeList()
 GET           /listaslasticarni                              @controllers.Login.pastryList()
 
+
+GET           /panel/:userId                                 @controllers.Login.renderPanelForAppropriateUser(userId: Integer)
+
 #AppUser
 
 GET           /admin/kreirajkorisnika                        @controllers.AppUsers.createUserRender()
@@ -59,7 +62,7 @@ GET           /admin/:userId                                 @controllers.AppUse
 DELETE        /admin/:userId                                 @controllers.AppUsers.deleteUser(userId: Integer)
 GET           /logout                                        @controllers.AppUsers.logout()
 
-GET           /korisnickipanel/:email                        @controllers.AppUsers.userPanelRender(email: String)
+#GET           /korisnickipanel/:email                        @controllers.AppUsers.userPanelRender(email: String)
 GET           /user/igraonice/:userId                        @controllers.AppUsers.userApartmentsRender(userId: Integer)
 GET           /igraonkice/:apartmentId                       @controllers.Apartments.showOnHomepage(apartmentId: Integer)
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.UserAccessLevel;
 import models.Apartment;
 import models.Cake;
 import models.Item;
@@ -20,7 +21,8 @@ public class Images extends Controller {
 
     /* ------------------- images upload render ------------------ */
     public Result imagesUploadRender(Integer apartmentId){
-        return ok(imagesUpload.render(apartmentId));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(imagesUpload.render(apartmentId, userId));
     }
 
     /* ------------------- images upload  ------------------ */
@@ -45,7 +47,8 @@ public class Images extends Controller {
     /* ------------------- list of images render ------------------ */
     public Result listOfPicturesRender(Integer apartmentId) {
         List<Image> images = Image.findApartmentImages(apartmentId);
-        return ok(views.html.Apartments.listOfImages.render(images, apartmentId));
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+        return ok(views.html.Apartments.listOfImages.render(images, apartmentId, userId));
     }
 
     /* ------------------- delete image ------------------ */

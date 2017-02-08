@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.UserAccessLevel;
 import models.Apartment;
 import models.Paket;
 import play.data.DynamicForm;
@@ -14,15 +15,16 @@ import java.util.List;
  */
 public class Paketi extends Controller {
 
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+
     public Result createPackageRender(Integer apartmentId) {
         Apartment apartment = Apartment.getApartmentById(apartmentId);
-        return ok(views.html.Paketi.createPackage.render(apartment));
+        return ok(views.html.Paketi.createPackage.render(apartment, userId));
     }
 
     public Result listOfPackages(Integer apartmentId){
         List<Paket> packages = Paket.getPackageByApartmentId(apartmentId);
-
-        return ok(views.html.Paketi.listOfPackages.render(packages, apartmentId));
+        return ok(views.html.Paketi.listOfPackages.render(packages, apartmentId, userId));
     }
 
     public Result createPackage(Integer apartmentId) {
@@ -40,7 +42,7 @@ public class Paketi extends Controller {
 
     public Result updatePackageRender(Integer packageId) {
         Paket paket = Paket.getPackageById(packageId);
-        return ok(views.html.Paketi.updatePackage.render(paket));
+        return ok(views.html.Paketi.updatePackage.render(paket, userId));
     }
 
     public Result updatePackage(Integer packageId) {

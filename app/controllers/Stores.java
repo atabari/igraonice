@@ -1,6 +1,7 @@
 package controllers;
 
 import helpers.Authenticator;
+import helpers.UserAccessLevel;
 import models.AppUser;
 import models.Store;
 import play.data.DynamicForm;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 public class Stores extends Controller {
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
 
     /* --------------- users stores list render ---------------*/
@@ -96,6 +98,6 @@ public class Stores extends Controller {
     public Result showOnHomePage(Integer storeId) {
         Store.isVisible(storeId);
         List<Store> stores = Store.getAllStores();
-        return ok(adminStores.render(stores));
+        return ok(adminStores.render(stores, userId));
     }
 }

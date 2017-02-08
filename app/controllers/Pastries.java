@@ -21,7 +21,7 @@ import java.util.List;
  * Created by User on 5/31/2016.
  */
 public class Pastries extends Controller {
-
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
                 /* --------------- create pastry render ---------------*/
 
     public Result createPastryRender(Integer userId) {
@@ -69,7 +69,7 @@ public class Pastries extends Controller {
 
     public Result updatePastryRender(Integer pastryId) {
         Pastry pastry = Pastry.findPastryById(pastryId);
-        return ok(views.html.pastry.updatePastry.render(pastry));
+        return ok(views.html.pastry.updatePastry.render(pastry, userId));
     }
 
         /* --------------- update pastry ---------------*/
@@ -103,7 +103,7 @@ public class Pastries extends Controller {
     public Result showPastryOnHomePage(Integer pastryId) {
         Pastry.isVisible(pastryId);
         List<Pastry> pastries = Pastry.getAllPastries();
-        return ok(adminPastries.render(pastries));
+        return ok(adminPastries.render(pastries, userId));
     }
 
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.UserAccessLevel;
 import models.Apartment;
 import models.Reservation;
 import play.Logger;
@@ -15,6 +16,8 @@ import java.util.List;
  * Created by User on 2/25/2016.
  */
 public class Reservations extends Controller {
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+
 
     public Result listOfReservationTimes(String datum) {
         List<String> times =  Reservation.getReservations(datum);
@@ -36,7 +39,7 @@ public class Reservations extends Controller {
 
     public Result allReservations(Integer apartmentId){
         List<Reservation> reservations = Reservation.getApartmentReservations(apartmentId);
-        return ok(reports.render(reservations));
+        return ok(reports.render(reservations, userId));
     }
 
       /* --------------- confirm reservation ---------------*/

@@ -1,5 +1,16 @@
 @(apartment: Apartment)(currentUser: AppUser)(apartments: java.util.List [Apartment])(paketi: java.util.List[Paket])(slike: java.util.List[String])
 @main {
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<ul>
+					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Igraonice" href="@routes.Application.index2()">Igraonice</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>igraonica @apartment.name</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <section id="apartment-section">
         <section>
             <div class="container">

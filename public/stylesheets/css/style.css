@@ -118,8 +118,8 @@ a:focus {
   text-shadow: none;
 }
 .cbx-heading {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 10px;
+  margin-bottom: 60px;
 }
 
 .cbx-heading2 {
@@ -3981,4 +3981,34 @@ li.cbxgrid-item-none {
 .product-essential .more-images img {
   padding: 6px 0;
   width: 100%;
+}
+
+/*	Breadcrumbs */
+.breadcrumbs {
+    padding: 7px 0px 7px 0px;
+    margin: auto;
+    font-size: 12px;
+    background: #5b5b5b;
+    color: #fff
+}
+.breadcrumbs a {
+    color: #e8f5fc;
+}
+.breadcrumbs span {
+    display: inline-block;
+    margin: 0 5px 0 5px;
+    color: #ddf1fb;
+    font-size: 13px;
+}
+.breadcrumbs ul {
+    margin: 0px;
+    padding: 0px 15px;
+}
+.breadcrumbs ul li {
+    list-style-type: none;
+    display: inline;
+}
+.breadcrumbs strong {
+    font-weight: bold;
+    color: #fff !important;
 }

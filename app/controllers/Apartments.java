@@ -26,6 +26,7 @@ import java.util.List;
  * Created by User on 12/29/2015.
  */
 public class Apartments extends Controller {
+    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
 
     // Apartment details
@@ -95,7 +96,7 @@ public class Apartments extends Controller {
     public Result renderUpdateApartment(Integer apartmentId) {
         Apartment apart = Apartment.getApartmentById(apartmentId);
 
-        return ok(updateapartment.render(apart));
+        return ok(updateapartment.render(apart, userId));
     }
 
     @Security.Authenticated(Authenticator.AdminUserFilter.class)
@@ -196,7 +197,7 @@ public class Apartments extends Controller {
     public Result deleteApartment(Integer apartmentId){
         Apartment.deleteApartment(apartmentId);
         List<Apartment> apartments = Apartment.getAllApartments();
-        return status(200, adminpage.render(apartments));
+        return status(200, adminpage.render(apartments, userId));
     }
 
 

@@ -1,6 +1,17 @@
 @import helpers.UserAccessLevel
-@(users: java.util.List[AppUser])
+@(users: java.util.List[AppUser])(userId: Integer)
 @main{
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<ul>
+					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
+					<li class="home"> <a title="Admin Panel" href="@routes.Login.renderPanelForAppropriateUser(userId)">Admin Panel</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>Korisnici</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
