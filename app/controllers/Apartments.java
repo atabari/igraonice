@@ -26,7 +26,7 @@ import java.util.List;
  * Created by User on 12/29/2015.
  */
 public class Apartments extends Controller {
-    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+    //final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
 
     // Apartment details
@@ -96,6 +96,7 @@ public class Apartments extends Controller {
     public Result renderUpdateApartment(Integer apartmentId) {
         Apartment apart = Apartment.getApartmentById(apartmentId);
 
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(updateapartment.render(apart, userId));
     }
 
@@ -197,6 +198,8 @@ public class Apartments extends Controller {
     public Result deleteApartment(Integer apartmentId){
         Apartment.deleteApartment(apartmentId);
         List<Apartment> apartments = Apartment.getAllApartments();
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return status(200, adminpage.render(apartments, userId));
     }
 

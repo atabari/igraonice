@@ -20,7 +20,7 @@ import java.util.List;
  * Created by User on 5/24/2016.
  */
 public class Cakes extends Controller {
-    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+    //final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
     /* --------------- create cake render ---------------*/
 
@@ -60,6 +60,8 @@ public class Cakes extends Controller {
     /* --------------- list of store cakes  ---------------*/
     public Result listOfStoreCakes(Integer storeId) {
         List<Cake> cakes = Cake.findAllCakesByPastryId(storeId);
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(views.html.cake.listOfStoreCakes.render(cakes, storeId, userId));
     }
 
@@ -68,6 +70,8 @@ public class Cakes extends Controller {
 
     public Result updateCakeRender(Integer cakeId) {
         Cake cake = Cake.findCakeById(cakeId);
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(views.html.cake.updateCake.render(cake, userId));
     }
 
@@ -105,6 +109,8 @@ public class Cakes extends Controller {
     /* --------------- add cake images ---------------*/
     public Result addCakeImages(Integer cakeId) {
         Integer pastryId = Cake.findCakeById(cakeId).pastry.id;
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(views.html.cake.addCakeImage.render(cakeId, userId, pastryId));
     }
 
@@ -113,6 +119,8 @@ public class Cakes extends Controller {
     public Result listOfCakeImages(Integer cakeId) {
         List<Image> images = Image.findCakeImages(cakeId);
         Integer pastryId = Cake.findCakeById(cakeId).pastry.id;
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(views.html.cake.listOfCakeImages.render(images, cakeId, userId, pastryId));
     }
 

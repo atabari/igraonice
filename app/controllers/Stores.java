@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class Stores extends Controller {
-    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
+    //final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
 
 
     /* --------------- users stores list render ---------------*/
@@ -98,6 +98,8 @@ public class Stores extends Controller {
     public Result showOnHomePage(Integer storeId) {
         Store.isVisible(storeId);
         List<Store> stores = Store.getAllStores();
+
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         return ok(adminStores.render(stores, userId));
     }
 }
