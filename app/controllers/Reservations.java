@@ -11,6 +11,7 @@ import play.mvc.Result;
 import views.html.reports;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by User on 2/25/2016.
@@ -20,7 +21,7 @@ public class Reservations extends Controller {
 
 
     public Result listOfReservationTimes(String datum) {
-        List<String> times =  Reservation.getReservations(datum);
+        Set<String> times =  Reservation.getReservations(datum);
         return ok(String.valueOf(times));
     }
 

@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 
 /**
@@ -37,6 +39,7 @@ public class Reservation extends Model {
     public Boolean confirmed;
     @ManyToOne
     public Paket paket;
+    private List<Reservation> reservations;
 
 
     public Reservation() {
@@ -69,7 +72,7 @@ public class Reservation extends Model {
         reservation.visitorEmail = email;
         reservation.visitorName = name;
 
-        if(reservation.visitorName.contains(" ")) {
+        if (reservation.visitorName.contains(" ")) {
             reservation.visitorName = name.split(" ")[0];
             reservation.visitorLastname = name.split(" ")[1];
         } else {
@@ -87,34 +90,34 @@ public class Reservation extends Model {
         reservation.save();
     }
 
-    public static List<String> reservationTimes(Integer apartmentId, String dateToCheck) {
+    public static Set<String> reservationTimes(Integer apartmentId, String dateToCheck) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-        List<String> times = new ArrayList<>();
+        Set<String> times = new HashSet<>();
 
-        for (int i=0; i < reservations.size(); i ++){
-            if(dateToCheck.equals(reservations.get(i).dateFrom)) {
-                times.add(reservations.get(i).timeFrom +":00 h " + " - " + reservations.get(i).timeTo +":00 h" );
+        for (int i = 0; i < reservations.size(); i++) {
+            if (reservations.get(i).confirmed && dateToCheck.equals(reservations.get(i).dateFrom)) {
+                times.add(reservations.get(i).timeFrom + ":00h" + " - " + reservations.get(i).timeTo + ":00h");
             }
         }
         return times;
     }
 
-    public static HashMap<String, List<String>> getReservationsByApartmentId(Integer apartmentId, String dateToCheck) {
+    public static HashMap<String, Set<String>> getReservationsByApartmentId(Integer apartmentId, String dateToCheck) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         List <Reservation> confirmedReservations = new ArrayList<>();
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-        for(int e = 0; e < reservations.size(); e++) {
-            if(reservations.get(e).confirmed == true) {
+        for (int e = 0; e < reservations.size(); e++) {
+            if (reservations.get(e).confirmed) {
                 confirmedReservations.add(reservations.get(e));
             }
         }
-        HashMap<String, List<String>> hashMap = new HashMap<>();
+        HashMap<String, Set<String>> hashMap = new HashMap<>();
 
-        for (int i=0; i < confirmedReservations.size(); i ++){
+        for (int i = 0; i < confirmedReservations.size(); i++) {
            hashMap.put(confirmedReservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
-
         }
+
         return hashMap;
     }
 
@@ -123,12 +126,12 @@ public class Reservation extends Model {
         return finder.where().eq("paket_id", paketid).findList();
     }
 
-    public static List<String> getReservations(String datum) {
+    public static Set<String> getReservations(String datum) {
 
         String dateToCheck = datum.split("-")[0];
-        Integer apartmentId =Integer.parseInt(datum.split("-")[1]) ;
+        Integer apartmentId = Integer.parseInt(datum.split("-")[1]) ;
 
-        HashMap<String, List<String>> hashMap = getReservationsByApartmentId(apartmentId, dateToCheck);
+        HashMap<String, Set<String>> hashMap = getReservationsByApartmentId(apartmentId, dateToCheck);
 
         return hashMap.get(dateToCheck);
 
@@ -139,18 +142,18 @@ public class Reservation extends Model {
         return finder.where().eq("apartment_id", apartmentId).findList();
     }
 
-    public static Reservation getReservationById(Integer reservationId){
+    public static Reservation getReservationById(Integer reservationId) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         return finder.where().eq("id", reservationId).findUnique();
     }
 
       /* --------------- confirm reservation ---------------*/
 
-    public static void confirmReservation(Integer reservationId){
+    public static void confirmReservation(Integer reservationId) {
         Reservation reservation = getReservationById(reservationId);
-        if(reservation.confirmed == false){
+        if (reservation.confirmed == false){
             reservation.confirmed = true;
-        }else if (reservation.confirmed == true){
+        } else if (reservation.confirmed == true){
             reservation.confirmed = false;
         }
         reservation.update();
