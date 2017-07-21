@@ -85,7 +85,7 @@ $('body').on('click', 'a[data-role="delete-pastry"]', function (e) {
     $toDelete = $(this);
     swal({
         title: 'BRISANJE!!!',
-        text: 'Ukoliko izbrišete slastičarnu, automatski će se izbrisati svi njeni proizvodi',
+        text: 'Ukoliko izbrišete prodavnicu torti, automatski će se izbrisati svi njeni proizvodi',
         type: 'warning',
         showCancelButton: true,
         showConfirmButton: true,
@@ -109,7 +109,7 @@ $('body').on('click', 'a[data-role="delete-pastry"]', function (e) {
                 location.reload();
                 swal({
                     title: 'Obrisana!',
-                    text: 'Slastičarna uspješno obrisana.',
+                    text: 'Prodavnica torti uspješno obrisana.',
                     type: 'success',
                     timer: 1000
                 });

@@ -108,7 +108,7 @@ public class Image extends Model {
             url = cloudinary.url().format("jpg")
                     .transformation(new Transformation().width(width).height(height)).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -118,9 +118,9 @@ public class Image extends Model {
         try {
             String url;
             url = cloudinary.url()
-                    .transformation(new Transformation().width(450).height(250).crop("limit")).generate(public_id);
+                    .transformation(new Transformation().width(650).height(360)).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -132,7 +132,7 @@ public class Image extends Model {
             url = cloudinary.url()
                     .transformation(new Transformation().width(80).height(80).crop("thumb")).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -144,7 +144,7 @@ public class Image extends Model {
             url = cloudinary.url()
                     .transformation(new Transformation().width(253).height(253).crop("fill")).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -156,7 +156,7 @@ public class Image extends Model {
             url = cloudinary.url()
                     .transformation(new Transformation().width(100).height(100).crop("fill")).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -168,7 +168,7 @@ public class Image extends Model {
             url = cloudinary.url()
                     .transformation(new Transformation().width(500).height(300).crop("fill")).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -180,7 +180,7 @@ public class Image extends Model {
             url = cloudinary.url()
                     .transformation(new Transformation().width(800).height(600)).generate(public_id);
             return url;
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             Logger.debug("Failed to receive image url.", e.getMessage());
             return "null";
         }
@@ -236,7 +236,7 @@ public class Image extends Model {
         return finder.where().eq("pastry_id", itemId).findList();
     }
 
-        /* ------------------- find cake images ------------------ */
+    /* ------------------- find cake images ------------------ */
     public static List<Image> findCakeImages(Integer cakeId) {
         return finder.where().eq("cake_id", cakeId).findList();
     }
@@ -307,7 +307,7 @@ public class Image extends Model {
         Logger.debug(image.image_url);
         image.secret_image_url = (String) uploadResult.get("secure_url");
         Logger.debug(image.secret_image_url);
-        if(cakeId != null) {
+        if (cakeId != null) {
             image.cake = Cake.findCakeById(cakeId);
         }
         image.save();
@@ -340,7 +340,7 @@ public class Image extends Model {
         Logger.debug(image.image_url);
         image.secret_image_url = (String) uploadResult.get("secure_url");
         Logger.debug(image.secret_image_url);
-        if(pastryId != null) {
+        if (pastryId != null) {
             image.pastry = Pastry.findPastryById(pastryId);
         }
         image.save();

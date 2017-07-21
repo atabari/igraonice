@@ -17,8 +17,6 @@ import java.util.Set;
  * Created by User on 2/25/2016.
  */
 public class Reservations extends Controller {
-    final Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
-
 
     public Result listOfReservationTimes(String datum) {
         Set<String> times =  Reservation.getReservations(datum);
@@ -34,18 +32,19 @@ public class Reservations extends Controller {
         String phone = form.field("phone").value();
         String paket = form.field("paketId").value();
 
-        Reservation.saveReservation(apartmentId, name, null, phone, date, timeFrom, timeTo, null, Integer.parseInt(paket));
+        Reservation.saveReservation(apartmentId, name, null, phone, date, timeFrom, timeTo, null, Integer.parseInt(paket), false);
         return redirect(routes.Paketi.listOfPackages(apartmentId));
     }
 
     public Result allReservations(Integer apartmentId){
+        Integer userId = UserAccessLevel.getCurrentUser(ctx()).id;
         List<Reservation> reservations = Reservation.getApartmentReservations(apartmentId);
         return ok(reports.render(reservations, userId));
     }
 
       /* --------------- confirm reservation ---------------*/
 
-    public Result confirmReservation(Integer reservationId){
+    public Result confirmReservation(Integer reservationId) {
         Reservation.confirmReservation(reservationId);
         Reservation reservation = Reservation.getReservationById(reservationId);
         Integer apartmentId = reservation.apartment.id;

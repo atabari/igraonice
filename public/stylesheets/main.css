@@ -708,7 +708,7 @@ ul.dropdown-menu { border: none }
     line-height: 1.6;
 }
 .error{
-    font-size: 12px;
+    font-size: 15px;
     color: red;
     text-align: center;
 }
@@ -819,4 +819,94 @@ ul.dropdown-menu { border: none }
 #margin-top-10{
     margin-top: 10px;
     font-size: 15px;
+}
+
+
+
+
+.col-left {
+    margin-bottom: 0px;
+}
+.sidebar {
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 1%;
+    overflow:hidden ;
+}
+.side-nav-categories, .side-nav-categories .block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 35px;
+}
+.block {
+    margin: 0 0 35px;
+}
+.block-layered-nav {
+    background-color: #FFFFFF;
+}
+.block .block-title {
+    color: #333;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    background: #f5f5f5;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: normal;
+    border-bottom: 1px #f5740a solid;
+    border-radius: 4px 4px 0px 0px;
+}
+.block .block-content {
+    border-top: medium none;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 15px 15px;
+    background: #f8f8f8
+}
+.block-layered-nav .block-subtitle, .block-layered-nav dt {
+    color: #565656;
+    font-weight: 900;
+}
+.block-layered-nav .block-subtitle {
+    font-size: 13px;
+    font-family: 'Raleway', sans-serif;
+}
+.sidebar .block dl {
+    border-bottom: 0px solid #ccc;
+    margin: 0;
+}
+.sidebar .block dd {
+    border-bottom: 0 solid #CCCCCC;
+    margin: 0;
+    padding: 0 5px;
+}
+.block-layered-nav dd {
+    margin: 0;
+    padding: 0;
+}
+.block-layered-nav dd ol {
+    position: relative;
+}
+.sidebar ol, .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding: 0
+}
+.sidebar ol, .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.block-layered-nav li {
+    padding: 5px 0;
+}
+.sidebar a, .sidebar .block-layered-nav .price .sub {
+    color: #222;
+    font-size: 14px;
+}
+a {
+    color: #333;
 }

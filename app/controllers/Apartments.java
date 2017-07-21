@@ -37,24 +37,24 @@ public class Apartments extends Controller {
         List<Paket> paketi = Paket.getPackageByApartmentId(apartmentId);
 
 
-            List<String> results = new ArrayList<>();
+        List<String> results = new ArrayList<>();
 
-            String folderName = apart.name + apart.id;
-            String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
+        String folderName = apart.name + apart.id;
+        String location = ConfigProvider.UPLOAD_IMAGES_FOLDER + folderName;
 
-            File[] files = new File(location).listFiles();
+        File[] files = new File(location).listFiles();
 
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isFile()) {
-                        results.add("/assets/images/" + folderName + "/" + file.getName());
-                    }
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    results.add("/assets/images/" + folderName + "/" + file.getName());
                 }
             }
+        }
 
-            if (results.size() > 0) {
-                results.remove(0);
-            }
+        if (results.size() > 0) {
+            results.remove(0);
+        }
 
         return ok(apartment.render(apart, currentUser, apartments, paketi, results));
     }
@@ -70,9 +70,7 @@ public class Apartments extends Controller {
 
         String name = form.field("name").value();
         String location = form.field("location").value();
-        Logger.info("location  " + location);
         String address = form.field("address").value();
-        Integer price = Integer.parseInt(form.field("price").value());
         Integer capacity = Integer.parseInt(form.field("capacity").value());
         String timeFrom = form.field("timeFrom").value();
         String timeTo = form.field("timeTo").value();
@@ -80,7 +78,7 @@ public class Apartments extends Controller {
         String lat = form.field("lat").value();
         String lng = form.field("lng").value();
 
-        Apartment apart = Apartment.createApartment(name, location, address, price, capacity,timeFrom,timeTo, description, lat, lng, userId);
+        Apartment apart = Apartment.createApartment(name, location, address, capacity,timeFrom,timeTo, description, lat, lng, userId);
 
         if (apart != null) {
             flash("success", "Uspješno ste kreirali objekat.");
@@ -110,7 +108,6 @@ public class Apartments extends Controller {
         String name = form.field("name").value();
         String location = form.field("location").value();
         String address = form.field("address").value();
-        Integer price = Integer.parseInt(form.field("price").value());
         Integer capacity = Integer.parseInt(form.field("capacity").value());
         String timeFrom = form.field("timeFrom").value();
         String timeTo = form.field("timeTo").value();
@@ -118,7 +115,7 @@ public class Apartments extends Controller {
         String lat = form.field("lat").value();
         String lng = form.field("lng").value();
 
-        Apartment apart = Apartment.updateApartment(apartmentId, name, location, address, price, capacity,timeFrom, timeTo, description, lat, lng);
+        Apartment apart = Apartment.updateApartment(apartmentId, name, location, address, capacity,timeFrom, timeTo, description, lat, lng);
 
 
         List<String> results = new ArrayList<>();
@@ -149,6 +146,11 @@ public class Apartments extends Controller {
     }
 
 
+
+    public Result findApartmentsByLocation (String location) {
+        List<Apartment> apartments = Apartment.findApartmentsByLocation(location);
+        return ok(searchApartments.render(apartments));
+    }
 
 
      /* --------------- apartments with location Sarajevo ---------------*/

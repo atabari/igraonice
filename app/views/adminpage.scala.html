@@ -29,6 +29,7 @@
                         <th>Cijena</th>
                         <th>Kapacitet</th>
                         <th>Uredi</th>
+                        <th>Prikazana na početnoj stranici</th>
                         <th>Prikazati na početnoj stranici</th>
                         <th>Obriši</th>
 
@@ -45,16 +46,21 @@
                             <a data-role="post" data-delete-parent="tr" href="@routes.Apartments.renderUpdateApartment(apartment.id)" role="button">
                                 <i class=" fa fa-pencil fa-lg"></i></a>
                         </td>
-
-                        <td class="text-center">
+                        <td class="text-center" style="width: 120px">
+                        @if(apartment.isVisible == null || apartment.isVisible == false) {
+                            <b style="color: black; vertical-align: middle;">Ne</b>
+                        } else {
+                            <b style="color: green; vertical-align: middle">Da</b>
+                        }
+                        </td>
+                        <td class="text-center" style="width: 100px">
                         @if(apartment.isVisible == null || apartment.isVisible == false) {
                             <a href="@routes.Apartments.showOnHomepage(apartment.id)" >
-                                <button type="submit" class="btn btn-primary" id="middlebuttons">NE</button>
+                                <button type="submit" class="btn-sm" id="middlebuttons" style="color: green;">PRIKAZATI</button>
                             </a>
                         } else {
                             <a href="@routes.Apartments.showOnHomepage(apartment.id)" >
-                                <button type="submit" class="btn btn-primary" id="middlebuttons">DA</button>
-
+                                <button type="submit" class="btn-sm" id="middlebuttons" style="color: black;">UKLONITI</button>
                             </a>
                         }
                         </td>

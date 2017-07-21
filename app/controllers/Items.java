@@ -34,9 +34,9 @@ public class Items extends Controller {
     }
 
     /* --------------- list of items ---------------*/
-        @Security.Authenticated(Authenticator.PokloniFilter.class)
+    @Security.Authenticated(Authenticator.PokloniFilter.class)
 
-        public Result listOfStoreItems(Integer storeId) {
+    public Result listOfStoreItems(Integer storeId) {
         List<Item> items  = Item.findStoreItems(storeId);
         return ok(views.html.item.listOfStoreItems.render(items, storeId));
     }
@@ -63,9 +63,10 @@ public class Items extends Controller {
         String description = form.field("description").value();
         String size = form.field("size").value();
         Integer itemCategory =Integer.parseInt(form.field("itemCategory").value());
+        String age = form.field("age").value();
         Store store = Store.findStoreById(storeId);
 
-        Item item = Item.createItem(name, price, description, size, store, itemCategory);
+        Item item = Item.createItem(name, price, description, size, store, itemCategory, age);
 
         Http.MultipartFormData body1 = request().body().asMultipartFormData();
         List<Http.MultipartFormData.FilePart> fileParts = body1.getFiles();
@@ -84,8 +85,7 @@ public class Items extends Controller {
     /* --------------- update item render ---------------*/
 
     public Result updateItemRender(Integer itemId) {
-        Item item = Item.findItemById(itemId);
-        return ok(views.html.item.updateItem.render(item));
+        return ok(views.html.item.updateItem.render(Item.findItemById(itemId)));
     }
 
     /* --------------- update item  ---------------*/
@@ -97,19 +97,19 @@ public class Items extends Controller {
         Integer price = Integer.parseInt(form.field("price").value());
         String description = form.field("description").value();
         String size = form.field("size").value();
+        String age = form.field("age").value();
         Integer itemCategory =Integer.parseInt(form.field("itemCategory").value());
 
 
-        Integer storeId = Item.updateItem(name, price, description, size,itemCategory, itemId);
+        Integer storeId = Item.updateItem(name, price, description, size, itemCategory,age, itemId);
         return redirect(routes.Items.listOfStoreItems(storeId));
     }
 
-        /* --------------- delete item  ---------------*/
+    /* --------------- delete item  ---------------*/
     @Security.Authenticated(Authenticator.PokloniFilter.class)
 
     public Result deleteItem(Integer itemId) {
-        Integer storeId = Item.deleteItem(itemId);
-        return redirect(routes.Items.listOfStoreItems(storeId));
+        return redirect(routes.Items.listOfStoreItems(Item.deleteItem(itemId)));
     }
 
             /* --------------- items panel  ---------------*/
@@ -121,11 +121,10 @@ public class Items extends Controller {
     /* --------------- list of items images  ---------------*/
 
     public Result listOfItemImages(Integer itemId) {
-        List<Image> images = Image.findItemImages(itemId);
-        return ok(views.html.item.listOfItemImages.render(images, itemId));
+        return ok(views.html.item.listOfItemImages.render(Image.findItemImages(itemId), itemId));
     }
 
-        /* --------------- add item images ---------------*/
+    /* --------------- add item images ---------------*/
     public Result addItemImages(Integer itemId) {
         return ok(views.html.item.addItemImage.render(itemId));
     }
@@ -134,8 +133,7 @@ public class Items extends Controller {
        /* --------------- find all male items  ---------------*/
 
     public Result findMaleItems() {
-        List<Item> items = Item.findMaleItems();
-        return ok(views.html.item.categoryItem.render(items));
+        return ok(views.html.item.categoryItem.render(Item.findMaleItems()));
     }
 
       /* --------------- find all female items  ---------------*/
@@ -152,6 +150,9 @@ public class Items extends Controller {
         return ok(views.html.item.categoryItem.render(items));
     }
 
+    public Result findItemsByAge(String age) {
+        return ok(views.html.item.categoryItem.render(Item.findItemsByAge(age)));
+    }
 
 
 }

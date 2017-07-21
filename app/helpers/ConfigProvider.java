@@ -15,5 +15,5 @@ public class ConfigProvider {
     public static final String MAIL_FROM = Play.application().configuration().getString("mailFrom");
     public static final String MAIL_FROM_PASS = Play.application().configuration().getString("mailFromPass");
     public static final String UPLOAD_IMAGES_FOLDER = Play.application().configuration().getString("upload.images");
-
+    public static final String MAIL_TO_ADMIN = Play.application().configuration().getString("mailToAdmin");
 }

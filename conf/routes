@@ -125,6 +125,7 @@ POST          /dodajslikuzaproizvod/:itemId                  @controllers.Images
 GET           /pretragadjecaci                               @controllers.Items.findMaleItems()
 GET           /pretragadjevojcice                            @controllers.Items.findFemaleItems()
 GET           /pretragaostalo                                @controllers.Items.findOtherItems()
+GET           /pretragagodine/:age                           @controllers.Items.findItemsByAge(age: String)
 
 #ITEM EMAIL AND RESERVATION
 POST          /rezervacijaproizvoda/:itemId                  @controllers.Emails.sendMailItem(itemId: Integer)

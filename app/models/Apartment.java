@@ -3,9 +3,11 @@ package models;
 import com.avaje.ebean.Model;
 import helpers.Authenticator;
 import helpers.ConfigProvider;
+import helpers.Constants;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Security;
+import scala.collection.immutable.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.OneToMany;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static models.Image.findApartmentImages;
@@ -50,7 +53,7 @@ public class Apartment extends Model {
 
     }
     public Apartment(Integer id, String name,String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo,
-                      String description, String lat, String lng, Integer userId, Boolean isVisible) {
+                     String description, String lat, String lng, Integer userId, Boolean isVisible) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -94,14 +97,13 @@ public class Apartment extends Model {
      */
     /* --------------- create apartment ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
-    public static Apartment createApartment(String name, String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng, Integer userId) {
+    public static Apartment createApartment(String name, String location, String address, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng, Integer userId) {
 
         Apartment apartment = new Apartment();
         try {
             apartment.name = name;
             apartment.location = location;
             apartment.address = address;
-            apartment.price = price;
             apartment.capacity = capacity;
             apartment.timeFrom = timeFrom;
             apartment.timeTo = timeTo;
@@ -121,14 +123,13 @@ public class Apartment extends Model {
     }
     /* --------------- update apartment ---------------*/
     @Security.Authenticated(Authenticator.AdminFilter.class)
-    public static Apartment updateApartment(Integer apartmentId, String name,String location, String address, Integer price, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng) {
+    public static Apartment updateApartment(Integer apartmentId, String name,String location, String address, Integer capacity,String timeFrom, String timeTo, String description, String lat, String lng) {
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
         try {
             apartment.name = name;
             apartment.location = location;
             apartment.address = address;
-            apartment.price = price;
             apartment.capacity = capacity;
             apartment.timeFrom = timeFrom;
             apartment.timeTo = timeTo;
@@ -166,7 +167,7 @@ public class Apartment extends Model {
         apartment.delete();
     }
 
-        /* --------------- retrieves all apartments ---------------*/
+    /* --------------- retrieves all apartments ---------------*/
     public static List<Apartment> getAllApartments(){
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
         List<Apartment> apartments = finder.all();
@@ -183,18 +184,22 @@ public class Apartment extends Model {
     }
 
 
+    public static List<Apartment> findApartmentsByLocation(String location) {
+        Model.Finder<String, Apartment> finderForApartments = new Model.Finder<>(Apartment.class);
+        List<Apartment> apartmentList = finderForApartments.where().eq("location", location).findList();
+
+        return apartmentList;
+    }
+
             /* --------------- retrieves apartments with location Sarajevo ---------------*/
 
-    public static List<Apartment> apartmentsSarajevo(){
+    public static List<Apartment> apartmentsSarajevo() {
         Model.Finder<String, Apartment> finder = new Model.Finder<>(Apartment.class);
-        List<Apartment> apartmentsList = finder.where().eq("location", "Sarajevo").findList();
-        List<Apartment> apartments = new ArrayList<>();
-        for(int i = 0; i < apartmentsList.size(); i ++){
-            if(apartmentsList.get(i).isVisible){
-                apartments.add(apartmentsList.get(i));
-            }
-        }
-        return apartments;
+        List<Apartment> apartmentsList = finder.where().eq("is_visible", true).findList();
+        Collections.shuffle(apartmentsList);
+
+        return (apartmentsList.size() >= Constants.NUMBER_OF_VISIBLE_APARTMENTS) ?
+                apartmentsList.subList(0, Constants.NUMBER_OF_VISIBLE_APARTMENTS) : apartmentsList;
     }
        /* --------------- retrieves apartments with location Mostar ---------------*/
 
@@ -301,22 +306,24 @@ public class Apartment extends Model {
         Integer price = apartment.price;
 
         List<Apartment> apartments = finder.where().eq("location", apartment.location).findList();
-        List<Integer> prices = new ArrayList<>();
+//        List<Integer> prices = new ArrayList<>();
+//
+//        for(int k = 0; k < apartments.size(); k++) {
+//            prices.add(apartments.get(k).price);
+//        }
 
-        for(int k = 0; k < apartments.size(); k++) {
-            prices.add(apartments.get(k).price);
-        }
+//        for(int i=0; i < prices.size(); i++) {
+//            for (int j = price - 10; j <= price + 10; j++) {
+//
+//                if (apartments.size() != 0 && apartments.get(i).price == j) {
+//                    recommendedApartments.add(apartments.get(i));
+//                }
+//            }
+//        }
+        Collections.shuffle(apartments);
 
-        for(int i=0; i < prices.size(); i++) {
-            for (int j = price - 10; j <= price + 10; j++) {
-
-                if (apartments.size() != 0 && apartments.get(i).price == j) {
-                    recommendedApartments.add(apartments.get(i));
-                }
-
-            }
-        }
-        return recommendedApartments;
+        return (apartments.size() >= Constants.NUMBER_OF_RECOMMENDED_APARTMENTS) ?
+                apartments.subList(0,Constants.NUMBER_OF_RECOMMENDED_APARTMENTS ) : apartments;
     }
 
             /* --------------- Apartment visibility on homepage ---------------*/

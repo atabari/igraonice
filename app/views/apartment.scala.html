@@ -81,10 +81,8 @@
                     </section>
                 </div>
             </div>
-
-
         </section>
-        @if(currentUser !=null && apartment.userId == currentUser.id){
+        @if(currentUser !=null && apartment.userId == currentUser.id) {
             <section>
                 <div class="container">
                     <div class="row">
@@ -97,11 +95,8 @@
                         </div>
                     </div>
                 </div>
-
             </section>
         }
-
-
         <section id="paketi-background">
             <div id="cbx-team" class="cbx-section cbx-team margin-bottom-20">
                 <div class="cbx-team-inner2">
@@ -128,8 +123,8 @@
                                                     </div>
                                                     <div class="font-single-text text-center margin-top80">
                                                         <h3>@paket.name</h3>
-                                                        <h4>Cijena @paket.cost KM</h4>
-                                                        <h4>Trajanje: @paket.duration h</h4>
+                                                        <h4>Cijena: @paket.cost KM</h4>
+                                                        <h4>Trajanje: @paket.duration<span>h</span></h4>
                                                     </div>
                                                 </div> <!-- //font content -->
                                                 <!-- back content -->
@@ -145,7 +140,8 @@
                                                     <form method="POST" role="form" action="#">
                                                         <div class=" xs-text-center cbx-submit-area position-button" id="reservation-button">
                                                             <button type="submit" name="login" class="btn btn-block lz-git-submit-btn cbx-submit" id="button" data-toggle="modal" data-target="#basicModal"
-                                                            onclick="pkgDuration(@paket.duration, @paket.id)">Rezerviši</button>
+                                                            onclick="pkgDuration(@paket.duration, @paket.id)">Rezerviši
+                                                            </button>
                                                         </div>
                                                     </form>
 
@@ -177,7 +173,6 @@
                 <div class="modal-content ">
                     <form method="POST" action="@routes.Emails.sendMail(apartment.id)">
                         <div class="modal-header">
-                            <button type="button" style="font-size: 30px;" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h2 class="modal-title" id="myModalLabel" style="text-align: center;">POTVRDITE REZERVACIJU</h2>
                         </div>
                         <div class="row">
@@ -218,12 +213,10 @@
                                             <input type="number" class=" date-check" id="timeTo" name="timeTo" max="@apartment.timeTo" readonly/>
                                         </div>
                                         <div class="col-md-12 padding-left-0">
-                                            <label id="time_error" class="error" for="timeTo"></label>
+                                            <div id="time_error" class="error" for="timeTo"></div>
                                         </div>
                                         <input id="timeFromCheck" value="@apartment.timeFrom" hidden>
                                         <input id="timeToCheck" value="@apartment.timeTo" hidden>
-
-
                                     </div>
 
                                     <div class="col-md-6">
@@ -275,7 +268,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" style="width:140px; font-size: 18px;" class="btn btn-default" data-dismiss="modal" onclick="clearData()">Odustani</button>
-                                    <button type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
+                                    <button id="confirmButton" type="POST" style="width:140px; font-size: 18px;" class="btn btn-primary" href="@routes.Emails.sendMail(apartment.id)">Potvrdi</button>
                                 </div>
 
                             </div>
@@ -368,6 +361,8 @@
             $('#basicModal').on('hidden.bs.modal', function () {
                 $(this).find('form').trigger('reset');
              });
+            $('#datumi').text("Trenutno nema zauzetih termina.");
+            $('#time_error').text("");
         }
 
     </script>

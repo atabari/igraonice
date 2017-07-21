@@ -1,16 +1,13 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.sun.org.apache.regexp.internal.RE;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 
 /**
@@ -39,12 +36,14 @@ public class Reservation extends Model {
     public Boolean confirmed;
     @ManyToOne
     public Paket paket;
-    private List<Reservation> reservations;
+    public Boolean duplicated;
 
 
     public Reservation() {
     }
-    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName, String visitorLastname, String visitorEmail,String capacity, String phone, String comment, Integer cost, Boolean confirmed, Paket paket) {
+    public Reservation(Apartment apartment, String dateFrom,String timeFrom,String timeTo, String visitorName,
+                       String visitorLastname, String visitorEmail,String capacity, String phone, String comment,
+                       Integer cost, Boolean confirmed, Paket paket, Boolean duplicated) {
         this.apartment = apartment;
         this.dateFrom = dateFrom;
         this.timeFrom = timeFrom;
@@ -58,10 +57,12 @@ public class Reservation extends Model {
         this.cost = cost;
         this.confirmed = confirmed;
         this.paket = paket;
+        this.duplicated = duplicated;
     }
 
 
-    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate, String timeFrom, String timeTo, String comment, Integer paketId) {
+    public static void saveReservation(Integer apartmentId, String name, String email, String phone, String checkInDate,
+                                       String timeFrom, String timeTo, String comment, Integer paketId, Boolean duplicated) {
 
         Apartment apartment = Apartment.getApartmentById(apartmentId);
 
@@ -72,7 +73,7 @@ public class Reservation extends Model {
         reservation.visitorEmail = email;
         reservation.visitorName = name;
 
-        if (reservation.visitorName.contains(" ")) {
+        if(reservation.visitorName.contains(" ")) {
             reservation.visitorName = name.split(" ")[0];
             reservation.visitorLastname = name.split(" ")[1];
         } else {
@@ -86,6 +87,7 @@ public class Reservation extends Model {
 
         Paket paket = Paket.getPackageById(paketId);
         reservation.paket = paket;
+        reservation.duplicated = duplicated;
 
         reservation.save();
     }
@@ -96,8 +98,8 @@ public class Reservation extends Model {
         Set<String> times = new HashSet<>();
 
         for (int i = 0; i < reservations.size(); i++) {
-            if (reservations.get(i).confirmed && dateToCheck.equals(reservations.get(i).dateFrom)) {
-                times.add(reservations.get(i).timeFrom + ":00h" + " - " + reservations.get(i).timeTo + ":00h");
+            if(reservations.get(i).confirmed && dateToCheck.equals(reservations.get(i).dateFrom)) {
+                times.add(reservations.get(i).timeFrom + "-" + reservations.get(i).timeTo);
             }
         }
         return times;
@@ -107,17 +109,17 @@ public class Reservation extends Model {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
         List <Reservation> confirmedReservations = new ArrayList<>();
         List<Reservation> reservations = finder.where().eq("apartment_id", apartmentId).findList();
-        for (int e = 0; e < reservations.size(); e++) {
-            if (reservations.get(e).confirmed) {
+        for(int e = 0; e < reservations.size(); e++) {
+            if(reservations.get(e).confirmed == true) {
                 confirmedReservations.add(reservations.get(e));
             }
         }
         HashMap<String, Set<String>> hashMap = new HashMap<>();
 
-        for (int i = 0; i < confirmedReservations.size(); i++) {
-           hashMap.put(confirmedReservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
-        }
+        for (int i=0; i < confirmedReservations.size(); i ++) {
+            hashMap.put(confirmedReservations.get(i).dateFrom, reservationTimes(apartmentId, dateToCheck));
 
+        }
         return hashMap;
     }
 
@@ -139,7 +141,7 @@ public class Reservation extends Model {
 
     public static List<Reservation> getApartmentReservations(Integer apartmentId) {
         Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
-        return finder.where().eq("apartment_id", apartmentId).findList();
+        return finder.where().eq("apartment_id", apartmentId).eq("duplicated", false).findList();
     }
 
     public static Reservation getReservationById(Integer reservationId) {
@@ -151,12 +153,35 @@ public class Reservation extends Model {
 
     public static void confirmReservation(Integer reservationId) {
         Reservation reservation = getReservationById(reservationId);
-        if (reservation.confirmed == false){
-            reservation.confirmed = true;
-        } else if (reservation.confirmed == true){
+
+        if(reservation.confirmed) {
             reservation.confirmed = false;
+            manageDuplicatedReservations(reservation, false);
+        } else if (reservation.confirmed == false) {
+            reservation.confirmed = true;
+            manageDuplicatedReservations(reservation, true);
         }
         reservation.update();
+    }
+
+    /*
+    Iterates through identical reservations and marks them as "duplicated", if confirming reservation,
+    or unmarks them if reservation is cancelling.
+     */
+    private static void manageDuplicatedReservations(Reservation reservation, Boolean confirming) {
+        String reservationDate = reservation.dateFrom;
+        String reservationTime = reservation.timeFrom;
+        Model.Finder<String, Reservation> finder = new Model.Finder<>(Reservation.class);
+
+        List<Reservation> reservationsForProvidedDateAndTime = finder.where().eq("date_from",
+                reservationDate).eq("time_from", reservationTime).findList();
+
+        for (Reservation res : reservationsForProvidedDateAndTime) {
+            if (!res.equals(reservation)) {
+                res.duplicated = (confirming) ? true : false ;
+                res.update();
+            }
+        }
     }
 
 }

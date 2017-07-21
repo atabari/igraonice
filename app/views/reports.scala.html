@@ -32,6 +32,7 @@
                             <th class="text-center">Naziv paketa</th>
                             <th class="text-center">Datum</th>
                             <th class="text-center">Vrijeme</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Potvrdi</th>
 
                         </tr>
@@ -47,14 +48,18 @@
                             <td class="text-center">@reservation.timeFrom:00h - @reservation.timeTo:00h</td>
                             <td class="text-center">
                             @if(reservation.confirmed == null || reservation.confirmed == false) {
+                                <b style="color: black; vertical-align: middle" >Nepotvrđena</b>
+                            } else {
+                                <b style="color: green; vertical-align: middle">Potvrđena</b>
+                            }
+                            </td>
+                            <td class="text-center">
+                            @if(reservation.confirmed == null || reservation.confirmed == false) {
                                 <a href="@routes.Reservations.confirmReservation(reservation.id)" >
-                                    <button type="submit" class="btn btn-primary" id="middlebuttons">DA</button>
-                                </a>
+                                    <button type="submit" class="btn-sm" id="middlebuttons" style="color: green;">POTVRDI</button></a>
                             } else {
                                 <a href="@routes.Reservations.confirmReservation(reservation.id)" >
-                                    <button type="submit" class="btn btn-primary" id="middlebuttons">NE</button>
-
-                                </a>
+                                    <button type="submit" class="btn-sm" id="middlebuttons"style="color: black;">OTKAŽI</button></a>
                             }
                             </td>
 

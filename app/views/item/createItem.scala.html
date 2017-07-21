@@ -1,4 +1,5 @@
 @import helpers.ItemCategories
+@import helpers.Constants
 @(storeId: Integer)
 @main{
     <section>
@@ -46,15 +47,27 @@
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-1">
                                 <select name="itemCategory"  class="form-control cbxname lz-git-form-control placeholder-style" id="ddlocation">
-                                    <option selected class="placeholder-style"> Odaberi kategoriju</option>
+                                    <option value="" disabled selected class="placeholder-style"> Odaberi kategoriju</option>
                                     <option value="@ItemCategories.DJECACI">Djecaci</option>
                                     <option value="@ItemCategories.DJEVOJCICE">Djevojčice</option>
                                     <option value="@ItemCategories.OSTALO">Ostalo</option>
-
                                 </select>
                                 <label id="cbxname-error" class="error valid" for="cbxname"></label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-1">
+                                <select name="age"  class="form-control cbxname lz-git-form-control placeholder-style">
+                                    <option value="" disabled selected class="placeholder-style"> Odaberi uzrast</option>
+                                    <option value="@Constants.ITEMS_BY_AGE_0_3">do 3 godine</option>
+                                    <option value="@Constants.ITEMS_BY_AGE_3_6">3 do 6 godina</option>
+                                    <option value="@Constants.ITEMS_BY_AGE_6_9">6 do 9 godina</option>
+                                    <option value="@Constants.ITEMS_BY_AGE_9">preko 9 godina</option>
+                                </select>
+                                <label id="cbxname-error" class="error valid" for="cbxname"></label>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="col-md-6">
@@ -66,11 +79,10 @@
                         </div>
                     </div>
 
-
                     <div col-md-6>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label for="image">Dodaj sliku <em class="required">*</em></label>
+                                <label for="image">Dodaj sliku<em class="required">*</em></label>
                                 <input id="height" type="file" name="image" class="form-control" multiple accept="image/*" required/>
                             </div>
                         </div>
