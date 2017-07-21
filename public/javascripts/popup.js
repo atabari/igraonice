@@ -62,43 +62,21 @@ $('#checkIn').change(function() {
     });
 });
 
-// //var time = $('.time').val();
-// var timeFromCheck = $('#timeFromCheck').val();
-// var timeToCheck = $('#timeToCheck').val();
-//
-// $('#timeFrom').change(function() {
-//
-//     var timeFrom = $('#timeFrom').val();
-//     var timeTo = (1*timeFrom) + (1*time);
-//     $('#timeTo').val(timeTo)
-//     //$('#paketId').val(pkg);
-//     if(timeFrom < timeFromCheck || timeTo > timeToCheck) {
-//         $('#confirmButton').prop('disabled', true);
-//         $('#time_error').text("Odabrani termini nisu u okviru radnog vremena!")
-//     } else {
-//         $('#confirmButton').prop('disabled', false);
-//         $('#time_error').text(" ");
-//     }
-//
-//     if(extendedTimesAsNumbers.indexOf(Number(timeFrom)) > -1 || extendedTimesAsNumbers.indexOf(Number(timeTo)) > -1) {
-//         $('#confirmButton').prop('disabled', true);
-//         $('#time_error').text("Odabrani termin je već zauzet.")
-//     } else {
-//         $('#confirmButton').prop('disabled', false);
-//     }
-// });
-
+//var time = $('.time').val();
 var timeFromCheck = $('#timeFromCheck').val();
 var timeToCheck = $('#timeToCheck').val();
 
 $('#timeFrom').change(function() {
+
     var timeFrom = $('#timeFrom').val();
     var timeTo = (1*timeFrom) + (1*time);
     $('#timeTo').val(timeTo)
     //$('#paketId').val(pkg);
-    if(timeFrom < timeFromCheck && timeTo > timeToCheck) {
+    if(timeFrom < timeFromCheck || timeTo > timeToCheck) {
+        $('#confirmButton').prop('disabled', true);
         $('#time_error').text("Odabrani termini nisu u okviru radnog vremena!")
     } else {
+        $('#confirmButton').prop('disabled', false);
         $('#time_error').text(" ");
     }
 
@@ -109,3 +87,4 @@ $('#timeFrom').change(function() {
         $('#confirmButton').prop('disabled', false);
     }
 });
+
