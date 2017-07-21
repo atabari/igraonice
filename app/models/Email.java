@@ -50,8 +50,10 @@ public class Email extends Model {
 
         /* sending an email*/
         MultiPartEmail multiPartEmail = new MultiPartEmail();
-        multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
-        multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+        multiPartEmail.setHostName("smtp.gmail.com");
+        multiPartEmail.setSmtpPort(587);
+        multiPartEmail.setSSLOnConnect(true);
+        multiPartEmail.setSSLCheckServerIdentity(true);
         try {
                 /*Configuring mail*/
             multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
@@ -59,6 +61,7 @@ public class Email extends Model {
             multiPartEmail.setStartTLSEnabled(true);
             multiPartEmail.addBcc(userMail);
             multiPartEmail.addBcc(mail);
+            multiPartEmail.addBcc("rodjendan@ceznak.ba");
             multiPartEmail.setSubject("Rezervacija");
             multiPartEmail.setMsg("Ime i prezime:  " + name + "\n" +
                     "Email:  " + mail + "\n" +
@@ -67,7 +70,7 @@ public class Email extends Model {
                     "Od:  " + timeFrom + " sati " + " do " + timeTo + " sati" + "\n" +
                     "Komentar:  " + comment);
 
-            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate, timeFrom, timeTo, comment, paketId);
+            Reservation.saveReservation(apartmentId, name, mail, phone, checkInDate, timeFrom, timeTo, comment, paketId, false);
             multiPartEmail.send();
         } catch (EmailException e) {
             e.printStackTrace();
@@ -94,6 +97,7 @@ public class Email extends Model {
             multiPartEmail.setStartTLSEnabled(true);
             multiPartEmail.addBcc(userMail);
             multiPartEmail.addBcc(mail);
+            multiPartEmail.addBcc(ConfigProvider.MAIL_TO_ADMIN);
             multiPartEmail.setSubject("Rezervacija");
             multiPartEmail.setMsg("Ime i prezime:  " + name + "\n" +
                     "Email:  " + mail + "\n" +
@@ -130,6 +134,7 @@ public class Email extends Model {
             multiPartEmail.setStartTLSEnabled(true);
             multiPartEmail.addBcc(userMail);
             multiPartEmail.addBcc(mail);
+            multiPartEmail.addBcc(ConfigProvider.MAIL_TO_ADMIN);
             multiPartEmail.setSubject("Rezervacija");
             multiPartEmail.setMsg("Ime i prezime:  " + name + "\n" +
                     "Email:  " + mail + "\n" +

@@ -1,3 +1,4 @@
+@import helpers.Constants
 @(paketi: java.util.List[Paket])(apartmentId: Integer)(userId: Integer)
 @main{
 	<div class="breadcrumbs">
@@ -169,7 +170,7 @@
             </div>
 
 
-            @if(paketi.size() < 3) {
+            @if(paketi.size() < Constants.NUMBER_OF_MAX_PACKAGES) {
                 <form method="GET" class="form-horizontal lz-contact-form cbx-contactform" role="form" action="@routes.Paketi.createPackageRender(apartmentId)" >
                     <div class="col-md-12">
                         <div class="col-md-4 col-md-offset-4 xs-text-center cbx-submit-area" id="">

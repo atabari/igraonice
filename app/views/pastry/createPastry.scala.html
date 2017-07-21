@@ -6,8 +6,8 @@
 				<ul>
 					<li class="home"> <a title="Početna" href="@routes.Application.index()">Početna</a><span>&mdash;›</span></li>
 					<li class="home"> <a title="Korisnički Panel" href="@routes.Login.renderPanelForAppropriateUser(userId)">Korisnički Panel</a><span>&mdash;›</span></li>
-					<li class="home"> <a title="Slastičarne" href="@routes.Pastries.listOfUserPastries(userId)">Slastičarne</a><span>&mdash;›</span></li>
-					<li class="category13"><strong>Dodaj Slastičarnu</strong></li>
+					<li class="home"> <a title="Slastičarne" href="@routes.Pastries.listOfUserPastries(userId)">Prodavci torti</a><span>&mdash;›</span></li>
+					<li class="category13"><strong>Dodaj prodavnicu torti</strong></li>
 				</ul>
 			</div>
 		</div>
@@ -17,9 +17,9 @@
           <div class="row">
               <div class="col-sm-12">
                   <div class="cbx-heading2 text-center">
-                      <h2 class="uppercase wow fadeInUp">DODAJ NOVU SLASTIČARNU</h2>
+                      <h2 class="uppercase wow fadeInUp">DODAJ NOVU PRODAVNICU TORTI</h2>
                       <hr noshade size="" width="" color="">
-                      <p class=" wow flipInY">Molimo unesite sve informacije kako bi slastičarna bila uspješno unesena u bazu</p>
+                      <p class=" wow flipInY">Molimo unesite sve informacije kako bi prodavnica torti bila uspješno unesena u bazu</p>
                   </div>
               </div>
           </div>
@@ -38,7 +38,7 @@
                   <div class="col-md-6">
                       <div class="form-group">
                           <div class="col-sm-10 col-sm-offset-1">
-                              <input type="text" name="name" class="form-control cbxname lz-git-form-control placeholder-style" id="storename" placeholder="Naziv Prodavnice" required>
+                              <input type="text" name="name" class="form-control cbxname lz-git-form-control placeholder-style" id="storename" placeholder="Naziv" required>
                               <label id="cbxname-error" class="error valid" for="cbxname"></label>
                           </div>
                       </div>

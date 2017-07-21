@@ -23,6 +23,7 @@ public class Item extends Model {
     public String size;
     public Integer category;
     public Boolean isVisible;
+    public String age;
 
     @ManyToOne
     public Store store;
@@ -50,7 +51,7 @@ public class Item extends Model {
 
             /* --------------- create item  ---------------*/
 
-    public static Item createItem(String name, Integer price, String description, String size, Store store, Integer category) {
+    public static Item createItem(String name, Integer price, String description, String size, Store store, Integer category, String age) {
         Item item = new Item();
 
         item.name = name;
@@ -60,6 +61,7 @@ public class Item extends Model {
         item.store = store;
         item.category = category;
         item.isVisible = true;
+        item.age = age;
         item.save();
         return  item;
     }
@@ -67,7 +69,7 @@ public class Item extends Model {
 
             /* --------------- update item ---------------*/
 
-    public static Integer updateItem(String name, Integer price, String description, String size,Integer category, Integer itemId) {
+    public static Integer updateItem(String name, Integer price, String description, String size,Integer category,String age, Integer itemId) {
 
         Item item = findItemById(itemId);
         item.name = name;
@@ -75,11 +77,12 @@ public class Item extends Model {
         item.description = description;
         item.size = size;
         item.category = category;
+        item.age = age;
         item.update();
         return item.store.id;
     }
 
-                /* --------------- delete item ---------------*/
+            /* --------------- delete item ---------------*/
 
     public static Integer deleteItem(Integer itemId) {
         Item item = findItemById(itemId);
@@ -96,7 +99,7 @@ public class Item extends Model {
     }
 
 
-       /* --------------- find all male items  ---------------*/
+    /* --------------- find all male items  ---------------*/
     public static List<Item> findMaleItems() {
         return finder.where().eq("category", ItemCategories.DJECACI).eq("is_visible", 1).findList();
     }
@@ -152,6 +155,10 @@ public class Item extends Model {
             }
         }
         return recommendedApartments;
+    }
+
+    public static List<Item> findItemsByAge(String age) {
+        return finder.where().eq("age", age).findList();
     }
 
 }
